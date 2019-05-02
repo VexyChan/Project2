@@ -262,13 +262,17 @@ std::vector<Room*> createRooms() {
 
 	/*
 	ROOM 0 - STARTING ROOM + STAIRCASE TO BOSS
+	PLAYER NEEDS TO GO BACK TO THIS ROOM WITH A KEY
+	TO GET TO THE BOSS
 	*/
 	room[0]->setRooms(room[4], room[1], room[6], room[2]);
 	room[0]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
 	room[0]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[0]->addToDescription("In the corner there is a staircase with a locked metal gate in front of it.");
-	room[0]->addToDescription("This gate can't be broken, you must find a key.");
-	room[0]->setLockStatus("locked");
+	room[0]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[0]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[0]->addToDescription("This door can't be broken, you must find a key.");
+	room[0]->setLockStatus(true);
+	room[0]->hasDoor(true);
 
 	/*
 	ROOM 1 - FIRST WEAPON ROOM
@@ -406,7 +410,6 @@ std::vector<Room*> createRooms() {
 	room[9]->setRooms(nullptr, nullptr, nullptr, nullptr);
 	room[9]->addToDescription("You enter a well-lit room.");
 	room[9]->addToDescription("Throughout the room there is golden treasure everywhere.");
-	room[9]->setGate(true);
 	Knight* bossKnight = new Knight("Betrayer", 150);
 	bossKnight->setAttack("Sledge", "attack", 20);
 	bossKnight->setAttack("Protect", "block", 30);
@@ -495,11 +498,6 @@ int main() {
 	system("CLS");
 	Player *player = new Player(name);
 	bool printRoom = true;
-	Item* steelSword = new Item("Steel Sword", "melee");
-	steelSword->setAttackType("Stab", "attack", 50);
-	steelSword->setAttackType("Block", "block", 50);
-	steelSword->setAttackType("Fury", "status", 50);
-	player->addToInv(steelSword);
 	
 	while (runGame) {
 		Room* previousRoom = currentRoom; //This is used if the user wants to run from a fight, returns them to "previous room"
@@ -643,9 +641,9 @@ int main() {
 					std::cout << "THIS ITEM DOES NOT HAVE A USE RIGHT NOW." << std::endl;
 				}
 			}
-		}//INVENTORY IF STATMENT
-		else if (tok == "gate") {
-			if (currentRoom->hasGate()) {
+		}//END OF INVENTORY IF STATMENT
+		else if (tok == "door") {
+			if (currentRoom->hasDoor()) {
 				if (player->numOfKeys() > 0) {
 					currentRoom->setLockStatus("unlocked");
 				}
@@ -657,10 +655,10 @@ int main() {
 				}
 			}
 			else {
-				std::cout << "There is no gate to open in here." << std::endl;
+				std::cout << "There is no door to open in here." << std::endl;
 			}
 			
-		}//GATE IF STATEMENT
+		}//END OF DOOR IF STATEMENT
 		else if (tok == "take" || tok == "grab") {
 			if (currentRoom->hasItem()) {
 				player->addToInv(currentRoom->getItem());

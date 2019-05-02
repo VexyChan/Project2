@@ -29,20 +29,20 @@ public:
 	void removeItem();
 
 	bool isLocked();
-	void setLockStatus(std::string status);
+	void setLockStatus(bool status);
 
 	bool hasEnemy();
 	Enemy* getEnemy();
 	void removeEnemy();
 	void setEnemy(Enemy* enemy);
 
-	bool hasGate();
-	void setGate(bool gate);
+	bool hasDoor();
+	void setDoor(bool door);
 
 private:
 	bool enemyBool;
-	bool gate;
-	std::string locked;
+	bool door;
+	bool locked;
 	std::string name;
 	std::vector<std::string> description;
 	Item* item;
