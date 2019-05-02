@@ -13,26 +13,41 @@ Room::~Room()
 {
 }
 
+/*
+RETURNS THE NAME OF THE ROOM
+*/
 std::string Room::getName()
 {
 	return this->name;
 }
 
+/*
+SETS THE NAME OF THE ROOM
+*/
 void Room::setName(std::string name)
 {
 	this->name = name;
 }
 
+/*
+RETURNS THE ROOM DESCRIPTION VECTOR
+*/
 std::vector<std::string> Room::getDescription()
 {
 	return this->description;
 }
 
+/*
+ADDS A STRING TO THE ROOM DESCRIPTION VECTOR
+*/
 void Room::addToDescription(std::string description)
 {
 	this->description.push_back(description);
 }
 
+/*
+PRINTS ROOM DESCRIPTION VECTOR
+*/
 void Room::printDescription()
 {
 	for (std::string desc : this->description) {
@@ -40,6 +55,9 @@ void Room::printDescription()
 	}
 }
 
+/*
+SETS DIRECTIONS OF OTHER ROOMS
+*/
 void Room::setRooms(Room * north, Room * south, Room * east, Room * west)
 {
 	this->north = north;
@@ -97,15 +115,10 @@ void Room::removeItem()
 
 bool Room::isLocked()
 {
-	if (this->locked == "locked") {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return status
 }
 
-void Room::setLockStatus(std::string status)
+void Room::setLockStatus(bool status)
 {
 	this->locked = status;
 }
@@ -132,12 +145,12 @@ void Room::setEnemy(Enemy* enemy)
 	this->enemyBool = true;
 }
 
-bool Room::hasGate()
+bool Room::hasDoor()
 {
-	return gate;
+	return door;
 }
 
-void Room::setGate(bool gate)
+void Room::setDoor(bool door)
 {
-	this->gate = gate;
+	this->door = door;
 }
