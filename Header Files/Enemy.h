@@ -4,23 +4,13 @@
 #include <map>
 #include "Item.h"
 #include "Attack.h"
-class Enemy
+#include "Player.h"
+class Enemy:public Player
 {
 public:
 	Enemy();
 	Enemy(std::string name, int health);
 	~Enemy();
-
-	int getHealth();
-	void setHealth(int health);
-	void addHealth(int value);
-	void subHealth(int value);
-
-	int getBlockValue();
-	void setBlockValue(int blockValue);
-
-	std::string getName();
-	void setName(std::string name);
 
 	std::vector<Attack*> getAttacks();
 
@@ -36,12 +26,7 @@ public:
 	void setItem(Item* item);
 	bool hasItem();
 
-	bool isAlive();
-
-	void printStatus();
-	void setStatus(std::string statusName, int statusValue);
-	void checkStatus();
-	void resetStatus();
+	
 
 	void attacked(Item* item, Attack* attack);
 
@@ -67,4 +52,3 @@ protected:
 
 	bool hasImmunity;
 };
-
