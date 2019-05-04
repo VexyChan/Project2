@@ -24,43 +24,51 @@ void Item::setName(std::string name)
 }
 
 /*
-Returns either "melee", "ranged", "magic", or "item"
+Returns either "melee", "ranged", "magic", "item"
 */
 std::string Item::getType()
 {
 	return this->type;
 }
 
+/*
+Returns the type of the item "melee", "ranged", "magic", "item"
+*/
 void Item::setType(std::string type)
 {
 	this->type = type;
 }
 
-std::vector<Attack*> Item::getAttackTypes()
+int Item::getValue()
 {
-	return this->attackTypes;
+	return this->value;
+}
+
+void Item::setValue(int value)
+{
+	this->value = value;
+}
+
+std::vector<struct Attack> Item::getAttacks() 
+{
+	return attacks;
 }
 
 /*
-takes a name and damage value (ex: "stab", 25), and adds them to a vector of attacks
+takes a name, type, and damage value (ex: "stab", 25), and adds them to a vector of attacks
 */
-void Item::setAttackType(std::string name, std::string type, int value)
+void Item::addToAttacks(std::string name, std::string type, int value)
 {
-	this->attackTypes.push_back(new Attack(name, type, value));
+	struct Attack tempAttack;
+	tempAttack.name = name;
+	tempAttack.type = type;
+	tempAttack.value = value;
+	attacks.push_back(tempAttack);
 }
 
 void Item::printAttackTypes()
 {
-	int i = 1;
-	for (Attack* at : this->attackTypes) {
-		if (at->getType() == "attack" || at->getType() == "status") {
-			std::cout << i << ".) " << at->getName() << " | Type: " << at->getType() << " | Damage: " << at->getValue() << std::endl;
-		}
-		else { //if attack type is "block", displays the value as 'Blocks: '
-			std::cout << i << ".) " << at->getName() << " | Type: " << at->getType() << " | Blocks: " << at->getValue() << std::endl;
-		}
-		++i;
-	}
+	//THIS WILL HAVE TO BE RE-DONE
 }
 
 std::vector<std::string> Item::getDescription()
@@ -80,15 +88,7 @@ void Item::addToDescription(std::string desc)
 	this->description.push_back(desc);
 }
 
-int Item::getValue()
-{
-	return this->value;
-}
 
-void Item::setValue(int value)
-{
-	this->value = value;
-}
 
 
 

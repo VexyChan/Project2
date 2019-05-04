@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include "Attack.h"
+
 class Item
 {
 public:
@@ -17,30 +17,42 @@ public:
 	void setName(std::string name);
 
 	/*
-	returns the type EX: "health", "melee"
+	returns the type EX: "health", "attack", "key"
 	*/
 	std::string getType();
 	void setType(std::string type);
-
-	std::vector<Attack*> getAttackTypes();
-	void setAttackType(std::string name, std::string type, int value);
-	void printAttackTypes();
-
-	std::vector<std::string> getDescription();
-	void printDescription();
-	void addToDescription(std::string desc);
 
 	/*
 	returns item's int value EX: health kit value
 	*/
 	int getValue();
 	void setValue(int value);
+
+	/*
+	Adds attacks to the attack vector
+	*/
+	void addToAttacks(std::string name, std::string type, int value);
+	std::vector<struct Attack> getAttacks();
+	void printAttackTypes();
+
+	/*
+	Item's description, can be multiple lines long.
+	*/
+	void addToDescription(std::string desc);
+	std::vector<std::string> getDescription();
+	void printDescription();
+	
 private:
 	std::vector<std::string> description;
-	std::vector<Attack*> attackTypes;
 	std::string name;
 	std::string type; //KEY, item, weapon...
 	int value; //for health items
 
+	struct Attack {
+		std::string name;
+		std::string type;
+		int value;
+	};
+	std::vector<struct Attack> attacks;
 };
 
