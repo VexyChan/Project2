@@ -1,13 +1,17 @@
 #include "Player.h"
+#include "..\Header Files\Player.h"
 
-
+Player::Player()
+{
+	name = "DefaultName";
+}
 
 Player::Player(std::string name)
 {
 	this->name = name;
-	this->health = 100;
-	this->alive = true;
-	this->blockValue = 0;
+	health = 100;
+	alive = true;
+	blockValue = 0;
 }
 
 
