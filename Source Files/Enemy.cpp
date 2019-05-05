@@ -7,7 +7,6 @@ Enemy::Enemy()
 	alive = true;
 	blockValue = 0;
 	item = nullptr;
-	hasImmunity = false;
 
 }
 
@@ -18,27 +17,20 @@ Enemy::Enemy(std::string name, int health)
 	alive = true;
 	blockValue = 0;
 	item = nullptr;
-	hasImmunity = false;
 }
 
 Enemy::~Enemy()
 {
 }
 
-/*
-This returns the entire moves vector for the enemy
-*/
-std::vector<Attack*> Enemy::getAttacks()
+void Enemy::addToAttacks(struct Attack *attack)
 {
-	return attacks;
+	attacksVector.push_back(attack);
 }
 
-/*
-Adds an Attack to the attack vector
-*/
-void Enemy::setAttack(std::string name, std::string type, int value)
+std::vector<struct Attack> Enemy::getAttacks()
 {
-	attacks.push_back(new Attack(name, type, value));
+	return attacksVector;
 }
 
 void Enemy::printWarning()
@@ -73,7 +65,11 @@ bool Enemy::hasItem()
 	}
 }
 
-void Enemy::attacked(Item * item, Attack* attack)
+void Enemy::attacked(struct Attack *attack)
 {
-	subHealth(attack->getValue());
+	/*
+	WILL COMPLETE ONCE THE RANDOM ITEM GENERATOR IS COMPLETE
+	*/
 }
+
+
