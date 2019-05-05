@@ -55,15 +55,11 @@ std::vector<struct Attack> Item::getAttacks()
 }
 
 /*
-takes a name, type, and damage value (ex: "stab", 25), and adds them to a vector of attacks
+takes an attack struct and adds it to attacks vector
 */
-void Item::addToAttacks(std::string name, std::string type, int value)
+void Item::addToAttacks(struct Attack *attack)
 {
-	struct Attack tempAttack;
-	tempAttack.name = name;
-	tempAttack.type = type;
-	tempAttack.value = value;
-	attacks.push_back(tempAttack);
+	attacksVector.push_back(attack);
 }
 
 void Item::printAttackTypes()

@@ -31,7 +31,7 @@ public:
 	/*
 	Adds attacks to the attack vector
 	*/
-	void addToAttacks(std::string name, std::string type, int value);
+	void addToAttacks(struct Attack *attack);
 	std::vector<struct Attack> getAttacks();
 	void printAttackTypes();
 
@@ -53,6 +53,6 @@ private:
 		std::string type;
 		int value;
 	};
-	std::vector<struct Attack> attacks;
+	std::vector<struct Attack> attacksVector;
 };
 

@@ -2,8 +2,6 @@
 #include "Room.h"
 #include "Enemy.h"
 #include "Item.h"
-#include "Attack.h"
-#include "Knight.h"
 #include <iostream>
 #include <vector>
 #include <sstream>
