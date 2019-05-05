@@ -87,30 +87,35 @@ Room * Room::getRoom(std::string direction)
 	}
 }
 
-Item* Room::getItem()
+void Room::addToItems(Item* item) 
+{
+	items.push_back(item);
+}
+
+std::vector<Item*> Room::getItems()
 {
 	return this->item;
 }
 
-void Room::setItem(Item* item)
+bool Room::hasItems()
 {
-	this->item = item;
-}
-
-bool Room::hasItem()
-{
-	if (this->item == nullptr) {
+	if (items.size() == 0) {
 		return false;
 	}
 	else {
 		return true;
 	}
-	
 }
 
-void Room::removeItem()
+void Room::removeItem(Item* item)
 {
-	this->item = nullptr;
+	std::vector<Item*> temp;
+	for (Item* it : items) {
+		if (it != item) {
+			temp.push_back(it);
+		}
+	}
+	items = temp;
 }
 
 bool Room::isLocked()

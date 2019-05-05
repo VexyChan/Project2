@@ -23,10 +23,10 @@ public:
 	void setRooms(Room* north, Room* south, Room* east, Room* west);
 	Room* getRoom(std::string direction);
 
-	Item* getItem();
-	void setItem(Item* item);
+	std::vector<Item*> getItems();
+	void addToItems(Item* item)
 	bool hasItem();
-	void removeItem();
+	void removeItem(Item* item);
 
 	bool isLocked();
 	void setLockStatus(bool status);
@@ -45,7 +45,7 @@ private:
 	bool locked;
 	std::string name;
 	std::vector<std::string> description;
-	Item* item;
+	std::vector<Item*> items;
 
 	Enemy* enemy;
 
