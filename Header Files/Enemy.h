@@ -17,7 +17,7 @@ public:
 	/*
 	Adds an Attack to the attack vector
 	*/
-	void addToAttacks(struct Attack *attack);
+	void addToAttacks(std::string name, std::string type, int value);
 	std::vector<struct Attack> getAttacks();
 
 	/*
