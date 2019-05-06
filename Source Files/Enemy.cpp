@@ -23,9 +23,13 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::addToAttacks(struct Attack *attack)
+void Enemy::addToAttacks(std::string name, std::string type, int value)
 {
-	attacksVector.push_back(attack);
+	struct Attack tempAttack;
+	tempAttack.name = name;
+	tempAttack.type = type;
+	tempAttack.value = value;
+	attacksVector.push_back(tempAttack);
 }
 
 std::vector<struct Attack> Enemy::getAttacks()
