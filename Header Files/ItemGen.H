@@ -5,9 +5,9 @@ class ItemGen
     
 public:
 	
-	ItemGen();
-	ItemGen(std::string name, std::string type, int value);
-	~ItemGen();
+    ItemGen();
+    ItemGen(std::string name, std::string type, int value);
+    ~ItemGen();
     std::string genItemName();
     std::string genItemType();
     int genItemValue();
