@@ -3,9 +3,8 @@
 Room::Room(std::string name)
 {
 	this->name = name;
-	this->enemyBool = false;
-	this->enemy = nullptr;
-	this->item = nullptr;
+	enemyBool = false;
+	enemy = nullptr;
 	gate = false;
 }
 
@@ -18,7 +17,7 @@ RETURNS THE NAME OF THE ROOM
 */
 std::string Room::getName()
 {
-	return this->name;
+	return name;
 }
 
 /*
@@ -34,7 +33,7 @@ RETURNS THE ROOM DESCRIPTION VECTOR
 */
 std::vector<std::string> Room::getDescription()
 {
-	return this->description;
+	return description;
 }
 
 /*
@@ -89,17 +88,17 @@ Room * Room::getRoom(std::string direction)
 
 void Room::addToItems(Item* item) 
 {
-	items.push_back(item);
+	itemsVector.push_back(item);
 }
 
 std::vector<Item*> Room::getItems()
 {
-	return this->item;
+	return itemsVector;
 }
 
 bool Room::hasItems()
 {
-	if (items.size() == 0) {
+	if (itemsVector.size() == 0) {
 		return false;
 	}
 	else {
@@ -110,7 +109,7 @@ bool Room::hasItems()
 void Room::removeItem(Item* item)
 {
 	std::vector<Item*> temp;
-	for (Item* it : items) {
+	for (Item* it : itemsVector) {
 		if (it != item) {
 			temp.push_back(it);
 		}

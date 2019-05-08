@@ -5,7 +5,6 @@
 #include "Item.h"
 #include <iostream>
 #include "Enemy.h"
-#include "Knight.h"
 
 class Room
 {
@@ -24,8 +23,8 @@ public:
 	Room* getRoom(std::string direction);
 
 	std::vector<Item*> getItems();
-	void addToItems(Item* item)
-	bool hasItem();
+	void addToItems(Item* item);
+	bool hasItems();
 	void removeItem(Item* item);
 
 	bool isLocked();
@@ -45,7 +44,7 @@ private:
 	bool locked;
 	std::string name;
 	std::vector<std::string> description;
-	std::vector<Item*> items;
+	std::vector<Item*> itemsVector;
 
 	Enemy* enemy;
 

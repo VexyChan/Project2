@@ -432,7 +432,7 @@ std::string tokenize(std::string userIn, char seperator) {
 		if (tok == "quit" || tok == "help" || tok == "north" ||
 			tok == "south" || tok == "east" || tok == "west" ||
 			tok == "inventory" || tok == "gate" || tok == "take" ||
-			tok == "grab" || tok == "look") 
+			tok == "grab" || tok == "look" || tok == "search") 
 		{
 			return tok;
 		}
@@ -640,6 +640,18 @@ int main() {
 				}
 			}
 		}//END OF INVENTORY IF STATMENT
+		else if (tok == "search") {
+			if (!currentRoom.hasItems()) {
+				std::cout << "This room has no usable items." << std::endl;
+			}
+			else {
+				tempItems = currentRoom.getItems();
+				std::cout << "This room contains: " << std::endl;
+				for (Item* it : tempItems) {
+					std::cout << it.getName() << std::endl;
+				}
+			}
+		}//END OF SEARCH IF STATEMENT
 		else if (tok == "door") {
 			if (currentRoom->hasDoor()) {
 				if (player->numOfKeys() > 0) {
