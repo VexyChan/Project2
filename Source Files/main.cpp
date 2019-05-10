@@ -552,7 +552,7 @@ int main() {
 			std::cout << std::endl;
 		}//"HELP IF STATEMENT
 		else if (tokens[0] == "north" || tokens[0] == "south" || tokens[0] == "east" || tokens[0] == "west") {
-			currentRoom = currentRoom->getRoom(tok); //SETS CURRENT ROOM TO NEW ROOM, OR SAME ROOM IF DIRECTION WAS NULLPTR
+			currentRoom = currentRoom->getRoom(tokens[0]); //SETS CURRENT ROOM TO NEW ROOM, OR SAME ROOM IF DIRECTION WAS NULLPTR
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
 			printRoom = false;
