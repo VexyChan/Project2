@@ -11,6 +11,7 @@
 #include <exception>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
 std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	system("CLS");
@@ -254,93 +255,76 @@ Creates and populates the rooms that will be traveled through.
 */
 std::vector<Room*> createRooms() {
 	std::vector<Room*> room;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 20; i++) {
 		room.push_back(new Room("Room " + std::to_string(i)));
 	}
 
 	/*
-	ROOM 0 - STARTING ROOM + STAIRCASE TO BOSS
-	PLAYER NEEDS TO GO BACK TO THIS ROOM WITH A KEY
-	TO GET TO THE BOSS
+	Room[0] Starting Room Outside starting Town
+	forest path is the only option for the next room
 	*/
-	room[0]->setRooms(room[4], room[1], room[6], room[2]);
-	room[0]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[0]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[0]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[0]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[0]->addToDescription("This door can't be broken, you must find a key.");
-	room[0]->setLockStatus(true);
-	room[0]->hasDoor(true);
+	room[0]->setRooms(room[1],nullptr,nullptr,nullptr);
+	room[0]->addToDescription("After leaving the adventures guild & gathering your things, you leave the town...");
+	room[0]->addToDescription("You stand outside the town ready to fight the Lord Of Chaos...);
+	room[0]->addToDescription("But first you must find the old kingdom's necropolis...");
+	room[0]->addToDescription("For now you may only go north towards the Forest...");
+	room[0]->addToDescription("In the distance you see an ominous black miasma overcast in the direction you need to go...");
 
+	
 	/*
 	ROOM 1 - FIRST WEAPON ROOM
 	*/
-	room[1]->setRooms(room[0], nullptr, nullptr, nullptr);
-	room[1]->addToDescription("You are in a well-lit room, with torches covering each wall.");
-	room[1]->addToDescription("In the center of the room lay the remains of a long-dead knight.");
-	Item* rustySword = new Item("Rusty Sword", "melee");
-	rustySword->setAttackType("Stab", "attack", 20);
-	rustySword->setAttackType("Block", "block", 20);
-	rustySword->addToDescription("There is an ancient sword sticking out of its chest.");
-	room[1]->setItem(rustySword);
+	room[1]->setRooms(nullptr, room[0], room[2], room[3]);
+	room[1]->addToDescription("You enter the path into the Nabaran Forest..."");
+	room[1]->addToDescription("The path is over cast by trees and darkness.....");
+	room[1]->addToDescription("This however is the only way to the necropolis of the old kingdom....");
+	room[1]->addToDescription("Infomation from the guild tells you ...");
+	room[1]->addToDescription("In the east is the direct route while in the west in a village you may stop and get supplies... ");
+	room[1]->addToDescription(".");
 
 	/*
 	ROOM 2 - FIRST ENEMY
 	*/
-	room[2]->setRooms(nullptr, nullptr, room[0], room[3]);
-	room[2]->addToDescription("There is an overwhelming smell of ass in this room.");
-	room[2]->addToDescription("Try not to touch anything, you'll probably get some sort of disease.");
-	Enemy* troll = new Enemy("Troll", 100);
-	troll->setAttack("Club", "attack", 5);
-	troll->setAttack("Shield", "block", 5);
-	troll->setItem(new Item("Health Kit","health"));
-	troll->getItem()->setValue(10);
-	troll->setWarning("You see an angry looking troll with a giant club and a broken-down shield, and he sees you.");
-	room[2]->setEnemy(troll);
+	room[2]->setRooms(room[5], nullptr,nullptr, room[1]);
+	room[2]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[2]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[2]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[2]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[2]->addToDescription("This door can't be broken, you must find a key.");
 	
 
 	/*
 	ROOM 3 - GET NEXT WEAPON TYPE
 	*/
-	room[3]->setRooms(nullptr, nullptr, room[2], room[7]);
-	room[3]->addToDescription("This rooms seems to be the remnants of a library.");
-	room[3]->addToDescription("There is hardened wax that has melted down the sides of bookshelves.");
-	Item* bookOfFlames = new Item("Book of Flames", "magic");
-	bookOfFlames->setAttackType("Blast", "attack", 20);
-	bookOfFlames->setAttackType("Burn","status",15); //does 5 damage at the end of each turn
-	bookOfFlames->addToDescription("At the edge of the room there is a pedestal with a book opened on it.");
-	bookOfFlames->addToDescription("There seems to be a flickering light coming from it.");
-	room[3]->setItem(bookOfFlames);
+	room[3]->setRooms(room[4], nullptr, room[1], nullptr);
+	room[3]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[3]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[3]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[3]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[3]->addToDescription("This door can't be broken, you must find a key.");
 	/*
 	ROOM 4
 	*/
-	room[4]->setRooms(room[5], room[0], nullptr, nullptr);
-	room[4]->addToDescription("You see the remains of a campfire in what look like an old dining room.");
-	room[4]->addToDescription("The embers are still hot.");
-	Enemy* goblin = new Enemy("Goblin", 100);
-	goblin->setAttack("Bleed", "status", 2); //bleeds 2 damage
-	goblin->setAttack("Side-Step", "block", 10);
-	goblin->setItem(new Item("Health Kit", "health"));
-	goblin->setWarning("You hear something moving quickly among the dining tables. A goblin jumps at you.");
-	room[4]->setEnemy(goblin);
-
+	room[4]->setRooms(nullptr, room[3], room[5],nullptr);
+	room[4]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[4]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[4]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[4]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[4]->addToDescription("This door can't be broken, you must find a key.");
 	/*
 	ROOM 5
 	*/
-	room[5]->setRooms(room[8], room[4], nullptr, nullptr);
-	room[5]->addToDescription("This room clearly used to be an armory.");
-	room[5]->addToDescription("There are sword hilts literring the ground.");
-	room[5]->addToDescription("There are not many usable materials in this room.");
-	Item* bowAndArrow = new Item("Bow and Arrow", "ranged");
-	bowAndArrow->setAttackType("Snipe", "attack", 25);
-	bowAndArrow->setAttackType("Hail", "status", 7); //hails 4 damage
-	bowAndArrow->addToDescription("Hanging on one of the walls is a bow and there are arrows below it.");
-	room[5]->setItem(bowAndArrow);
+	room[5]->setRooms(room[6], room[2],nullptr,nullptr);
+	room[5]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[5]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[5]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[5]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[5]->addToDescription("This door can't be broken, you must find a key.");
 
 	/*
 	ROOM 6
 	*/
-	room[6]->setRooms(nullptr, nullptr, nullptr, room[0]);
+	room[6]->setRooms(room[7], room[5], nullptr, nullptr);
 	room[6]->addToDescription("You are in a courtyard, with a large bonfire lit in the center.");
 	room[6]->addToDescription("There are several sleeping bags, and some sort of animal is being cooked.");
 	Knight* bronzeKnight = new Knight("Bronze Knight", 150);
@@ -362,60 +346,131 @@ std::vector<Room*> createRooms() {
 	/*
 	ROOM 7
 	*/
-	room[7]->setRooms(nullptr, nullptr, room[3], nullptr);
-	room[7]->addToDescription("You are in a backroom attached to the Library.");
-	room[7]->addToDescription("There are scrolls spread all over the floor.");
-	Knight* silverKnight = new Knight("Silver Knight", 150);
-	silverKnight->setAttack("Whirlwind", "attack", 10);
-	silverKnight->setAttack("Tornado","status",2);
-	silverKnight->setWarning("There is a silver-clad knight sitting among the scrolls.");
-	silverKnight->setWarning("A light seems to be pulsing from him.");
-	Item* bookOfFlamesPlus = new Item("Advanced Book of Flames", "magic");
-	bookOfFlamesPlus->setAttackType("Blast", "attack", 30);
-	bookOfFlamesPlus->setAttackType("Burn", "status", 20);
-	bookOfFlamesPlus->setAttackType("Flame Wall", "block", 30);
-	silverKnight->setItem(bookOfFlamesPlus);
-	silverKnight->setImmunity("magic");
-	room[7]->setEnemy(silverKnight);
-	Item* key2 = new Item("key", "item");
-	key2->addToDescription("Among the scrolls you see a key.");
-	room[7]->setItem(key2);
-
+	room[7]->setRooms(nullptr, room[6], nullptr, room[8]);
+	room[7]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[7]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[7]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[7]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[7]->addToDescription("This door can't be broken, you must find a key.");
 	/*
 	ROOM 8
 	*/
-	room[8]->setRooms(nullptr, room[5], nullptr, nullptr);
-	room[8]->addToDescription("You enter a courtyard which looks to be a firing range.");
-	room[8]->addToDescription("There are dummy targets down-range which are full of arrows.");
-	Knight* goldKnight = new Knight("Gold Knight", 150);
-	goldKnight->setAttack("Triple Shot", "attack", 15);
-	goldKnight->setAttack("Defensive Rain", "block", 15);
-	goldKnight->setWarning("A knight is practicing his shooting with a giant recurve bow.");
-	goldKnight->setWarning("He turns and sees you.");
-	Item* bowAndArrowPlus = new Item("Recurve Bow", "ranged");
-	bowAndArrowPlus->setAttackType("Snipe", "attack", 35);
-	bowAndArrowPlus->setAttackType("Hail", "status", 20);
-	goldKnight->setItem(bowAndArrowPlus);
-	goldKnight->setImmunity("ranged");
-	room[8]->setEnemy(goldKnight);
-	Item* key3 = new Item("key", "item");
-	key3->addToDescription("Hanging from one of the arrows is a key.");
-	room[8]->setItem(key3);
-
-	/*
+	room[8]->setRooms(nullptr, room[9], room[7], nullptr);
+	room[8]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[8]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[8]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[8]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[8]->addToDescription("This door can't be broken, you must find a key.");
+		/*
 	ROOM 9
 	*/
-	room[9]->setRooms(nullptr, nullptr, nullptr, nullptr);
-	room[9]->addToDescription("You enter a well-lit room.");
-	room[9]->addToDescription("Throughout the room there is golden treasure everywhere.");
-	Knight* bossKnight = new Knight("Betrayer", 150);
-	bossKnight->setAttack("Sledge", "attack", 20);
-	bossKnight->setAttack("Protect", "block", 30);
-	bossKnight->setWarning("Your 'friend' is sitting among the treasures.");
-	bossKnight->setWarning("You need to finish this.");
-	bossKnight->setImmunity("melee");
-	room[9]->setEnemy(bossKnight);
-
+	room[9]->setRooms(room[8], nullptr,room[10],room[11]);
+	room[9]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[9]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[9]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[9]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[9]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 10
+	*/
+	room[10]->setRooms(room[13], room[12], room[11], room[9]);
+	room[10]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[10]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[10]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[10]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[10]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 11
+	*/
+	room[11]->setRooms(nullptr, nullptr, room[9], room[10]);
+	room[11]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[11]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[11]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[11]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[11]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 12
+	*/
+	room[12]->setRooms(room[10], room[20], room[14], nullptr]);
+	room[12]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[12]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[12]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[12]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[12]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 13
+	*/
+	room[13]->setRooms(room[15], room[10], nullptr,nullptr);
+	room[13]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[13]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[13]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[13]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[13]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 14
+	*/
+	room[14]->setRooms(nullptr,nullptr,nullptr, room[12]);
+	room[14]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[14]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[14]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[14]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[14]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 15
+	*/
+	room[15]->setRooms(room[16], room[13], room[17],nullptr);
+	room[15]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[15]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[15]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[15]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[15]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 16
+	*/
+	room[16]->setRooms(nullptr, room[15], room[19], nullptr);
+	room[16]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[16]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[16]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[16]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[16]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 17
+	*/
+	room[17]->setRooms(room[18], nullptr, nullptr, room[15]);
+	room[17]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[17]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[17]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[17]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[17]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 18
+	*/
+	room[18]->setRooms(nullptr, room[12], nullptr,nullptr);
+	room[18]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[18]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[18]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[18]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[18]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 19 Undead Dragon
+	*/
+	room[19]->setRooms(nullptr,nullptr,nullptr,room[19]);
+	room[19]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[19]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[19]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[19]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[19]->addToDescription("This door can't be broken, you must find a key.");
+		/*
+	ROOM 20 Boss Room [Chaos Lord]
+	*/
+	room[20]->setRooms(room[12],nullptr,nullptr,nullptr);
+	room[20]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
+	room[20]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[20]->addToDescription("In the corner there is a locked metal door with a small window.");
+	room[20]->addToDescription("Upon looking through the window a staircase can be seen.");
+	room[20]->addToDescription("This door can't be broken, you must find a key.");
+	room[20]->setLockStatus(true);
+	room[20]->hasDoor(true);
 	return room;
 }
 
@@ -449,14 +504,17 @@ void printHelp() {
 	creates 'help' list of available commands
 	*/
 	std::vector<std::string> help;
-	help.push_back("north/south/east/west : travel in indicated direction. Can also enter 'go south', 'travel south', etc..");
-	help.push_back("inventory : shows the player's inventory");
-	help.push_back("look : describes the room to the player");
-	help.push_back("take/grab : if there is an item in the room, lets you pick it up");
-	help.push_back("");
-	help.push_back("ENCOUNTER COMMANDS: ");
-	help.push_back("run : if you encounter an enemy, allows you to return to previous room without engaging in combat");
-	help.push_back("fight : if you encounter an enemy, starts a combat encounter");
+    help.push_back("Interaction Commands:");
+    help.push_back("[ {north} | {south} | {east} | {west} ] Will move you into the next room");
+    help.push_back("{Inventory} Displays Your Inventory");
+    help.push_back("{look} tells the player infomation about the room  & what items it has");
+    help.push_back("[ {take} | {grab} ] Will allow you to take an item");
+	help.push_back("[ {search} ]tells what items a room has");
+    help.push_back("");
+    help.push_back("Encounter Commands: ");
+    help.push_back("{run} Allows you to return to the previous room before combat");
+    help.push_back("{fight} Starts a combat encounter with an enemy");
+
 
 	for (std::string msg : help) {
 		std::cout << msg << std::endl;
@@ -466,8 +524,12 @@ void printHelp() {
 
 
 int main() {
-	
-
+std::cout << "########################" << std::endl;
+std::cout << "# Welcome To                           #" << std::endl;
+std::cout << "#                   Adventure Quest!#" << std::endl;
+std::cout << "######################## " << std::endl;                                                                                                                   
+system("CLS");                                                                                        
+                                                                                                                            
 	/*
 	Creates rooms, run conditional
 	*/
@@ -479,20 +541,41 @@ int main() {
 	/*
 	Get character name here:
 	*/
-	std::cout << "You suddenly wake up, your head is pounding." << std::endl;
-	std::cout << "You have a hard time remembering exactly what happened." << std::endl;
-	std::cout << "There is one thing you do remember: " << std::endl;
-	std::cout << "Your friend has betrayed you and left you for dead in this dungeon." << std::endl;
-	std::cout << "Find them." << std::endl;
+	std::cout << "The lord of destruction & chaos has awakened. . . ." << std::endl;
+	Sleep(10); 
+	std::cout << "The land and its people are in dire peril! . . ." << std::endl;
+	Sleep(10);
+	std::cout << "You must become the hero that save the kingdom & the world from ruin. . ." << std::endl;
+	Sleep(10);
+	std::cout << "Will you stand against the chaos and save the world . . ." << std::endl;
+	Sleep(10);
+		std::cout << ". . ." << std::endl;
+	Sleep(25);
+	system("CLS");
 	std::cout << std::endl << std::endl;
 	std::string name;
-	std::cout << "Enter your character's name: " << std::endl;
+	std::cout << "What is Your Name Hero. . . " << std::endl;
 	std::getline(std::cin, name);
 	while(name.length() <= 0) {
 		system("CLS");
-		std::cout << "Enter your character's name: " << std::endl;
+		std::cout << "What is Your Name Hero. . . " << std::endl;
 		std::getline(std::cin, name);
 	}
+	system("CLS");
+	std::cout << ". . . ???" << std::endl;
+	Sleep(10);
+	std::cout << "The Lord Of Chaos Wages War & Destruction upon the land attacking it's people in waves... "<<std::endl;
+	Sleep(10);
+	std::cout <<user.getName()<< " you have been tasked with defeating the chaos lord and his corrupted minions and stopping the spread of his  malevolence..."<<std::endl; 
+	Sleep(10);
+	std::cout <<"You must raid the Chaos Lord's  stronghold which was the necropolis of old, which belonged to a  long forgotten kingdom amongst the passing of time..."<<std::endl;
+	Sleep(10);
+	std::cout <<"The adventures guild of the kingdom of Estnophor has tasked you with finding and stop the spread of chaos..."<<std::endl;
+	Sleep(10);
+	std::cout <<"As well as defeating the Chaos Lord ..."<<std::endl;
+	Sleep(10);
+	std::cout <<"Will You Save the Kingdom & The World..."<<std::endl;
+	Sleep(35);
 	system("CLS");
 	Player *player = new Player(name);
 	bool printRoom = true;
