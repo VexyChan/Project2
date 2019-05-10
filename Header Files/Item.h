@@ -31,7 +31,7 @@ public:
 	/*
 	Adds attacks to the attack vector
 	*/
-	void addToAttacks(std::string name, std::string type, int value);
+	void addToAttacks(struct Attack *attack);
 	std::vector<struct Attack> getAttacks();
 	void printAttackTypes();
 
@@ -41,6 +41,9 @@ public:
 	void addToDescription(std::string desc);
 	std::vector<std::string> getDescription();
 	void printDescription();
+
+	void setUsable(bool usable);
+	bool isUsable();
 	
 private:
 	std::vector<std::string> description;
@@ -53,6 +56,8 @@ private:
 		std::string type;
 		int value;
 	};
-	std::vector<struct Attack> attacks;
+	std::vector<struct Attack> attacksVector;
+
+	bool usable;
 };
 
