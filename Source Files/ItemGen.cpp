@@ -166,7 +166,7 @@ void ItemGen::loadStaticItemParts(std::ifstream& inFile)
 	inFile >> garbage >> name;//read the object name
 	//read all of the objects member variables
 	inFile >> garbage;
-	getline(inFile, description);
+	getline(inFile, type);
 	inFile >> garbage >> healthAdd;
 	inFile >> garbage >> armorAdd;
 	inFile >> garbage >> blockAdd;
