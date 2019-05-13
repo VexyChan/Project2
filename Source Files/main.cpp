@@ -16,7 +16,7 @@
 std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	system("CLS");
 
-	std::vector<Attack*> enemyAttacks = enemy->getAttacks();
+	std::vector<struct Attack> enemyAttacks = enemy->getAttacks();
 	Attack* enemyAttack = nullptr;
 	Attack* userAttack = nullptr;
 	std::vector<Item*> playerWeapons = player->getWeapons();
@@ -321,6 +321,7 @@ std::vector<Room*> createRooms() {
 	HealthPotion3->addToDescription("An avarge quality Health Potion")
 	room[0]->setItem(HealthPotion3);
 	Item* LeatherArmor =new Item("LeatherArmor", "health");
+	LeatherArmor->setUsable(true);
 	LeatherArmor->setValue(250);
 	LeatherArmor->addToDescription("Well crafted armor which helps with taking some hit from enemies"));
 	room[0]->setItem(LeatherArmor);
@@ -342,14 +343,14 @@ std::vector<Room*> createRooms() {
 	room[1]->setItem(HealthPotion4);
 	/* Enemeis*/
 	Enemy* CHumman1 = new Enemy("Alex", 60);
-	CHumman1->setAttack("Inpact", "attack", 10); 
-	CHumman1->setAttack("AxeSlash", "attack", 40);
+	CHumman1->addToAttacks("Inpact", "melee", 10); 
+	CHumman1->addToAttacks("AxeSlash", "melee", 40);
 	CHumman1->setWarning("During the first waves when the chaos lord returned he had corrupted the spirts of  humans  make them mindless servents to chaos. . ..");
 	CHumman1->setWarning("As you enter the forest you come upon 2 people Jace and Alex who you have known since childhood, as you get closser you see their eyes are glossed over. . .");
 	CHumman1->setWarning("It is like they can't even see the world around them any more. . .");
 	Enemy* CHumman2 = new Enemy("Jace", 45);
-	CHumman2->setAttack("Inpact", "attack", 25); 
-	CHumman2->setAttack("Punch", "attack", 20);
+	CHumman2->addToAttacks("Inpact", "melee", 25); 
+	CHumman2->addToAttacks("Punch", "melee", 20);
 	room[1]->setEnemy(CHumman1);
 	room[1]->setEnemy(CHumman2);
 	/*
@@ -374,9 +375,9 @@ std::vector<Room*> createRooms() {
 	room[2]->setItem(HealthPotion6);
 	/*Enemies */ 
 	Enemy* Bear= new Enemy("Bear", 100);
-	Bear->setAttack("Charge", "attack", 35); 
-	Bear->setAttack("Bite", "attack", 50);
-	Bear->setAttack("Claw", "attack", 30);
+	Bear->addToAttacks("Charge", "melee", 35); 
+	Bear->addToAttacks("Bite", "melee", 50);
+	Bear->addToAttacks("Claw", "melee", 30);
 	room[2]->setEnemy(Bear);
 	/*
 	ROOM 3 Eastern path of the Nahouran forest
@@ -402,24 +403,24 @@ std::vector<Room*> createRooms() {
 	room[2]->setItem(WoodSheild);
 	/*Enemies */ 
 	Enemy* Wolf1= new Enemy("Wolf", 30);
-	Wolf1->setAttack("Charge", "attack",15); 
-	Wolf1->setAttack("Bite", "attack", 30);
-	Wolf1->setAttack("Claw", "attack", 20);
+	Wolf1->addToAttacks("Charge", "melee",15); 
+	Wolf1->addToAttacks("Bite", "melee", 30);
+	Wolf1->addToAttacks("Claw", "melee", 20);
 	room[3]->setEnemy(Wolf1);
 	Enemy* Wolf2= new Enemy("Wolf", 50);
-	Wolf2->setAttack("Charge", "attack",25); 
-	Wolf2->setAttack("Bite", "attack", 40);
-	Wolf2->setAttack("Claw", "attack", 25);
+	Wolf2->addToAttacks("Charge", "melee",25); 
+	Wolf2->addToAttacks("Bite", "melee", 40);
+	Wolf2->addToAttacks("Claw", "melee", 25);
 	room[3]->setEnemy(Wolf2);
 	Enemy* Wolf3= new Enemy("Wolf", 20);
-	Wolf3->setAttack("Charge", "attack",15); 
-	Wolf3->setAttack("Bite", "attack", 25);
-	Wolf3->setAttack("Claw", "attack", 10);
+	Wolf3->addToAttacks("Charge", "melee",15); 
+	Wolf3->addToAttacks("Bite", "melee", 25);
+	Wolf3->addToAttacks("Claw", "melee", 10);
 	room[3]->setEnemy(Wolf3);
 	Enemy* Wolf4= new Enemy("Wolf", 10);
-	Wolf4->setAttack("Charge", "attack",5); 
-	Wolf4->setAttack("Bite", "attack", 15);
-	Wolf4->setAttack("Claw", "attack", 5);
+	Wolf4->addToAttacks("Charge", "melee",5); 
+	Wolf4->addToAttacks("Bite", "melee", 15);
+	Wolf4->addToAttacks("Claw", "melee", 5);
 	room[3]->setEnemy(Wolf4);
 	/*
 	ROOM 4 Off the eastern trail exit to the outskirts of the onld kingdom the plains
@@ -430,14 +431,14 @@ std::vector<Room*> createRooms() {
 	room[4]->addToDescription("you need to go East to arrive at the old kingdom to fight the chaos lord. . .");	
 	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
 	Enemy* Wolf5= new Enemy("Wolf", 60);
-	Wolf5->setAttack("Charge", "attack",25); 
-	Wolf5->setAttack("Bite", "attack", 35);
-	Wolf5->setAttack("Claw", "attack",40);
+	Wolf5->addToAttacks("Charge", "melee",25); 
+	Wolf5->addToAttacks("Bite", "melee", 35);
+	Wolf5->addToAttacks("Claw", "melee",40);
 	room[4]->setEnemy(Wolf3);
 	Enemy* Wolf6= new Enemy("Wolf", 50);
-	Wolf6->setAttack("Charge", "attack",25); 
-	Wolf6->setAttack("Bite", "attack", 45);
-	Wolf6->setAttack("Claw", "attack", 15);
+	Wolf6->addToAttacks("Charge", "melee",25); 
+	Wolf6->addToAttacks("Bite", "melee", 45);
+	Wolf6->addToAttacks("Claw", "melee", 15);
 	room[4]->setEnemy(Wolf4);
 
 	/*
@@ -460,13 +461,13 @@ std::vector<Room*> createRooms() {
     FoodRation3->addToDescription("Gain some health back for Eating");
     room[5]->setItem(FoodRation3);
 	Enemy* ZHumman1 = new Enemy("Zombie", 60);
-	ZHumman1->setAttack("Grab", "attack", 5); 
-	ZHumman1->setAttack("Bite", "attack", 20);
+	ZHumman1->addToAttacks("Grab", "melee", 5); 
+	ZHumman1->addToAttacks("Bite", "melee", 20);
 	ZHumman1->setWarning("When the chaos lord returned he had corrupted the spirts of and trapped them inside dead humans bringing their bodies back to life. . .");
 	ZHumman1->setWarning("As are about to leave blockade you find two zombies have wandered over to you. . .");
 	Enemy* ZHumman2 = new Enemy("Zombie", 45);
-	ZHumman2->setAttack("Bite", "attack", 25); 
-	ZHumman2->setAttack("Claw", "attack", 20);
+	ZHumman2->addToAttacks("Bite", "melee", 25); 
+	ZHumman2->addToAttacks("Claw", "melee", 20);
 	room[5]->setEnemy(ZHumman1);
 	room[5]->setEnemy(ZHumman2);
 	/*
@@ -478,14 +479,14 @@ std::vector<Room*> createRooms() {
 	room[6]->addToDescription("It appears to be the only way in to the old kingdom. . .");
 	room[6]->addToDescription("The Front Gates are closed and appear not to have moved in centuries. . .");
 	Enemy* Skeleton1 = new Enemy("Skeleton", 50);
-	Skeleton1->setAttack("Arrow Shot", "attack", 5); 
-	Skeleton1->setAttack("BoneThrow", "attack", 20);
+	Skeleton1->addToAttacks("Arrow Shot", "melee", 5); 
+	Skeleton1->addToAttacks("BoneThrow", "melee", 20);
 	Skeleton1->setWarning("When the chaos lord returned he returned some of the bones of the crypt located in the necropolis to motion traping slayed humans soul within their marrow. . .");
 	Skeleton1->setWarning("You see two skeletons with bows standing perched on platforms higher up on the inside of the tower. . .");
 	Skeleton1->setWarning("You must defeat them to make it into the city. . .");
 	Enemy* Skeleton2 = new Enemy("skeleton", 55);
-	Skeleton2->setAttack("Bite", "attack", 25);  
-	Skeleton2->setAttack("Claw", "attack", 20);
+	Skeleton2->addToAttacks("Bite", "melee", 25);  
+	Skeleton2->addToAttacks("Claw", "melee", 20);
 	room[6]->setEnemy(Skeleton1);
 	room[6]->setEnemy(Skeleton2);
 	/*
@@ -497,14 +498,14 @@ std::vector<Room*> createRooms() {
 	room[7]->addToDescription("You also notice some of them look to have been preyed on by vultures and other animals. . .");
 	room[7]->addToDescription("ou see intestines strewn from these bodies as if what ever did this savagely ripped them apart after they fell from a high. . .");
 	Enemy* Wayvern1 = new Enemy("Wayvern",150);
-	Wayvern1->setAttack("Bite", "attack", 50); 
-	Wayvern1->setAttack("TailWhip", "attack", 120);
+	Wayvern1->addToAttacks("Bite", "melee", 50); 
+	Wayvern1->addToAttacks("TailWhip", "melee", 120);
 	Wayvern1->setWarning("you hear a loud screeching noise from within the cloud of  miasma, then out  come two undead wayverns. . .");
 	Wayvern1->setWarning("you have heard legends that the kingdoms of old use to have the power to train and control wayverns and dragons. . .");
 	Wayvern1->setWarning("You never believed that they existed, but now you know they must have! ! ! . . .");
 	Enemy* Wayvern2 = new Enemy("Wayvern", 155);
-	Wayvern2->setAttack("Bite", "attack", 25);  
-	Wayvern2->setAttack("Claw", "attack", 20);
+	Wayvern2->addToAttacks("Bite", "melee", 25);  
+	Wayvern2->addToAttacks("Claw", "melee", 20);
 	room[7]->setEnemy(Wayvern1);
 	room[7]->setEnemy(Wayvern2);
 	/*
@@ -517,16 +518,16 @@ std::vector<Room*> createRooms() {
 	room[8]->addToDescription("The map looks similar to maps you have seen of the area now, the only diffrence was that insdead of the old kingdom it has the name Estize. . .");
 	room[8]->addToDescription("You must decided to continue further south into the necropolis or to fail the world and it's people. . .");
 	Enemy* ZHumman6 = new Enemy("Zombie", 60);
-	ZHumman6->setAttack("Grab", "attack", 5); 
-	ZHumman6->setAttack("Bite", "attack", 20);
+	ZHumman6->addToAttacks("Grab", "melee", 5); 
+	ZHumman6->addToAttacks("Bite", "melee", 20);
 	ZHumman6->setWarning("As you descend deeper into the crypts  you find . . .");
 	ZHumman6->setWarning("three zombies wandering around the hall that has doors to the south . . .");
 	Enemy* ZHumman7 = new Enemy("Zombie", 45);
-	ZHumman7->setAttack("Bite", "attack", 25); 
-	ZHumman7->setAttack("Claw", "attack", 20);
+	ZHumman7->addToAttacks("Bite", "melee", 25); 
+	ZHumman7->addToAttacks("Claw", "melee", 20);
 	Enemy* ZHumman8 = new Enemy("Zombie", 60);
-	ZHumman8->setAttack("Grab", "attack", 5); 
-	ZHumman8->setAttack("Bite", "attack", 20);
+	ZHumman8->addToAttacks("Grab", "melee", 5); 
+	ZHumman8->addToAttacks("Bite", "melee", 20);
 	room[8]->setEnemy(ZHumman6);
 	room[8]->setEnemy(ZHumman7);
 	room[8]->setEnemy(ZHumman8);
@@ -538,15 +539,15 @@ std::vector<Room*> createRooms() {
 	room[9]->addToDescription("It seems like the temple where you see off the dead in the crypt of Estnophor");
 	room[9]->addToDescription("If you remeber correctly the layout of the Estnophor crypt had a priests quarters to the  west and a path to the crypts in the east");
 	Enemy* ChaosKnight1 = new Enemy("ChaosKnight", 255);
-    ChaosKnight1->setAttack("Inpact", "attack", 25); 
-    ChaosKnight1->setAttack("Punch", "attack", 20);
+    ChaosKnight1->addToAttacks("Inpact", "melee", 25); 
+    ChaosKnight1->addToAttacks("Punch", "melee", 20);
 	Enemy* UndeadKnight1 = new Enemy("UndeadKnight", 115);
-    UndeadKnight1->setAttack("MaceBludgeon", "attack", 35); 
-    UndeadKnight1->setAttack("cleave", "attack", 40);
+    UndeadKnight1->addToAttacks("MaceBludgeon", "melee", 35); 
+    UndeadKnight1->addToAttacks("cleave", "melee", 40);
     room[9]->setEnemy(UndeadKnight1);
 	Enemy* UndeadKnight2 = new Enemy("UndeadKnight", 125);
-    UndeadKnight1->setAttack("SwordInpact", "attack", 25); 
-    UndeadKnight1->setAttack("Punch", "attack", 20);
+    UndeadKnight1->addToAttacks("SwordInpact", "melee", 25); 
+    UndeadKnight1->addToAttacks("Punch", "melee", 20);
     room[9]->setEnemy(ChaosKnight1);
 	room[9]->setEnemy(UndeadKnight1);
 	room[9]->setEnemy(UndeadKnight2);
@@ -557,16 +558,16 @@ std::vector<Room*> createRooms() {
 	room[10]->addToDescription("You descend deeper into the crypt to find the lord of chaos.");
 	room[10]->addToDescription("There is many bones lined up on the walls of the crypt as you descent level after level");
 	Enemy* ZHumman3 = new Enemy("Zombie", 60);
-	ZHumman3->setAttack("Grab", "attack", 5); 
-	ZHumman3->setAttack("Bite", "attack", 20);
+	ZHumman3->addToAttacks("Grab", "melee", 5); 
+	ZHumman3->addToAttacks("Bite", "melee", 20);
 	ZHumman3->setWarning("As you descend deeper into the crypts  you find  a large a hall that branches off into two diffrent directions. . .");
 	ZHumman3->setWarning("You find three zombies wandering around the hall that has doors to the south and the north . .");
 	Enemy* ZHumman4 = new Enemy("Zombie", 45);
-	ZHumman4->setAttack("Bite", "attack", 25); 
-	ZHumman4->setAttack("Claw", "attack", 20);
+	ZHumman4->addToAttacks("Bite", "melee", 25); 
+	ZHumman4->addToAttacks("Claw", "melee", 20);
 	Enemy* ZHumman5 = new Enemy("Zombie", 60);
-	ZHumman5->setAttack("Grab", "attack", 5); 
-	ZHumman5->setAttack("Bite", "attack", 20);
+	ZHumman5->addToAttacks("Grab", "melee", 5); 
+	ZHumman5->addToAttacks("Bite", "melee", 20);
 	room[10]->setEnemy(ZHumman3);
 	room[10]->setEnemy(ZHumman4);
 	room[10]->setEnemy(ZHumman5);
@@ -577,12 +578,12 @@ std::vector<Room*> createRooms() {
 	room[11]->addToDescription("You are in the priests quarters, it is bleak and empty just as you would excpect a man of the cloths room to be. . .");
 	room[11]->addToDescription("As when they join the brother hood of the cloth they give up worldly possesions. . .");
 	Enemy* Skeleton4 = new Enemy("Skeleton", 40);
-	Skeleton4->setAttack("BowBash", "attack", 5); 
-	Skeleton4->setAttack("BoneThrow", "attack", 20);
+	Skeleton4->addToAttacks("BowBash", "melee", 5); 
+	Skeleton4->addToAttacks("BoneThrow", "melee", 20);
 	Skeleton4->setWarning("You Find two former men of the cloth now brough back a minions of the lord of chaos. . .");
 	Enemy* Skeleton5 = new Enemy("Skeleton", 60);
-	Skeleton5->setAttack("BowBash", "attack", 5); 
-	Skeleton5->setAttack("BoneSword", "attack", 50);
+	Skeleton5->addToAttacks("BowBash", "melee", 5); 
+	Skeleton5->addToAttacks("BoneSword", "melee", 50);
 	Skeleton5->setWarning("They seem to have been dead a long time. . .");
 	room[11]->setEnemy(Skeleton4);
 	room[11]->setEnemy(Skeleton5);
@@ -594,12 +595,12 @@ std::vector<Room*> createRooms() {
 	room[12]->addToDescription("The giant door is locked and the smaller one seems open");
 	room[12]->addToDescription("You can go back north and find a key for the southern door possibly deeper in the crypt from the ritual chamber or go east into what seems like a crypt for royals of the kingdom. . .");
 	Enemy* UndeadKnight3 = new Enemy("UndeadKnight", 115);
-    UndeadKnight3->setAttack("MaceBludgeon", "attack", 35); 
-    UndeadKnight3->setAttack("cleave", "attack", 40);
+    UndeadKnight3->addToAttacks("MaceBludgeon", "melee", 35); 
+    UndeadKnight3->addToAttacks("cleave", "melee", 40);
     room[12]->setEnemy(UndeadKnight3);
 	Enemy* UndeadKnight4 = new Enemy("UndeadKnight", 125);
-    UndeadKnight4->setAttack("SwordInpact", "attack", 25); 
-    UndeadKnight4->setAttack("Punch", "attack", 20);
+    UndeadKnight4->addToAttacks("SwordInpact", "melee", 25); 
+    UndeadKnight4->addToAttacks("Punch", "melee", 20);
 	room[12]->setEnemy(UndeadKnight4);
 	/*
 		/*
@@ -611,17 +612,17 @@ std::vector<Room*> createRooms() {
 	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
 	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
 	Enemy* Skeleton6 = new Enemy("Skeleton", 40);
-	Skeleton6->setAttack("BowBash", "attack", 5); 
-	Skeleton6->setAttack("BoneThrow", "attack", 20);
+	Skeleton6->addToAttacks("BowBash", "melee", 5); 
+	Skeleton6->addToAttacks("BoneThrow", "melee", 20);
 	Skeleton6->setWarning("You Find three skeletons brough back as minions of the lord of chaos. . .");
 	Enemy* Skeleton7 = new Enemy("Skeleton", 60);
-	Skeleton7->setAttack("BowBash", "attack", 5); 
-	Skeleton7->setAttack("BoneSword", "attack", 50);
+	Skeleton7->addToAttacks("BowBash", "melee", 5); 
+	Skeleton7->addToAttacks("BoneSword", "melee", 50);
 	room[13]->setEnemy(Skeleton6);
 	room[13]->setEnemy(Skeleton7);
 	Enemy* Skeleton8 = new Enemy("Skeleton", 40);
-	Skeleton8->setAttack("BowBash", "attack", 5); 
-	Skeleton8->setAttack("BoneThrow", "attack", 20);
+	Skeleton8->addToAttacks("BowBash", "melee", 5); 
+	Skeleton8->addToAttacks("BoneThrow", "melee", 20);
 
 		/*
 	ROOM 14 1st generation tomb of royalty
@@ -629,12 +630,12 @@ std::vector<Room*> createRooms() {
 	room[14]->setRooms(nullptr,nullptr,nullptr, room[12]);
 	room[14]->addToDescription("You are in a Tomb for the first generation of royals of the Estize kingdom. . .");
 	Enemy* UndeadKnight5 = new Enemy("UndeadKnight", 155);
-    UndeadKnight5->setAttack("MaceBludgeon", "attack", 35); 
-    UndeadKnight5->setAttack("RainOfMaces", "attack", 80);
+    UndeadKnight5->addToAttacks("MaceBludgeon", "melee", 35); 
+    UndeadKnight5->addToAttacks("RainOfMaces", "melee", 80);
     room[14]->setEnemy(UndeadKnight5);
 	Enemy* UndeadKnight6 = new Enemy("UndeadKnight", 178);
-    UndeadKnight6->setAttack("SwordInpact", "attack", 75); 
-    UndeadKnight6->setAttack("LifeDrain", "attack", 60);
+    UndeadKnight6->addToAttacks("SwordInpact", "melee", 75); 
+    UndeadKnight6->addToAttacks("LifeDrain", "melee", 60);
 	room[14]->setEnemy(UndeadKnight6);
 	/*
 	ROOM 15 corrador of the dammed
@@ -643,27 +644,27 @@ std::vector<Room*> createRooms() {
 	room[15]->addToDescription("You one you come out of crypt you arrive what essentialy looks like a gate to hell on the west wall that is painted in extreame detail  by someone of old as if to liken the crypts to never ending suffering for those who are not invited.");
 	room[15]->addToDescription("You have the option of two more crypts either to the north or to the east.");
 	Enemy* ZHumman9 = new Enemy("Zombie", 60);
-	ZHumman9->setAttack("Grab", "attack", 5); 
-	ZHumman9->setAttack("Bite", "attack", 20);
+	ZHumman9->addToAttacks("Grab", "melee", 5); 
+	ZHumman9->addToAttacks("Bite", "melee", 20);
 	ZHumman9->setWarning("You find six zombies wandering around the hall that has doors to the east and the north . .");
 	Enemy* ZHumman10 = new Enemy("Zombie", 45);
-	ZHumman10->setAttack("Bite", "attack", 25); 
-	ZHumman10->setAttack("Claw", "attack", 20);
+	ZHumman10->addToAttacks("Bite", "melee", 25); 
+	ZHumman10->addToAttacks("Claw", "melee", 20);
 	Enemy* ZHumman5 = new Enemy("Zombie", 60);
-	ZHumman11->setAttack("Grab", "attack", 5); 
-	ZHumman11->setAttack("Bite", "attack", 20);
+	ZHumman11->addToAttacks("Grab", "melee", 5); 
+	ZHumman11->addToAttacks("Bite", "melee", 20);
 	room[15]->setEnemy(ZHumman9);
 	room[15]->setEnemy(ZHumman10);
 	room[15]->setEnemy(ZHumman11);
 	Enemy* ZHumman12 = new Enemy("Zombie", 60);
-	ZHumman12->setAttack("Grab", "attack", 5); 
-	ZHumman12->setAttack("Bite", "attack", 20);
+	ZHumman12->addToAttacks("Grab", "melee", 5); 
+	ZHumman12->addToAttacks("Bite", "melee", 20);
 	Enemy* ZHumman13 = new Enemy("Zombie", 45);
-	ZHumman13->setAttack("Bite", "attack", 25); 
-	ZHumman13->setAttack("Claw", "attack", 20);
+	ZHumman13->addToAttacks("Bite", "melee", 25); 
+	ZHumman13->addToAttacks("Claw", "melee", 20);
 	Enemy* ZHumman14 = new Enemy("Zombie", 60);
-	ZHumman14->setAttack("Grab", "attack", 5); 
-	ZHumman14->setAttack("Bite", "attack", 20);
+	ZHumman14->addToAttacks("Grab", "melee", 5); 
+	ZHumman14->addToAttacks("Bite", "melee", 20);
 	room[15]->setEnemy(ZHumman12);
 	room[15]->setEnemy(ZHumman13);
 	room[15]->setEnemy(ZHumman14);
@@ -674,12 +675,12 @@ std::vector<Room*> createRooms() {
 	room[16]->addToDescription("You have entered another crypt with only one exit to the east. . . .");
 	room[16]->addToDescription("The eastern door is lkarge enoug for several of the wayverns you fought back in the town square to fit through, what does that mean for wha't whating for you ? ? ?.");
 	Enemy* UndeadKnight10= new Enemy("UndeadKnight", 125);
-    UndeadKnight10->setAttack("Inpact", "attack", 25); 
-    UndeadKnight10->setAttack("Punch", "attack", 20);
+    UndeadKnight10->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight10->addToAttacks("Punch", "melee", 20);
     room[16]->setEnemy(UndeadKnight8);
 	Enemy* UndeadKnight11 = new Enemy("UndeadKnight", 125);
-    UndeadKnight11->setAttack("Inpact", "attack", 25); 
-    UndeadKnight11->setAttack("Punch", "attack", 20);
+    UndeadKnight11->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight11->addToAttacks("Punch", "melee", 20);
     room[16]->setEnemy(UndeadKnight11);
 	/*
 	ROOM 17 Eastern wing of the second lvl of the crypt
@@ -691,8 +692,8 @@ std::vector<Room*> createRooms() {
 	room[17]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
 	room[17]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
 	Enemy* UndeadKnight12 = new Enemy("UndeadKnight", 125);
-    UndeadKnight12->setAttack("Inpact", "attack", 25); 
-    UndeadKnight12->setAttack("Punch", "attack", 20);
+    UndeadKnight12->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight12->addToAttacks("Punch", "melee", 20);
     room[17]->setEnemy(UndeadKnight12);
 	/*
 	ROOM 18  2nd generation tomb of royalty 3 undead knight  2 chaos knights Dead End room dont enter
@@ -702,24 +703,24 @@ std::vector<Room*> createRooms() {
 	room[18]->addToDescription("It Also Seems to have an aura of war and blood to it. . ..");
 	 room[18]->addToDescription("It must have been a generation of war. . .");
 	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 225);
-    ChaosKnight2->setAttack("Inpact", "attack", 25); 
-    ChaosKnight2->setAttack("Punch", "attack", 20);
+    ChaosKnight2->addToAttacks("Inpact", "melee", 25); 
+    ChaosKnight2->addToAttacks("Punch", "melee", 20);
     room[18]->setEnemy(ChaosKnight1);
 	Enemy* ChaosKnight3 = new Enemy("ChaosKnight", 225);
-    ChaosKnight3->setAttack("Inpact", "attack", 25); 
-    ChaosKnight3->setAttack("Punch", "attack", 20);
+    ChaosKnight3->addToAttacks("Inpact", "melee", 25); 
+    ChaosKnight3->addToAttacks("Punch", "melee", 20);
     room[18]->setEnemy(ChaosKnight3);
 	Enemy* UndeadKnight7 = new Enemy("UndeadKnight", 125);
-    UndeadKnight7->setAttack("Inpact", "attack", 25); 
-    UndeadKnight7->setAttack("Punch", "attack", 20);
+    UndeadKnight7->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight7->addToAttacks("Punch", "melee", 20);
     room[18]->setEnemy(UndeadKnight7);
 	Enemy* UndeadKnight8 = new Enemy("UndeadKnight", 125);
-    UndeadKnight8->setAttack("Inpact", "attack", 25); 
-    UndeadKnight8->setAttack("Punch", "attack", 20);
+    UndeadKnight8->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight8->addToAttacks("Punch", "melee", 20);
     room[18]->setEnemy(UndeadKnight8);
 	Enemy* UndeadKnight9 = new Enemy("UndeadKnight", 125);
-    UndeadKnight9->setAttack("Inpact", "attack", 25); 
-    UndeadKnight9->setAttack("Punch", "attack", 20);
+    UndeadKnight9->addToAttacks("Inpact", "melee", 25); 
+    UndeadKnight9->addToAttacks("Punch", "melee", 20);
     room[18]->setEnemy(UndeadKnight9);
 		/*
 	ROOM 19 Undead Dragon  tomb of royal the gardian 1 undead dragon key room
@@ -733,9 +734,9 @@ std::vector<Room*> createRooms() {
 	key->addToDescription("A key in the hand of a dead adventure, it must open something important. . .");
 	room[19]->setItem(key);
 	Enemy* UndeadDragon = new Enemy("UndeadDragon", 325);
-    UndeadDragon->setAttack("FireBreath", "attack", 100); 
-    UndeadDragon->setAttack("WingSlam", "attack", 50);
-	UndeadDragon->setAttack("TailWhip", "attack", 90);
+    UndeadDragon->addToAttacks("FireBreath", "melee", 100); 
+    UndeadDragon->addToAttacks("WingSlam", "melee", 50);
+	UndeadDragon->addToAttacks("TailWhip", "melee", 90);
     room[19]->setEnemy(UndeadDragon);
 	/*
 	ROOM 20 Boss Room [Chaos Lord] Crypt of the elders 1 lord of destruction and chaos
@@ -749,8 +750,8 @@ std::vector<Room*> createRooms() {
 	room[20]->setLockStatus(true);
 	room[20]->hasDoor(true);
 	Enemy* ChaosLord = new Enemy("ChaosLord", 525);
-    ChaosLord->setAttack("Inpact", "attack", 25); 
-    ChaosLord->setAttack("Punch", "attack", 20);
+    ChaosLord->addToAttacks("Inpact", "melee", 25); 
+    ChaosLord->addToAttacks("Punch", "melee", 20);
     room[20]->setEnemy(ChaosLord);
 	return room;
 }

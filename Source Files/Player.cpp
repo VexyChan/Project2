@@ -31,18 +31,11 @@ void Player::setName(std::string name)
 
 void Player::addToInv(Item* item)
 {
-	if (item->getType() == "melee" || item->getType() == "ranged" || item->getType() == "magic") {
-		std::vector<Item*> tempWeapons;
-		for (Item* it : weapons) {
-			if (it->getType() != item->getType()) {
-				tempWeapons.push_back(it);
-			}
-		}
-		tempWeapons.push_back(item);
-		weapons = tempWeapons;
+	if (item->getType() == "attack") {
+		weapons.push_back(item);
 	}
 	else {
-		this->items.push_back(item);
+		items.push_back(item);
 	}
 }
 
