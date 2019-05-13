@@ -518,6 +518,20 @@ std::vector<Room*> createRooms() {
 	room[8]->addToDescription("You light a torch and see a map on the ground you pick it up and you notice it has the name Estize. . .");
 	room[8]->addToDescription("The map looks similar to maps you have seen of the area now, the only diffrence was that insdead of the old kingdom it has the name Estize. . .");
 	room[8]->addToDescription("You must decided to continue further south into the necropolis or to fail the world and it's people. . .");
+	Enemy* ZHumman6 = new Enemy("Zombie", 60);
+	ZHumman6->setAttack("Grab", "attack", 5); 
+	ZHumman6->setAttack("Bite", "attack", 20);
+	ZHumman6->setWarning("As you descend deeper into the crypts  you find . . .");
+	ZHumman6->setWarning("three zombies wandering around the hall that has doors to the south . . .");
+	Enemy* ZHumman7 = new Enemy("Zombie", 45);
+	ZHumman7->setAttack("Bite", "attack", 25); 
+	ZHumman7->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman8 = new Enemy("Zombie", 60);
+	ZHumman8->setAttack("Grab", "attack", 5); 
+	ZHumman8->setAttack("Bite", "attack", 20);
+	room[8]->setEnemy(ZHumman6);
+	room[8]->setEnemy(ZHumman7);
+	room[8]->setEnemy(ZHumman8);
 	/*
 	ROOM 9 Ritual Chamber
 	*/
@@ -598,6 +612,18 @@ std::vector<Room*> createRooms() {
 	room[13]->addToDescription("There is cobwebs and dust filling the air to make it hard to see even with light. . .");
 	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
 	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
+	Enemy* Skeleton6 = new Enemy("Skeleton", 40);
+	Skeleton6->setAttack("BowBash", "attack", 5); 
+	Skeleton6->setAttack("BoneThrow", "attack", 20);
+	Skeleton6->setWarning("You Find three skeletons brough back as minions of the lord of chaos. . .");
+	Enemy* Skeleton7 = new Enemy("Skeleton", 60);
+	Skeleton7->setAttack("BowBash", "attack", 5); 
+	Skeleton7->setAttack("BoneSword", "attack", 50);
+	room[13]->setEnemy(Skeleton6);
+	room[13]->setEnemy(Skeleton7);
+	Enemy* Skeleton8 = new Enemy("Skeleton", 40);
+	Skeleton8->setAttack("BowBash", "attack", 5); 
+	Skeleton8->setAttack("BoneThrow", "attack", 20);
 
 		/*
 	ROOM 14 1st generation tomb of royalty
@@ -613,48 +639,90 @@ std::vector<Room*> createRooms() {
     UndeadKnight6->setAttack("LifeDrain", "attack", 60);
 	room[14]->setEnemy(UndeadKnight6);
 	/*
-		/*
 	ROOM 15 corrador of the dammed
 	*/
 	room[15]->setRooms(room[16], room[13], room[17],nullptr);
 	room[15]->addToDescription("You one you come out of crypt you arrive what essentialy looks like a gate to hell on the west wall that is painted in extreame detail  by someone of old as if to liken the crypts to never ending suffering for those who are not invited.");
 	room[15]->addToDescription("You have the option of two more crypts either to the north or to the east.");
-	
+	Enemy* ZHumman9 = new Enemy("Zombie", 60);
+	ZHumman9->setAttack("Grab", "attack", 5); 
+	ZHumman9->setAttack("Bite", "attack", 20);
+	ZHumman9->setWarning("You find six zombies wandering around the hall that has doors to the east and the north . .");
+	Enemy* ZHumman10 = new Enemy("Zombie", 45);
+	ZHumman10->setAttack("Bite", "attack", 25); 
+	ZHumman10->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman5 = new Enemy("Zombie", 60);
+	ZHumman11->setAttack("Grab", "attack", 5); 
+	ZHumman11->setAttack("Bite", "attack", 20);
+	room[15]->setEnemy(ZHumman9);
+	room[15]->setEnemy(ZHumman10);
+	room[15]->setEnemy(ZHumman11);
+	Enemy* ZHumman12 = new Enemy("Zombie", 60);
+	ZHumman12->setAttack("Grab", "attack", 5); 
+	ZHumman12->setAttack("Bite", "attack", 20);
+	Enemy* ZHumman13 = new Enemy("Zombie", 45);
+	ZHumman13->setAttack("Bite", "attack", 25); 
+	ZHumman13->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman14 = new Enemy("Zombie", 60);
+	ZHumman14->setAttack("Grab", "attack", 5); 
+	ZHumman14->setAttack("Bite", "attack", 20);
+	room[15]->setEnemy(ZHumman12);
+	room[15]->setEnemy(ZHumman13);
+	room[15]->setEnemy(ZHumman14);
 		/*
 	ROOM 16  north wing of the second lvl of the crypt
 	*/
 	room[16]->setRooms(nullptr, room[15], room[19], nullptr);
-	room[16]->addToDescription("This crypt was alot shorter then the others and comes to a eastern door which is made out of a material you haven't seen before. . .");
-	room[16]->addToDescription("You have a really bad feeling about it and peek in.");
-	room[16]->addToDescription("When you look in all you see is a great hall filled with 2 chaos knights and 3 undead.");
-	room[16]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
-	room[16]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
+	room[16]->addToDescription("You have entered another crypt with only one exit to the east. . . .");
+	room[16]->addToDescription("The eastern door is lkarge enoug for several of the wayverns you fought back in the town square to fit through, what does that mean for wha't whating for you ? ? ?.");
+	Enemy* UndeadKnight10= new Enemy("UndeadKnight", 125);
+    UndeadKnight10->setAttack("Inpact", "attack", 25); 
+    UndeadKnight10->setAttack("Punch", "attack", 20);
+    room[16]->setEnemy(UndeadKnight8);
+	Enemy* UndeadKnight11 = new Enemy("UndeadKnight", 125);
+    UndeadKnight11->setAttack("Inpact", "attack", 25); 
+    UndeadKnight11->setAttack("Punch", "attack", 20);
+    room[16]->setEnemy(UndeadKnight11);
 	/*
 	ROOM 17 Eastern wing of the second lvl of the crypt
 	*/
 	room[17]->setRooms(room[18], nullptr, nullptr, room[15]);
-	room[17]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[17]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[17]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[17]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[17]->addToDescription("This door can't be broken, you must find a key.");
-		/*
+	room[17]->addToDescription("This crypt was alot shorter then the others and comes to a western door which is made out of a material you haven't seen before. . .");
+	room[17]->addToDescription("You have a really bad feeling about it and peek in.");
+	room[17]->addToDescription("When you look in all you see is a great hall filled with 2 chaos knights and 3 undead.");
+	room[17]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
+	room[17]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
+	Enemy* UndeadKnight12 = new Enemy("UndeadKnight", 125);
+    UndeadKnight12->setAttack("Inpact", "attack", 25); 
+    UndeadKnight12->setAttack("Punch", "attack", 20);
+    room[17]->setEnemy(UndeadKnight12);
+	/*
 	ROOM 18  2nd generation tomb of royalty 3 undead knight  2 chaos knights Dead End room dont enter
 	*/
 	room[18]->setRooms(nullptr, room[17], nullptr,nullptr);
-	room[18]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[18]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[18]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[18]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[18]->addToDescription("This door can't be broken, you must find a key.");
-	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 125);
+	room[18]->addToDescription("You what looks like a royal tomb of a diffrent era long before the times of now. . .");
+	room[18]->addToDescription("It Also Seems to have an aura of war and blood to it. . ..");
+	 room[18]->addToDescription("It must have been a generation of war. . .");
+	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 225);
     ChaosKnight2->setAttack("Inpact", "attack", 25); 
     ChaosKnight2->setAttack("Punch", "attack", 20);
     room[18]->setEnemy(ChaosKnight1);
-	Enemy* ChaosKnight3 = new Enemy("ChaosKnight", 125);
+	Enemy* ChaosKnight3 = new Enemy("ChaosKnight", 225);
     ChaosKnight3->setAttack("Inpact", "attack", 25); 
     ChaosKnight3->setAttack("Punch", "attack", 20);
     room[18]->setEnemy(ChaosKnight3);
+	Enemy* UndeadKnight7 = new Enemy("UndeadKnight", 125);
+    UndeadKnight7->setAttack("Inpact", "attack", 25); 
+    UndeadKnight7->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight7);
+	Enemy* UndeadKnight8 = new Enemy("UndeadKnight", 125);
+    UndeadKnight8->setAttack("Inpact", "attack", 25); 
+    UndeadKnight8->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight8);
+	Enemy* UndeadKnight9 = new Enemy("UndeadKnight", 125);
+    UndeadKnight9->setAttack("Inpact", "attack", 25); 
+    UndeadKnight9->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight9);
 		/*
 	ROOM 19 Undead Dragon  tomb of royal the gardian 1 undead dragon key room
 	*/
@@ -666,6 +734,11 @@ std::vector<Room*> createRooms() {
 	Item* key = new Item("key", "item");
 	key->addToDescription("A key in the hand of a dead adventure, it must open something important. . .");
 	room[19]->setItem(key);
+	Enemy* UndeadDragon = new Enemy("UndeadDragon", 325);
+    UndeadDragon->setAttack("FireBreath", "attack", 100); 
+    UndeadDragon->setAttack("WingSlam", "attack", 50);
+	UndeadDragon->setAttack("TailWhip", "attack", 90);
+    room[19]->setEnemy(UndeadDragon);
 	/*
 	ROOM 20 Boss Room [Chaos Lord] Crypt of the elders 1 lord of destruction and chaos
 	*/
@@ -677,6 +750,10 @@ std::vector<Room*> createRooms() {
 	room[20]->addToDescription("The giant before you is the lord of chaos & Destruction! ! !");
 	room[20]->setLockStatus(true);
 	room[20]->hasDoor(true);
+	Enemy* ChaosLord = new Enemy("ChaosLord", 525);
+    ChaosLord->setAttack("Inpact", "attack", 25); 
+    ChaosLord->setAttack("Punch", "attack", 20);
+    room[20]->setEnemy(ChaosLord);
 	return room;
 }
 /*
