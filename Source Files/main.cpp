@@ -11,6 +11,7 @@
 #include <exception>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
 std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	system("CLS");
@@ -248,101 +249,7 @@ std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	}
 	return std::make_pair(player, enemy);
 }
-
-/*
-Creates and populates the rooms that will be traveled through.
-*/
-std::vector<Room*> createRooms() {
-	std::vector<Room*> room;
-	for (int i = 0; i < 10; i++) {
-		room.push_back(new Room("Room " + std::to_string(i)));
-	}
-
-	/*
-	ROOM 0 - STARTING ROOM + STAIRCASE TO BOSS
-	PLAYER NEEDS TO GO BACK TO THIS ROOM WITH A KEY
-	TO GET TO THE BOSS
-	*/
-	room[0]->setRooms(room[4], room[1], room[6], room[2]);
-	room[0]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[0]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[0]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[0]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[0]->addToDescription("This door can't be broken, you must find a key.");
-	room[0]->setLockStatus(true);
-	room[0]->hasDoor(true);
-
-	/*
-	ROOM 1 - FIRST WEAPON ROOM
-	*/
-	room[1]->setRooms(room[0], nullptr, nullptr, nullptr);
-	room[1]->addToDescription("You are in a well-lit room, with torches covering each wall.");
-	room[1]->addToDescription("In the center of the room lay the remains of a long-dead knight.");
-	Item* rustySword = new Item("Rusty Sword", "melee");
-	rustySword->setAttackType("Stab", "attack", 20);
-	rustySword->setAttackType("Block", "block", 20);
-	rustySword->addToDescription("There is an ancient sword sticking out of its chest.");
-	room[1]->setItem(rustySword);
-
-	/*
-	ROOM 2 - FIRST ENEMY
-	*/
-	room[2]->setRooms(nullptr, nullptr, room[0], room[3]);
-	room[2]->addToDescription("There is an overwhelming smell of ass in this room.");
-	room[2]->addToDescription("Try not to touch anything, you'll probably get some sort of disease.");
-	Enemy* troll = new Enemy("Troll", 100);
-	troll->setAttack("Club", "attack", 5);
-	troll->setAttack("Shield", "block", 5);
-	troll->setItem(new Item("Health Kit","health"));
-	troll->getItem()->setValue(10);
-	troll->setWarning("You see an angry looking troll with a giant club and a broken-down shield, and he sees you.");
-	room[2]->setEnemy(troll);
-	
-
-	/*
-	ROOM 3 - GET NEXT WEAPON TYPE
-	*/
-	room[3]->setRooms(nullptr, nullptr, room[2], room[7]);
-	room[3]->addToDescription("This rooms seems to be the remnants of a library.");
-	room[3]->addToDescription("There is hardened wax that has melted down the sides of bookshelves.");
-	Item* bookOfFlames = new Item("Book of Flames", "magic");
-	bookOfFlames->setAttackType("Blast", "attack", 20);
-	bookOfFlames->setAttackType("Burn","status",15); //does 5 damage at the end of each turn
-	bookOfFlames->addToDescription("At the edge of the room there is a pedestal with a book opened on it.");
-	bookOfFlames->addToDescription("There seems to be a flickering light coming from it.");
-	room[3]->setItem(bookOfFlames);
-	/*
-	ROOM 4
-	*/
-	room[4]->setRooms(room[5], room[0], nullptr, nullptr);
-	room[4]->addToDescription("You see the remains of a campfire in what look like an old dining room.");
-	room[4]->addToDescription("The embers are still hot.");
-	Enemy* goblin = new Enemy("Goblin", 100);
-	goblin->setAttack("Bleed", "status", 2); //bleeds 2 damage
-	goblin->setAttack("Side-Step", "block", 10);
-	goblin->setItem(new Item("Health Kit", "health"));
-	goblin->setWarning("You hear something moving quickly among the dining tables. A goblin jumps at you.");
-	room[4]->setEnemy(goblin);
-
-	/*
-	ROOM 5
-	*/
-	room[5]->setRooms(room[8], room[4], nullptr, nullptr);
-	room[5]->addToDescription("This room clearly used to be an armory.");
-	room[5]->addToDescription("There are sword hilts literring the ground.");
-	room[5]->addToDescription("There are not many usable materials in this room.");
-	Item* bowAndArrow = new Item("Bow and Arrow", "ranged");
-	bowAndArrow->setAttackType("Snipe", "attack", 25);
-	bowAndArrow->setAttackType("Hail", "status", 7); //hails 4 damage
-	bowAndArrow->addToDescription("Hanging on one of the walls is a bow and there are arrows below it.");
-	room[5]->setItem(bowAndArrow);
-
-	/*
-	ROOM 6
-	*/
-	room[6]->setRooms(nullptr, nullptr, nullptr, room[0]);
-	room[6]->addToDescription("You are in a courtyard, with a large bonfire lit in the center.");
-	room[6]->addToDescription("There are several sleeping bags, and some sort of animal is being cooked.");
+/* enemy attack add for knight
 	Knight* bronzeKnight = new Knight("Bronze Knight", 150);
 	bronzeKnight->setAttack("Slam", "attack", 15); 
 	bronzeKnight->setAttack("Barricade", "block", 10);
@@ -355,70 +262,500 @@ std::vector<Room*> createRooms() {
 	bronzeKnight->setItem(steelSword);
 	bronzeKnight->setImmunity("melee");
 	room[6]->setEnemy(bronzeKnight);
-	Item* key1 = new Item("key", "item");
-	key1->addToDescription("You see a key on the ground next to the sleeping bags.");
-	room[6]->setItem(key1);
+	*/
+/*
+Creates and populates the rooms that will be traveled through.
+*/
+std::vector<Room*> createRooms() {
+	std::vector<Room*> room;
+	for (int i = 0; i < 20; i++) {
+		room.push_back(new Room("Room " + std::to_string(i)));
+	}
 
 	/*
-	ROOM 7
+	Room[0] Starting Room | Outside starting Town
+	forest path is the only option for the next room
+	Items:
+	3x hp pots heal for 150
+	1x armor adds 250 // the only thing the guild could spare due to the waves spread across the land and supplies for battaling them are so low
+	2x Fireball  dmg 75-100
+	3x throwing knife 25-50 dmg
+	3x water
+	2x rations
+	No enemies in this room	
 	*/
-	room[7]->setRooms(nullptr, nullptr, room[3], nullptr);
-	room[7]->addToDescription("You are in a backroom attached to the Library.");
-	room[7]->addToDescription("There are scrolls spread all over the floor.");
-	Knight* silverKnight = new Knight("Silver Knight", 150);
-	silverKnight->setAttack("Whirlwind", "attack", 10);
-	silverKnight->setAttack("Tornado","status",2);
-	silverKnight->setWarning("There is a silver-clad knight sitting among the scrolls.");
-	silverKnight->setWarning("A light seems to be pulsing from him.");
-	Item* bookOfFlamesPlus = new Item("Advanced Book of Flames", "magic");
-	bookOfFlamesPlus->setAttackType("Blast", "attack", 30);
-	bookOfFlamesPlus->setAttackType("Burn", "status", 20);
-	bookOfFlamesPlus->setAttackType("Flame Wall", "block", 30);
-	silverKnight->setItem(bookOfFlamesPlus);
-	silverKnight->setImmunity("magic");
-	room[7]->setEnemy(silverKnight);
-	Item* key2 = new Item("key", "item");
-	key2->addToDescription("Among the scrolls you see a key.");
-	room[7]->setItem(key2);
+	room[0]->setRooms(room[1],nullptr,nullptr,nullptr);
+	room[0]->addToDescription("After leaving the adventures guild & gathering your things, you leave the town...");
+	room[0]->addToDescription("You stand outside the town ready to fight the Lord Of Chaos...);
+	room[0]->addToDescription("But first you must find the old kingdom's necropolis...");
+	room[0]->addToDescription("For now you may only go north towards the Forest...");
+	room[0]->addToDescription("In the distance you see an ominous black miasma overcast in the direction you need to go...");
+	/* Items*/
+	Item*  sMageStaff= new Item("MageStaff", "magic");
+	sMageStaff->addToDescription("Your trusty magic staff you have fought may enemies with while adventuring")
+	sMageStaff->setAttackType("Fireball", "attack", 45);
+	sMageStaff->setAttackType("Lightning", "attack", 20);
+	sMageStaff->setAttackType("Purification", "attack", 55);
+	Item* sHolySword = new Item("HolySword", "melee");
+	sHolySword->addToDescription("Your trusty sword  you have had since you first became an adventure, it has been passed down in your family for generations");
+	sHolySword->setAttackType("Slash", "attack", 40);
+	sHolySword->setAttackType("cleave", "attack", 50);
+	sHolySword->setAttackType("Impale", "attack", 55);
+	Item* sBow = new Item("Bow&Arrow", "ranged");
+	sBow->addToDescription("eww it is just a normal bow you just kinda found");
+	sBow->setAttackType("VortexArrow", "attack", 35);
+	sBow->setAttackType("FireArrow", "attack", 45);
+	sBow->setAttackType("Snipe", "attack", 30);
+	room[0]->setItem(sBow);
+	room[0]->setItem(sHolySword);
+	room[0]->setItem(sMageStaff);
+	item* WaterRation1 = new Item("WaterRation", "health");
+	WaterRation1->setValue(30);
+	WaterRation1->addToDescription("Gain some health back for hydrating");
+	room[0]->setItem(WaterRation1);
+	item* FoodRation1 = new Item("FoodRation", "health");
+	FoodRation1->setValue(20);
+	FoodRation1->addToDescription("You can't fight on an empty stomach");
+	room[0]->setItem(FoodRation1);
+	item* HealthPotion1 =new Item("HealthPotion", "health";
+	HealthPotion1->setValue(50);
+	HealthPotion1->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion1);
+	item* HealthPotion2 =new Item("HealthPotion", "health";
+	HealthPotion2->setValue(50);
+	HealthPotion2->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion2);
+	item* HealthPotion3 =new Item("HealthPotion", "health";
+	HealthPotion3->setValue(50);
+	HealthPotion3->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion3);
+	item* LeatherArmor =new Item("LeatherArmor", "health");
+	LeatherArmor->setValue(250);
+	LeatherArmor->addToDescription("Well crafted armor which helps with taking some hit from enemies"));
+	room[0]->setItem(LeatherArmor);
+	/*
+	ROOM 1 Starting path in the naba forest
+	shield adds 32 hp // its a wood plank
+	*/
+	room[1]->setRooms(nullptr, room[0], room[2], room[3]);
+	room[1]->addToDescription("You enter the path into the Nabaran Forest..."");
+	room[1]->addToDescription("The path is over cast by trees and darkness.....");
+	room[1]->addToDescription("This however is the only way to the necropolis of the old kingdom....");
+	room[1]->addToDescription("Infomation from the guild tells you ...");
+	room[1]->addToDescription("In the east is the direct route while in the west in a village you may stop and get supplies... ");
+	/* Items */
+	item* HealthPotion4 =new Item("HealthPotion", "health";
+	HealthPotion4->setValue(50);
+	HealthPotion4->addToDescription("An avarge quality Health Potion")
+	room[1]->setItem(HealthPotion4);
+	/* Enemeis*/
+	Enemy* CHumman1 = new Enemy("Alex", 60);
+	CHumman1->setAttack("Inpact", "attack", 10); 
+	CHumman1->setAttack("AxeSlash", "attack", 40);
+	CHumman1->setWarning("During the first waves when the chaos lord returned he had corrupted the spirts of  humans  make them mindless servents to chaos. . ..");
+	CHumman1->setWarning("As you enter the forest you come upon 2 people Jace and Alex who you have known since childhood, as you get closser you see their eyes are glossed over. . .");
+	CHumman1->setWarning("It is like they can't even see the world around them any more. . .");
+	Enemy* CHumman2 = new Enemy("Jace", 45);
+	CHumman2->setAttack("Inpact", "attack", 25); 
+	CHumman2->setAttack("Punch", "attack", 20);
+	room[1]->setEnemy(CHumman1);
+	room[1]->setEnemy(CHumman2);
+	/*
+	ROOM 2  Western path of the Nahouran forest
+	*/
+	room[2]->setRooms(room[5], nullptr,nullptr, room[1]);
+	room[2]->addToDescription("You have decided to go to the next village to find some supplies to fight the lord. . . .");
+	room[2]->addToDescription("You still have a ways to go before you get there, you still can turn back. . .");
+	room[2]->addToDescription("You have no idea what this path has in store for you . . .");
+	room[2]->addToDescription("As you enter deeper into the forest the pressure of the miasma grows. . .");
+	room[2]->addToDescription("you see several abandoned carts as you journey along the path may of them have been destroyed. . . but by what? . . .");
+	/* Items */
+	item* HealthPotion5 =new Item("HealthPotion", "health";
+	HealthPotion5->setValue(50);
+	HealthPotion5->addToDescription("An avarge quality Health Potion")
+	room[2]->setItem(HealthPotion3);
+	item* HealthPotion6 =new Item("HealthPotion", "health";
+	HealthPotion6->setValue(50);
+	HealthPotion6->addToDescription("An avarge quality Health Potion")
+	room[2]->setItem(HealthPotion6);
+	/*Enemies */ 
+	Enemy* Bear= new Enemy("Bear", 100);
+	Bear->setAttack("Charge", "attack", 35); 
+	Bear->setAttack("Bite", "attack", 50);
+	Bear->setAttack("Claw", "attack", 30);
+	room[2]->setEnemy(Bear);
+	/*
+	ROOM 3 Eastern path of the Nahouran forest
+	*/
+	room[3]->addToDescription("You have decided to take the shorter path . . .");
+	room[3]->addToDescription("As you reach the end it seems like the bridge is out and a dark  miasma  covers the other side. . .");
+	room[3]->addToDescription("you find a path to the east which will take you around to the exit of the forest....");	
+	room[3]->setRooms(room[4], nullptr, room[1], nullptr);
+	/* Items */
+	item* HealthPotion7 =new Item("HealthPotion", "health";
+	HealthPotion7->setValue(50);
+	HealthPotion7->addToDescription("An avarge quality Health Potion")
+	room[3]->setItem(HealthPotion7);
+	item* WaterRation2 =new Item("WaterRation", "health";
+	WaterRation2->setValue(20);
+	WaterRation2->addToDescription("Gain some health back for hydrating")
+	room[2]->setItem(WaterRation2);
+	item* WoodSheild =new Item("WoodPlank", "health";
+	WoodSheild ->setValue(70);
+	WoodSheild->addToDescription("Gain some more protection from damage")
+	room[2]->setItem(WoodSheild);
+	/*Enemies */ 
+	Enemy* Wolf1= new Enemy("Wolf", 30);
+	Wolf1->setAttack("Charge", "attack",15); 
+	Wolf1->setAttack("Bite", "attack", 30);
+	Wolf1->setAttack("Claw", "attack", 20);
+	room[3]->setEnemy(Wolf1);
+	Enemy* Wolf2= new Enemy("Wolf", 50);
+	Wolf2->setAttack("Charge", "attack",25); 
+	Wolf2->setAttack("Bite", "attack", 40);
+	Wolf2->setAttack("Claw", "attack", 25);
+	room[3]->setEnemy(Wolf2);
+	Enemy* Wolf3= new Enemy("Wolf", 20);
+	Wolf3->setAttack("Charge", "attack",15); 
+	Wolf3->setAttack("Bite", "attack", 25);
+	Wolf3->setAttack("Claw", "attack", 10);
+	room[3]->setEnemy(Wolf3);
+	Enemy* Wolf4= new Enemy("Wolf", 10);
+	Wolf4->setAttack("Charge", "attack",5); 
+	Wolf4->setAttack("Bite", "attack", 15);
+	Wolf4->setAttack("Claw", "attack", 5);
+	room[3]->setEnemy(Wolf4);
+	/*
+	ROOM 4 Off the eastern trail exit to the outskirts of the onld kingdom the plains
+	*/
+	room[4]->addToDescription("You have ended up closer to  the old  kingdom . . .");
+	room[4]->addToDescription("As you reach the end of the forest you can see a field with a path . .");
+	room[4]->addToDescription("you are still a good distance away from the old kingdom, but you see it from the forest the skies pitch black due to the evil  miasma coming from the necropolis. . .");
+	room[4]->addToDescription("you need to go East to arrive at the old kingdom to fight the chaos lord. . .");	
+	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
+	Enemy* Wolf5= new Enemy("Wolf", 60);
+	Wolf5->setAttack("Charge", "attack",25); 
+	Wolf5->setAttack("Bite", "attack", 35);
+	Wolf5->setAttack("Claw", "attack",40);
+	room[4]->setEnemy(Wolf3);
+	Enemy* Wolf6= new Enemy("Wolf", 50);
+	Wolf6->setAttack("Charge", "attack",25); 
+	Wolf6->setAttack("Bite", "attack", 45);
+	Wolf6->setAttack("Claw", "attack", 15);
+	room[4]->setEnemy(Wolf4);
 
 	/*
-	ROOM 8
+	ROOM 5 the exit of the forest, next to the destroyed town of tohya
 	*/
-	room[8]->setRooms(nullptr, room[5], nullptr, nullptr);
-	room[8]->addToDescription("You enter a courtyard which looks to be a firing range.");
-	room[8]->addToDescription("There are dummy targets down-range which are full of arrows.");
-	Knight* goldKnight = new Knight("Gold Knight", 150);
-	goldKnight->setAttack("Triple Shot", "attack", 15);
-	goldKnight->setAttack("Defensive Rain", "block", 15);
-	goldKnight->setWarning("A knight is practicing his shooting with a giant recurve bow.");
-	goldKnight->setWarning("He turns and sees you.");
-	Item* bowAndArrowPlus = new Item("Recurve Bow", "ranged");
-	bowAndArrowPlus->setAttackType("Snipe", "attack", 35);
-	bowAndArrowPlus->setAttackType("Hail", "status", 20);
-	goldKnight->setItem(bowAndArrowPlus);
-	goldKnight->setImmunity("ranged");
-	room[8]->setEnemy(goldKnight);
-	Item* key3 = new Item("key", "item");
-	key3->addToDescription("Hanging from one of the arrows is a key.");
-	room[8]->setItem(key3);
-
+	room[5]->setRooms(room[6], room[2],nullptr,nullptr);
+	room[5]->addToDescription("You are almost to the village of Toyha however you find the path has been blocked. . .");
+	room[5]->addToDescription("There is a hole in the blockade and you  decide to get up on the blockade. . .");
+	room[5]->addToDescription("When you are on the blockade you see the village of Toyha  burned to the ground, miasma cover the path between houses . . .");
+	room[5]->addToDescription("It is infested with zombies and what you belive crazzed humans killing each other within the  miasma. . .");
+	room[5]->addToDescription("You have two choices either move north to the old kingdom which you see in the distance  and exit the forest or go back and try to go east to look for more supplies . . .");
+	item* FoodRation2 = new Item("Food Ration", "health");
+    FoodRation2->setValue(25);
+    FoodRation2->addToDescription("Gain some health back for Eating");
+    room[5]->setItem(FoodRation2);
+	item* FoodRation3 = new Item("Food Ration", "health");
+    FoodRation3->setValue(20);
+    FoodRation3->addToDescription("Gain some health back for Eating");
+    room[5]->setItem(FoodRation3);
+	Enemy* ZHumman1 = new Enemy("Zombie", 60);
+	ZHumman1->setAttack("Grab", "attack", 5); 
+	ZHumman1->setAttack("Bite", "attack", 20);
+	ZHumman1->setWarning("When the chaos lord returned he had corrupted the spirts of and trapped them inside dead humans bringing their bodies back to life. . .");
+	ZHumman1->setWarning("As are about to leave blockade you find two zombies have wandered over to you. . .");
+	Enemy* ZHumman2 = new Enemy("Zombie", 45);
+	ZHumman2->setAttack("Bite", "attack", 25); 
+	ZHumman2->setAttack("Claw", "attack", 20);
+	room[5]->setEnemy(ZHumman1);
+	room[5]->setEnemy(ZHumman2);
 	/*
-	ROOM 9
+	ROOM 6  Old KIngdom City outskirt ruins 2 sekeltons
 	*/
-	room[9]->setRooms(nullptr, nullptr, nullptr, nullptr);
-	room[9]->addToDescription("You enter a well-lit room.");
-	room[9]->addToDescription("Throughout the room there is golden treasure everywhere.");
-	Knight* bossKnight = new Knight("Betrayer", 150);
-	bossKnight->setAttack("Sledge", "attack", 20);
-	bossKnight->setAttack("Protect", "block", 30);
-	bossKnight->setWarning("Your 'friend' is sitting among the treasures.");
-	bossKnight->setWarning("You need to finish this.");
-	bossKnight->setImmunity("melee");
-	room[9]->setEnemy(bossKnight);
+	room[6]->setRooms(room[7], room[5], nullptr, room[4]);
+	room[6]->addToDescription("You arrive at the walls of the old kingdom. . .");
+	room[6]->addToDescription("There is a giant hole piercing the wall at the bottom of one of the watch towers. . .");
+	room[6]->addToDescription("It appears to be the only way in to the old kingdom. . .");
+	room[6]->addToDescription("The Front Gates are closed and appear not to have moved in centuries. . .");
+	Enemy* Skeleton1 = new Enemy("Skeleton", 50);
+	Skeleton1->setAttack("Arrow Shot", "attack", 5); 
+	Skeleton1->setAttack("BoneThrow", "attack", 20);
+	Skeleton1->setWarning("When the chaos lord returned he returned some of the bones of the crypt located in the necropolis to motion traping slayed humans soul within their marrow. . .");
+	Skeleton1->setWarning("You see two skeletons with bows standing perched on platforms higher up on the inside of the tower. . .");
+	Skeleton1->setWarning("You must defeat them to make it into the city. . .");
+	Enemy* Skeleton2 = new Enemy("skeleton", 55);
+	Skeleton2->setAttack("Bite", "attack", 25);  
+	Skeleton2->setAttack("Claw", "attack", 20);
+	room[6]->setEnemy(Skeleton1);
+	room[6]->setEnemy(Skeleton2);
+	/*
+	ROOM 7  Old kingdom main square
+	*/
+	room[7]->setRooms(nullptr, room[6], nullptr, room[8]);
+	room[7]->addToDescription("After making it through the tower you have now arrived at the main plaza of the kingdom. . .");
+	room[7]->addToDescription("You notice there are many bodies on the ground they look like the have been dropped from a significant high. . .");
+	room[7]->addToDescription("You also notice some of them look to have been preyed on by vultures and other animals. . .");
+	room[7]->addToDescription("ou see intestines strewn from these bodies as if what ever did this savagely ripped them apart after they fell from a high. . .");
+	Enemy* Wayvern1 = new Enemy("Wayvern",150);
+	Wayvern1->setAttack("Bite", "attack", 50); 
+	Wayvern1->setAttack("TailWhip", "attack", 120);
+	Wayvern1->setWarning("you hear a loud screeching noise from within the cloud of  miasma, then out  come two undead wayverns. . .");
+	Wayvern1->setWarning("you have heard legends that the kingdoms of old use to have the power to train and control wayverns and dragons. . .");
+	Wayvern1->setWarning("You never believed that they existed, but now you know they must have! ! ! . . .");
+	Enemy* Wayvern2 = new Enemy("Wayvern", 155);
+	Wayvern2->setAttack("Bite", "attack", 25);  
+	Wayvern2->setAttack("Claw", "attack", 20);
+	room[7]->setEnemy(Wayvern1);
+	room[7]->setEnemy(Wayvern2);
+	/*
+	ROOM 8 Estize Kingdom Necropolis
+	*/
+	room[8]->setRooms(nullptr, room[9], room[7], nullptr);
+	room[8]->addToDescription("You gotten to what seems  like the old kingdom's necropolis. . .");
+	room[8]->addToDescription("There is a hole in the door that  miasma  is coming out from and you slip your way in. . .");
+	room[8]->addToDescription("You light a torch and see a map on the ground you pick it up and you notice it has the name Estize. . .");
+	room[8]->addToDescription("The map looks similar to maps you have seen of the area now, the only diffrence was that insdead of the old kingdom it has the name Estize. . .");
+	room[8]->addToDescription("You must decided to continue further south into the necropolis or to fail the world and it's people. . .");
+	Enemy* ZHumman6 = new Enemy("Zombie", 60);
+	ZHumman6->setAttack("Grab", "attack", 5); 
+	ZHumman6->setAttack("Bite", "attack", 20);
+	ZHumman6->setWarning("As you descend deeper into the crypts  you find . . .");
+	ZHumman6->setWarning("three zombies wandering around the hall that has doors to the south . . .");
+	Enemy* ZHumman7 = new Enemy("Zombie", 45);
+	ZHumman7->setAttack("Bite", "attack", 25); 
+	ZHumman7->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman8 = new Enemy("Zombie", 60);
+	ZHumman8->setAttack("Grab", "attack", 5); 
+	ZHumman8->setAttack("Bite", "attack", 20);
+	room[8]->setEnemy(ZHumman6);
+	room[8]->setEnemy(ZHumman7);
+	room[8]->setEnemy(ZHumman8);
+	/*
+	ROOM 9 Ritual Chamber
+	*/
+	room[9]->setRooms(room[8], nullptr,room[10],room[11]);
+	room[9]->addToDescription("You arrive  in a cold room, surrounded on all four sides by walls with an alter in the middle with doors on the east and west sides.");
+	room[9]->addToDescription("It seems like the temple where you see off the dead in the crypt of Estnophor");
+	room[9]->addToDescription("If you remeber correctly the layout of the Estnophor crypt had a priests quarters to the  west and a path to the crypts in the east");
+	Enemy* ChaosKnight1 = new Enemy("ChaosKnight", 255);
+    ChaosKnight1->setAttack("Inpact", "attack", 25); 
+    ChaosKnight1->setAttack("Punch", "attack", 20);
+	Enemy* UndeadKnight1 = new Enemy("UndeadKnight", 115);
+    UndeadKnight1->setAttack("MaceBludgeon", "attack", 35); 
+    UndeadKnight1->setAttack("cleave", "attack", 40);
+    room[9]->setEnemy(UndeadKnight1);
+	Enemy* UndeadKnight2 = new Enemy("UndeadKnight", 125);
+    UndeadKnight1->setAttack("SwordInpact", "attack", 25); 
+    UndeadKnight1->setAttack("Punch", "attack", 20);
+    room[9]->setEnemy(ChaosKnight1);
+	room[9]->setEnemy(UndeadKnight1);
+	room[9]->setEnemy(UndeadKnight2);
+	/*
+	ROOM 10 corridor to the crypts
+	*/
+	room[10]->setRooms(room[13], room[12], room[11], room[9]);
+	room[10]->addToDescription("You descend deeper into the crypt to find the lord of chaos.");
+	room[10]->addToDescription("There is many bones lined up on the walls of the crypt as you descent level after level");
+	Enemy* ZHumman3 = new Enemy("Zombie", 60);
+	ZHumman3->setAttack("Grab", "attack", 5); 
+	ZHumman3->setAttack("Bite", "attack", 20);
+	ZHumman3->setWarning("As you descend deeper into the crypts  you find  a large a hall that branches off into two diffrent directions. . .");
+	ZHumman3->setWarning("You find three zombies wandering around the hall that has doors to the south and the north . .");
+	Enemy* ZHumman4 = new Enemy("Zombie", 45);
+	ZHumman4->setAttack("Bite", "attack", 25); 
+	ZHumman4->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman5 = new Enemy("Zombie", 60);
+	ZHumman5->setAttack("Grab", "attack", 5); 
+	ZHumman5->setAttack("Bite", "attack", 20);
+	room[10]->setEnemy(ZHumman3);
+	room[10]->setEnemy(ZHumman4);
+	room[10]->setEnemy(ZHumman5);
+		/*
+	ROOM 11  priests quarters
+	*/
+	room[11]->setRooms(nullptr, nullptr, room[9], room[10]);
+	room[11]->addToDescription("You are in the priests quarters, it is bleak and empty just as you would excpect a man of the cloths room to be. . .");
+	room[11]->addToDescription("As when they join the brother hood of the cloth they give up worldly possesions. . .");
+	Enemy* Skeleton4 = new Enemy("Skeleton", 40);
+	Skeleton4->setAttack("BowBash", "attack", 5); 
+	Skeleton4->setAttack("BoneThrow", "attack", 20);
+	Skeleton4->setWarning("You Find two former men of the cloth now brough back a minions of the lord of chaos. . .");
+	Enemy* Skeleton5 = new Enemy("Skeleton", 60);
+	Skeleton5->setAttack("BowBash", "attack", 5); 
+	Skeleton5->setAttack("BoneSword", "attack", 50);
+	Skeleton5->setWarning("They seem to have been dead a long time. . .");
+	room[11]->setEnemy(Skeleton4);
+	room[11]->setEnemy(Skeleton5);
+		/*
+	ROOM 12 southern wing of the crypt
+	*/
+	room[12]->setRooms(room[10], room[20], room[14], nullptr]);
+	room[12]->addToDescription("You travel a while down the southern wing of the crypt and come to two doors one giant and one normal sized. . .");
+	room[12]->addToDescription("The giant door is locked and the smaller one seems open");
+	room[12]->addToDescription("You can go back north and find a key for the southern door possibly deeper in the crypt from the ritual chamber or go east into what seems like a crypt for royals of the kingdom. . .");
+	Enemy* UndeadKnight3 = new Enemy("UndeadKnight", 115);
+    UndeadKnight3->setAttack("MaceBludgeon", "attack", 35); 
+    UndeadKnight3->setAttack("cleave", "attack", 40);
+    room[12]->setEnemy(UndeadKnight3);
+	Enemy* UndeadKnight4 = new Enemy("UndeadKnight", 125);
+    UndeadKnight4->setAttack("SwordInpact", "attack", 25); 
+    UndeadKnight4->setAttack("Punch", "attack", 20);
+	room[12]->setEnemy(UndeadKnight4);
+	/*
+		/*
+	ROOM 13 norther wing of the crypt 
+	*/
+	room[13]->setRooms(room[15], room[10], nullptr,nullptr);
+	room[13]->addToDescription("You venture deeper into the crypt then anyone has since the old kingdom's fall. . .");
+	room[13]->addToDescription("There is cobwebs and dust filling the air to make it hard to see even with light. . .");
+	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
+	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
+	Enemy* Skeleton6 = new Enemy("Skeleton", 40);
+	Skeleton6->setAttack("BowBash", "attack", 5); 
+	Skeleton6->setAttack("BoneThrow", "attack", 20);
+	Skeleton6->setWarning("You Find three skeletons brough back as minions of the lord of chaos. . .");
+	Enemy* Skeleton7 = new Enemy("Skeleton", 60);
+	Skeleton7->setAttack("BowBash", "attack", 5); 
+	Skeleton7->setAttack("BoneSword", "attack", 50);
+	room[13]->setEnemy(Skeleton6);
+	room[13]->setEnemy(Skeleton7);
+	Enemy* Skeleton8 = new Enemy("Skeleton", 40);
+	Skeleton8->setAttack("BowBash", "attack", 5); 
+	Skeleton8->setAttack("BoneThrow", "attack", 20);
 
+		/*
+	ROOM 14 1st generation tomb of royalty
+	*/
+	room[14]->setRooms(nullptr,nullptr,nullptr, room[12]);
+	room[14]->addToDescription("You are in a Tomb for the first generation of royals of the Estize kingdom. . .");
+	Enemy* UndeadKnight5 = new Enemy("UndeadKnight", 155);
+    UndeadKnight5->setAttack("MaceBludgeon", "attack", 35); 
+    UndeadKnight5->setAttack("RainOfMaces", "attack", 80);
+    room[14]->setEnemy(UndeadKnight5);
+	Enemy* UndeadKnight6 = new Enemy("UndeadKnight", 178);
+    UndeadKnight6->setAttack("SwordInpact", "attack", 75); 
+    UndeadKnight6->setAttack("LifeDrain", "attack", 60);
+	room[14]->setEnemy(UndeadKnight6);
+	/*
+	ROOM 15 corrador of the dammed
+	*/
+	room[15]->setRooms(room[16], room[13], room[17],nullptr);
+	room[15]->addToDescription("You one you come out of crypt you arrive what essentialy looks like a gate to hell on the west wall that is painted in extreame detail  by someone of old as if to liken the crypts to never ending suffering for those who are not invited.");
+	room[15]->addToDescription("You have the option of two more crypts either to the north or to the east.");
+	Enemy* ZHumman9 = new Enemy("Zombie", 60);
+	ZHumman9->setAttack("Grab", "attack", 5); 
+	ZHumman9->setAttack("Bite", "attack", 20);
+	ZHumman9->setWarning("You find six zombies wandering around the hall that has doors to the east and the north . .");
+	Enemy* ZHumman10 = new Enemy("Zombie", 45);
+	ZHumman10->setAttack("Bite", "attack", 25); 
+	ZHumman10->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman5 = new Enemy("Zombie", 60);
+	ZHumman11->setAttack("Grab", "attack", 5); 
+	ZHumman11->setAttack("Bite", "attack", 20);
+	room[15]->setEnemy(ZHumman9);
+	room[15]->setEnemy(ZHumman10);
+	room[15]->setEnemy(ZHumman11);
+	Enemy* ZHumman12 = new Enemy("Zombie", 60);
+	ZHumman12->setAttack("Grab", "attack", 5); 
+	ZHumman12->setAttack("Bite", "attack", 20);
+	Enemy* ZHumman13 = new Enemy("Zombie", 45);
+	ZHumman13->setAttack("Bite", "attack", 25); 
+	ZHumman13->setAttack("Claw", "attack", 20);
+	Enemy* ZHumman14 = new Enemy("Zombie", 60);
+	ZHumman14->setAttack("Grab", "attack", 5); 
+	ZHumman14->setAttack("Bite", "attack", 20);
+	room[15]->setEnemy(ZHumman12);
+	room[15]->setEnemy(ZHumman13);
+	room[15]->setEnemy(ZHumman14);
+		/*
+	ROOM 16  north wing of the second lvl of the crypt
+	*/
+	room[16]->setRooms(nullptr, room[15], room[19], nullptr);
+	room[16]->addToDescription("You have entered another crypt with only one exit to the east. . . .");
+	room[16]->addToDescription("The eastern door is lkarge enoug for several of the wayverns you fought back in the town square to fit through, what does that mean for wha't whating for you ? ? ?.");
+	Enemy* UndeadKnight10= new Enemy("UndeadKnight", 125);
+    UndeadKnight10->setAttack("Inpact", "attack", 25); 
+    UndeadKnight10->setAttack("Punch", "attack", 20);
+    room[16]->setEnemy(UndeadKnight8);
+	Enemy* UndeadKnight11 = new Enemy("UndeadKnight", 125);
+    UndeadKnight11->setAttack("Inpact", "attack", 25); 
+    UndeadKnight11->setAttack("Punch", "attack", 20);
+    room[16]->setEnemy(UndeadKnight11);
+	/*
+	ROOM 17 Eastern wing of the second lvl of the crypt
+	*/
+	room[17]->setRooms(room[18], nullptr, nullptr, room[15]);
+	room[17]->addToDescription("This crypt was alot shorter then the others and comes to a western door which is made out of a material you haven't seen before. . .");
+	room[17]->addToDescription("You have a really bad feeling about it and peek in.");
+	room[17]->addToDescription("When you look in all you see is a great hall filled with 2 chaos knights and 3 undead.");
+	room[17]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
+	room[17]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
+	Enemy* UndeadKnight12 = new Enemy("UndeadKnight", 125);
+    UndeadKnight12->setAttack("Inpact", "attack", 25); 
+    UndeadKnight12->setAttack("Punch", "attack", 20);
+    room[17]->setEnemy(UndeadKnight12);
+	/*
+	ROOM 18  2nd generation tomb of royalty 3 undead knight  2 chaos knights Dead End room dont enter
+	*/
+	room[18]->setRooms(nullptr, room[17], nullptr,nullptr);
+	room[18]->addToDescription("You what looks like a royal tomb of a diffrent era long before the times of now. . .");
+	room[18]->addToDescription("It Also Seems to have an aura of war and blood to it. . ..");
+	 room[18]->addToDescription("It must have been a generation of war. . .");
+	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 225);
+    ChaosKnight2->setAttack("Inpact", "attack", 25); 
+    ChaosKnight2->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(ChaosKnight1);
+	Enemy* ChaosKnight3 = new Enemy("ChaosKnight", 225);
+    ChaosKnight3->setAttack("Inpact", "attack", 25); 
+    ChaosKnight3->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(ChaosKnight3);
+	Enemy* UndeadKnight7 = new Enemy("UndeadKnight", 125);
+    UndeadKnight7->setAttack("Inpact", "attack", 25); 
+    UndeadKnight7->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight7);
+	Enemy* UndeadKnight8 = new Enemy("UndeadKnight", 125);
+    UndeadKnight8->setAttack("Inpact", "attack", 25); 
+    UndeadKnight8->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight8);
+	Enemy* UndeadKnight9 = new Enemy("UndeadKnight", 125);
+    UndeadKnight9->setAttack("Inpact", "attack", 25); 
+    UndeadKnight9->setAttack("Punch", "attack", 20);
+    room[18]->setEnemy(UndeadKnight9);
+		/*
+	ROOM 19 Undead Dragon  tomb of royal the gardian 1 undead dragon key room
+	*/
+	room[19]->setRooms(nullptr,nullptr,nullptr,room[19]);
+	room[19]->addToDescription("Room is Filled with gold and jews . . .");
+	room[19]->addToDescription("There is a hole in the ceiling above them . . .");
+	room[19]->addToDescription("All of a sudden a LARGE DRAGON COMES CRASHING DOWN INTO THE PILE OF GOLD. . ..");
+	room[19]->addToDescription("Upon looking around you see a key made of gold on the floor next to a corpse of whaat looks like a freshly killed adventurer");
+	Item* key = new Item("key", "item");
+	key->addToDescription("A key in the hand of a dead adventure, it must open something important. . .");
+	room[19]->setItem(key);
+	Enemy* UndeadDragon = new Enemy("UndeadDragon", 325);
+    UndeadDragon->setAttack("FireBreath", "attack", 100); 
+    UndeadDragon->setAttack("WingSlam", "attack", 50);
+	UndeadDragon->setAttack("TailWhip", "attack", 90);
+    room[19]->setEnemy(UndeadDragon);
+	/*
+	ROOM 20 Boss Room [Chaos Lord] Crypt of the elders 1 lord of destruction and chaos
+	*/
+	room[20]->setRooms(room[12],nullptr,nullptr,nullptr);
+	room[20]->addToDescription("You are in a large Hall with a throne at the end of it. . .");
+	room[20]->addToDescription("On the throne You see a mass of black miasma covering the throne. . .");
+	room[20]->addToDescription("You hear a loud clap, anmd the black miasma dissapates. . .");
+	room[20]->addToDescription("You see on the throne a man the size of a giant . . . ");
+	room[20]->addToDescription("The giant before you is the lord of chaos & Destruction! ! !");
+	room[20]->setLockStatus(true);
+	room[20]->hasDoor(true);
+	Enemy* ChaosLord = new Enemy("ChaosLord", 525);
+    ChaosLord->setAttack("Inpact", "attack", 25); 
+    ChaosLord->setAttack("Punch", "attack", 20);
+    room[20]->setEnemy(ChaosLord);
 	return room;
 }
-
 /*
 Returns a vector of user input tokens
 */
@@ -439,35 +776,29 @@ std::string tokenize(std::string userIn, char seperator) {
 	}
 	return "blank";
 }
-
 /*
 prints all options for help
 */
 void printHelp() {
-
 	/*
 	creates 'help' list of available commands
 	*/
 	std::vector<std::string> help;
-	help.push_back("north/south/east/west : travel in indicated direction. Can also enter 'go south', 'travel south', etc..");
-	help.push_back("inventory : shows the player's inventory");
-	help.push_back("look : describes the room to the player");
-	help.push_back("take/grab : if there is an item in the room, lets you pick it up");
-	help.push_back("");
-	help.push_back("ENCOUNTER COMMANDS: ");
-	help.push_back("run : if you encounter an enemy, allows you to return to previous room without engaging in combat");
-	help.push_back("fight : if you encounter an enemy, starts a combat encounter");
-
+    help.push_back("Interaction Commands:");
+    help.push_back("[ {north} | {south} | {east} | {west} ] Will move you into the next room");
+    help.push_back("{Inventory} Displays Your Inventory");
+    help.push_back("{look} tells the player infomation about the room  & what items it has");
+    help.push_back("[ {take} | {grab} ] Will allow you to take an item");
+	help.push_back("[ {search} ]tells what items a room has");
+    help.push_back("");
+    help.push_back("Encounter Commands: ");
+    help.push_back("{run} Allows you to return to the previous room before combat");
+    help.push_back("{fight} Starts a combat encounter with an enemy");
 	for (std::string msg : help) {
 		std::cout << msg << std::endl;
 	}
 }
-
-
-
-int main() {
-	
-
+int main() {                                                                                            
 	/*
 	Creates rooms, run conditional
 	*/
@@ -479,20 +810,41 @@ int main() {
 	/*
 	Get character name here:
 	*/
-	std::cout << "You suddenly wake up, your head is pounding." << std::endl;
-	std::cout << "You have a hard time remembering exactly what happened." << std::endl;
-	std::cout << "There is one thing you do remember: " << std::endl;
-	std::cout << "Your friend has betrayed you and left you for dead in this dungeon." << std::endl;
-	std::cout << "Find them." << std::endl;
+	std::cout << "The lord of destruction & chaos has awakened. . . ." << std::endl;
+	Sleep(10); 
+	std::cout << "The land and its people are in dire peril! . . ." << std::endl;
+	Sleep(10);
+	std::cout << "You must become the hero that save the kingdom & the world from ruin. . ." << std::endl;
+	Sleep(10);
+	std::cout << "Will you stand against the chaos and save the world . . ." << std::endl;
+	Sleep(10);
+		std::cout << ". . ." << std::endl;
+	Sleep(25);
+	system("CLS");
 	std::cout << std::endl << std::endl;
 	std::string name;
-	std::cout << "Enter your character's name: " << std::endl;
+	std::cout << "What is Your Name Hero. . . " << std::endl;
 	std::getline(std::cin, name);
 	while(name.length() <= 0) {
 		system("CLS");
-		std::cout << "Enter your character's name: " << std::endl;
+		std::cout << "What is Your Name Hero. . . " << std::endl;
 		std::getline(std::cin, name);
 	}
+	system("CLS");
+	std::cout << ". . . ???" << std::endl;
+	Sleep(10);
+	std::cout << "The Lord Of Chaos Wages War & Destruction upon the land attacking it's people in waves... "<<std::endl;
+	Sleep(10);
+	std::cout <<user.getName()<< " you have been tasked with defeating the chaos lord and his corrupted minions and stopping the spread of his  malevolence..."<<std::endl; 
+	Sleep(10);
+	std::cout <<"You must raid the Chaos Lord's  stronghold which was the necropolis of old, which belonged to a  long forgotten kingdom amongst the passing of time..."<<std::endl;
+	Sleep(10);
+	std::cout <<"The adventures guild of the kingdom of Estnophor has tasked you with finding and stop the spread of chaos..."<<std::endl;
+	Sleep(10);
+	std::cout <<"As well as defeating the Chaos Lord ..."<<std::endl;
+	Sleep(10);
+	std::cout <<"Will You Save the Kingdom & The World..."<<std::endl;
+	Sleep(35);
 	system("CLS");
 	Player *player = new Player(name);
 	bool printRoom = true;
@@ -577,6 +929,10 @@ int main() {
 					}
 					else if (!player->isAlive()) { //IF THE PLAYER IS DEAD
 						std::cout << "You were killed by the " << currentRoom->getEnemy()->getName() << "!" << std::endl;
+						std::cout <<"The World and kingdom has fallen into ruins. . ."<<std::endl;
+						Sleep(10);
+						std::cout <<"You have failed however you do have another chance. . ."<<std::endl;
+						Sleep(10);
 						runGame = false;
 						int pause;
 						std::cout << "Enter any number to continue.";
