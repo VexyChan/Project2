@@ -24,7 +24,7 @@ ItemGen(std::string name, std::string type, int value)
     
 }
 
-ItemGen::ItemGen(std::string nName, std::string type, bool isOpe, bool isU, bool isE, std::string open, int h, int arm, int blc, int atck)
+ItemGen::ItemGen(std::string nName, std::string type, bool isOpe, bool isU, bool isE, std::string open, int h, int arm, int blc, int atck, std::string whIsItem)
 {
 	name = nName;
 	type = tType;
@@ -36,6 +36,7 @@ ItemGen::ItemGen(std::string nName, std::string type, bool isOpe, bool isU, bool
 	armorAdd = arm;
 	blockAdd = blc;
 	attackAdd = atck;
+	whereIsItem = whIsItem;
 
 }
 
@@ -112,11 +113,18 @@ void ItemGen::setOpenDesc(string openD)
 	mOpen = openD;
 }
 
+std::string ItemGen::getWhereIsItem()
+{
+	return whereIsItem;
+}
+
+
 void ItemGen::printItem()
 {
 	std::cout << "Item name: " << name << std::endl;
 	std::cout << "Item type: " << type << std::endl;
 	std::cout << "Item isOpenable: " << isOpenable << std::endl;
+	cout << "Item whereitis: " << whereIsItem << endl;
 
 }
 
@@ -137,6 +145,7 @@ void ItemGen::loadItem(std::ifstream& inFile)
 	inFile >> garbage >> armorAdd;
 	inFile >> garbage >> blockAdd;
 	inFile >> garbage >> attackAdd;
+	inFile >> garbage >> whereIsItem;
 
 }
 
@@ -152,6 +161,7 @@ void ItemGen::saveItem(std::ofstream& oFile)
 	oFile << "armorAdd " << armorAdd << std::endl;
 	oFile << "blockAdd " << blockAdd << std::endl;
 	oFile << "attackAdd " << attackAdd << std::endl;
+	oFile << "RoomWhereItIs " << whereIsItem << std::endl;
 	oFile << std::endl;
 
 }
@@ -181,6 +191,7 @@ void ItemGen::loadChangingItemParts(std::ifstream& inFile)
 	inFile >> garbage >> isOpenable;
 	inFile >> garbage >> isUsable;
 	inFile >> garbage >> isEquipable;
+	inFile >> garbage >> whereIsItem;
 }
 
 std::string genItemName()
