@@ -249,7 +249,20 @@ std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	}
 	return std::make_pair(player, enemy);
 }
-
+/* enemy attack add for knight
+	Knight* bronzeKnight = new Knight("Bronze Knight", 150);
+	bronzeKnight->setAttack("Slam", "attack", 15); 
+	bronzeKnight->setAttack("Barricade", "block", 10);
+	bronzeKnight->setWarning("A tall knight clad in bronze-colored armor steps out from behind the fire.");
+	bronzeKnight->setWarning("He carries a gleaming Steel Sword.");
+	Item* steelSword = new Item("Steel Sword", "melee");
+	steelSword->setAttackType("Stab", "attack", 30);
+	steelSword->setAttackType("Block", "block", 25);
+	steelSword->setAttackType("Fury", "status", 15);
+	bronzeKnight->setItem(steelSword);
+	bronzeKnight->setImmunity("melee");
+	room[6]->setEnemy(bronzeKnight);
+	*/
 /*
 Creates and populates the rooms that will be traveled through.
 */
@@ -260,8 +273,16 @@ std::vector<Room*> createRooms() {
 	}
 
 	/*
-	Room[0] Starting Room Outside starting Town
+	Room[0] Starting Room | Outside starting Town
 	forest path is the only option for the next room
+	Items:
+	3x hp pots heal for 150
+	1x armor adds 250 // the only thing the guild could spare due to the waves spread across the land and supplies for battaling them are so low
+	2x Fireball  dmg 75-100
+	3x throwing knife 25-50 dmg
+	3x water
+	2x rations
+	No enemies in this room	
 	*/
 	room[0]->setRooms(room[1],nullptr,nullptr,nullptr);
 	room[0]->addToDescription("After leaving the adventures guild & gathering your things, you leave the town...");
@@ -269,10 +290,38 @@ std::vector<Room*> createRooms() {
 	room[0]->addToDescription("But first you must find the old kingdom's necropolis...");
 	room[0]->addToDescription("For now you may only go north towards the Forest...");
 	room[0]->addToDescription("In the distance you see an ominous black miasma overcast in the direction you need to go...");
-
-	
+	/* Items */
+	item* WaterRation1 = new Item("Water Ration", "health");
+	WaterRation1->setValue(30);
+	WaterRation1->addToDescription("Gain some health back for hydrating");
+	room[0]->setItem(WaterRation1);
+	item* FoodRation1 = new Item("Food Ration", "health");
+	FoodRation1->setValue(20);
+	FoodRation1->addToDescription("You can't fight on an empty stomach");
+	room[0]->setItem(FoodRation1);
+	item* HealthPotion1 =new Item("Health Potion", "health";
+	HealthPotion1->setValue(50);
+	HealthPotion1->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion1);
+	item* HealthPotion2 =new Item("Health Potion", "health";
+	HealthPotion2->setValue(50);
+	HealthPotion2->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion2);
+	item* HealthPotion3 =new Item("Health Potion", "health";
+	HealthPotion3->setValue(50);
+	HealthPotion3->addToDescription("An avarge quality Health Potion")
+	room[0]->setItem(HealthPotion3);
+	item* LeatherArmor =new Item("Leather armor", "health");
+	LeatherArmor->setValue(250);
+	LeatherArmor->addToDescription("Helps with taking some hit from enemies"));
+	room[0]->setItem(LeatherArmor);
 	/*
-	ROOM 1 - FIRST WEAPON ROOM
+	ROOM 1 Starting path in the naba forest
+	1 hp pot
+	2 berries
+	1 water
+	axe // used wood axe its falling appart 15 -20 dmg
+	shield adds 32 hp // its a wood plank
 	*/
 	room[1]->setRooms(nullptr, room[0], room[2], room[3]);
 	room[1]->addToDescription("You enter the path into the Nabaran Forest..."");
@@ -280,34 +329,62 @@ std::vector<Room*> createRooms() {
 	room[1]->addToDescription("This however is the only way to the necropolis of the old kingdom....");
 	room[1]->addToDescription("Infomation from the guild tells you ...");
 	room[1]->addToDescription("In the east is the direct route while in the west in a village you may stop and get supplies... ");
-	room[1]->addToDescription(".");
+	/* Items */
+	item* HealthPotion4 =new Item("Health Potion", "health";
+	HealthPotion4->setValue(50);
+	HealthPotion4->addToDescription("An avarge quality Health Potion")
+	room[1]->setItem(HealthPotion4);
+	/* Enemeis*/
+	Enemy* CHumman1 = new Enemy("Alex", 60);
+	CHumman1->setAttack("Inpact", "attack", 10); 
+	CHumman1->setAttack("Bite", "attack", 20);
+	CHumman1->setWarning("During the first waves when the chaos lord returned he had corrupted the spirts of killed humans trapping them in their bodies make them mindless servents to chaos");
+	CHumman1->setWarning("As you enter the forest you come upon 3 wandering zombies");
+	Enemy* CHumman2 = new Enemy("Jace", 45);
+	CHumman2->setAttack("Inpact", "attack", 25); 
+	CHumman2->setAttack("Bite", "attack", 20);
+	room[1]->setEnemy(CHumman1);
+	room[1]->setEnemy(CHumman2);
 
 	/*
-	ROOM 2 - FIRST ENEMY
+	ROOM 2
 	*/
 	room[2]->setRooms(room[5], nullptr,nullptr, room[1]);
-	room[2]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[2]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[2]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[2]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[2]->addToDescription("This door can't be broken, you must find a key.");
-	
-
+	room[2]->addToDescription("You have decided to go to the next village to find some supplies to fight the lord. . . .");
+	room[2]->addToDescription("You still have a ways to go before you get there, you still can turn back. . .");
+	room[2]->addToDescription("You have no idea what this path has in store for you . . .");
+	room[2]->addToDescription("As you enter deeper into the forest the pressure of the miasma grows. . .");
+	room[2]->addToDescription("you see several abandoned carts as you journey along the path may of them have been destroyed. . . but by what? . . .");
+	/* Items */
+	item* HealthPotion5 =new Item("Health Potion", "health";
+	HealthPotion5->setValue(50);
+	HealthPotion5->addToDescription("An avarge quality Health Potion")
+	room[2]->setItem(HealthPotion3);
+	item* HealthPotion6 =new Item("Health Potion", "health";
+	HealthPotion6->setValue(50);
+	HealthPotion6->addToDescription("An avarge quality Health Potion")
+	room[2]->setItem(HealthPotion6);
+	/*Enemies */ 
+	Enemy* Bear= new Enemy("Bear", 100);
+	Bear->setAttack("Charge", "attack", 35); 
+	Bear->setAttack("Bite", "attack", 50);
+	Bear->setAttack("Claw", "attack", 30);
+	room[2]->setEnemy(Bear);
 	/*
-	ROOM 3 - GET NEXT WEAPON TYPE
+	ROOM 3
 	*/
 	room[3]->setRooms(room[4], nullptr, room[1], nullptr);
-	room[3]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[3]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[3]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[3]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[3]->addToDescription("This door can't be broken, you must find a key.");
+	room[3]->addToDescription("You are almost to the village however you find the path has been blocked. . .");
+	room[3]->addToDescription("There is a hole in the blockade and you  decide to get up on the blockade. . .");
+	room[3]->addToDescription("When you are on the blockade you see the village burned to the ground. . .");
+	room[3]->addToDescription("it is infested with zombies and what you belive crazzed humans killing each other. . .");
+	room[3]->addToDescription("You have two choices either move  north to the forest exit or back east to try going the other way. . .");
 	/*
 	ROOM 4
 	*/
-	room[4]->setRooms(nullptr, room[3], room[5],nullptr);
-	room[4]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[4]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
+	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
+	room[4]->addToDescription("You have decided to take the shorter path . . .");
+	room[4]->addToDescription("");
 	room[4]->addToDescription("In the corner there is a locked metal door with a small window.");
 	room[4]->addToDescription("Upon looking through the window a staircase can be seen.");
 	room[4]->addToDescription("This door can't be broken, you must find a key.");
@@ -324,7 +401,7 @@ std::vector<Room*> createRooms() {
 	/*
 	ROOM 6
 	*/
-	room[6]->setRooms(room[7], room[5], nullptr, nullptr);
+	room[6]->setRooms(room[7], room[5], nullptr, room[4]);
 	room[6]->addToDescription("You are in a courtyard, with a large bonfire lit in the center.");
 	room[6]->addToDescription("There are several sleeping bags, and some sort of animal is being cooked.");
 	Knight* bronzeKnight = new Knight("Bronze Knight", 150);
@@ -527,7 +604,8 @@ int main() {
 std::cout << "########################" << std::endl;
 std::cout << "# Welcome To                           #" << std::endl;
 std::cout << "#                   Adventure Quest!#" << std::endl;
-std::cout << "######################## " << std::endl;                                                                                                                   
+std::cout << "######################## " << std::endl;          
+Sleep(25);                                                                                                         
 system("CLS");                                                                                        
                                                                                                                             
 	/*
@@ -660,6 +738,10 @@ system("CLS");
 					}
 					else if (!player->isAlive()) { //IF THE PLAYER IS DEAD
 						std::cout << "You were killed by the " << currentRoom->getEnemy()->getName() << "!" << std::endl;
+						std::cout <<"The World and kingdom has fallen into ruins. . ."<<std::endl;
+						Sleep(10);
+						std::cout <<"You have failed however you do have another chance. . ."<<std::endl;
+						Sleep(10);
 						runGame = false;
 						int pause;
 						std::cout << "Enter any number to continue.";
