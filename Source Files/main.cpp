@@ -388,7 +388,7 @@ std::vector<Room*> createRooms() {
 	ROOM 3 Eastern path of the Nahouran forest
 	*/
 	room[3]->addToDescription("You have decided to take the shorter path . . .");
-	room[3]->addToDescription("As you reach the end it seems like the bridge is out. . .");
+	room[3]->addToDescription("As you reach the end it seems like the bridge is out and a dark  miasma  covers the other side. . .");
 	room[3]->addToDescription("you find a path to the east which will take you around to the exit of the forest....");	
 	room[3]->setRooms(room[4], nullptr, room[1], nullptr);
 	/* Items */
@@ -430,8 +430,8 @@ std::vector<Room*> createRooms() {
 	*/
 	room[4]->addToDescription("You have ended up closer to  the old  kingdom . . .");
 	room[4]->addToDescription("As you reach the end of the forest you can see a field with a path . .");
-	room[4]->addToDescription("you are still a good distance away from the old kingdom. . ..");
-	room[4]->addToDescription("you need to go East to arrive at the old kingdom. . .");	
+	room[4]->addToDescription("you are still a good distance away from the old kingdom, but you see it from the forest the skies pitch black due to the evil  miasma coming from the necropolis. . .");
+	room[4]->addToDescription("you need to go East to arrive at the old kingdom to fight the chaos lord. . .");	
 	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
 	Enemy* Wolf5= new Enemy("Wolf", 60);
 	Wolf5->setAttack("Charge", "attack",25); 
@@ -450,8 +450,8 @@ std::vector<Room*> createRooms() {
 	room[5]->setRooms(room[6], room[2],nullptr,nullptr);
 	room[5]->addToDescription("You are almost to the village of Toyha however you find the path has been blocked. . .");
 	room[5]->addToDescription("There is a hole in the blockade and you  decide to get up on the blockade. . .");
-	room[5]->addToDescription("When you are on the blockade you see the village of Toyha  burned to the ground. . .");
-	room[5]->addToDescription("It is infested with zombies and what you belive crazzed humans killing each other. . .");
+	room[5]->addToDescription("When you are on the blockade you see the village of Toyha  burned to the ground, miasma cover the path between houses . . .");
+	room[5]->addToDescription("It is infested with zombies and what you belive crazzed humans killing each other within the  miasma. . .");
 	room[5]->addToDescription("You have two choices either move north to the old kingdom which you see in the distance  and exit the forest or go back and try to go east to look for more supplies . . .");
 	item* FoodRation2 = new Item("Food Ration", "health");
     FoodRation2->setValue(25);
@@ -501,7 +501,7 @@ std::vector<Room*> createRooms() {
 	Enemy* Wayvern1 = new Enemy("Wayvern",150);
 	Wayvern1->setAttack("Bite", "attack", 50); 
 	Wayvern1->setAttack("TailWhip", "attack", 120);
-	Wayvern1->setWarning("you hear a loud screeching noise then out of no where come two undead wayverns. . .");
+	Wayvern1->setWarning("you hear a loud screeching noise from within the cloud of  miasma, then out  come two undead wayverns. . .");
 	Wayvern1->setWarning("you have heard legends that the kingdoms of old use to have the power to train and control wayverns and dragons. . .");
 	Wayvern1->setWarning("You never believed that they existed, but now you know they must have! ! ! . . .");
 	Enemy* Wayvern2 = new Enemy("Wayvern", 155);
@@ -514,10 +514,9 @@ std::vector<Room*> createRooms() {
 	*/
 	room[8]->setRooms(nullptr, room[9], room[7], nullptr);
 	room[8]->addToDescription("You gotten to what seems  like the old kingdom's necropolis. . .");
-	room[8]->addToDescription("There is a hole in the door and you slip your way in. . .");
+	room[8]->addToDescription("There is a hole in the door that  miasma  is coming out from and you slip your way in. . .");
 	room[8]->addToDescription("You light a torch and see a map on the ground you pick it up and you notice it has the name Estize. . .");
 	room[8]->addToDescription("The map looks similar to maps you have seen of the area now, the only diffrence was that insdead of the old kingdom it has the name Estize. . .");
-	room[8]->addToDescription("Does that mean the kingdom was erased from the records for some reason? ? ? . . .");
 	room[8]->addToDescription("You must decided to continue further south into the necropolis or to fail the world and it's people. . .");
 	/*
 	ROOM 9 Ritual Chamber
@@ -529,7 +528,6 @@ std::vector<Room*> createRooms() {
 	Enemy* ChaosKnight1 = new Enemy("ChaosKnight", 255);
     ChaosKnight1->setAttack("Inpact", "attack", 25); 
     ChaosKnight1->setAttack("Punch", "attack", 20);
-    room[9]->setEnemy(ChaosKnight1);
 	Enemy* UndeadKnight1 = new Enemy("UndeadKnight", 115);
     UndeadKnight1->setAttack("MaceBludgeon", "attack", 35); 
     UndeadKnight1->setAttack("cleave", "attack", 40);
@@ -564,57 +562,74 @@ std::vector<Room*> createRooms() {
 	ROOM 11  priests quarters
 	*/
 	room[11]->setRooms(nullptr, nullptr, room[9], room[10]);
-	room[11]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[11]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[11]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[11]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[11]->addToDescription("This door can't be broken, you must find a key.");
+	room[11]->addToDescription("You are in the priests quarters, it is bleak and empty just as you would excpect a man of the cloths room to be. . .");
+	room[11]->addToDescription("As when they join the brother hood of the cloth they give up worldly possesions. . .");
+	Enemy* Skeleton4 = new Enemy("Skeleton", 40);
+	Skeleton4->setAttack("BowBash", "attack", 5); 
+	Skeleton4->setAttack("BoneThrow", "attack", 20);
+	Skeleton4->setWarning("You Find two former men of the cloth now brough back a minions of the lord of chaos. . .");
+	Enemy* Skeleton5 = new Enemy("Skeleton", 60);
+	Skeleton5->setAttack("BowBash", "attack", 5); 
+	Skeleton5->setAttack("BoneSword", "attack", 50);
+	Skeleton5->setWarning("They seem to have been dead a long time. . .");
+	room[11]->setEnemy(Skeleton4);
+	room[11]->setEnemy(Skeleton5);
 		/*
 	ROOM 12 southern wing of the crypt
 	*/
 	room[12]->setRooms(room[10], room[20], room[14], nullptr]);
-	room[12]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[12]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[12]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[12]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[12]->addToDescription("This door can't be broken, you must find a key.");
+	room[12]->addToDescription("You travel a while down the southern wing of the crypt and come to two doors one giant and one normal sized. . .");
+	room[12]->addToDescription("The giant door is locked and the smaller one seems open");
+	room[12]->addToDescription("You can go back north and find a key for the southern door possibly deeper in the crypt from the ritual chamber or go east into what seems like a crypt for royals of the kingdom. . .");
+	Enemy* UndeadKnight3 = new Enemy("UndeadKnight", 115);
+    UndeadKnight3->setAttack("MaceBludgeon", "attack", 35); 
+    UndeadKnight3->setAttack("cleave", "attack", 40);
+    room[12]->setEnemy(UndeadKnight3);
+	Enemy* UndeadKnight4 = new Enemy("UndeadKnight", 125);
+    UndeadKnight4->setAttack("SwordInpact", "attack", 25); 
+    UndeadKnight4->setAttack("Punch", "attack", 20);
+	room[12]->setEnemy(UndeadKnight4);
+	/*
 		/*
 	ROOM 13 norther wing of the crypt 
 	*/
 	room[13]->setRooms(room[15], room[10], nullptr,nullptr);
-	room[13]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[13]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[13]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[13]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[13]->addToDescription("This door can't be broken, you must find a key.");
+	room[13]->addToDescription("You venture deeper into the crypt then anyone has since the old kingdom's fall. . .");
+	room[13]->addToDescription("There is cobwebs and dust filling the air to make it hard to see even with light. . .");
+	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
+	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
+
 		/*
 	ROOM 14 1st generation tomb of royalty
 	*/
 	room[14]->setRooms(nullptr,nullptr,nullptr, room[12]);
-	room[14]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[14]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[14]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[14]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[14]->addToDescription("This door can't be broken, you must find a key.");
+	room[14]->addToDescription("You are in a Tomb for the first generation of royals of the Estize kingdom. . .");
+	Enemy* UndeadKnight5 = new Enemy("UndeadKnight", 155);
+    UndeadKnight5->setAttack("MaceBludgeon", "attack", 35); 
+    UndeadKnight5->setAttack("RainOfMaces", "attack", 80);
+    room[14]->setEnemy(UndeadKnight5);
+	Enemy* UndeadKnight6 = new Enemy("UndeadKnight", 178);
+    UndeadKnight6->setAttack("SwordInpact", "attack", 75); 
+    UndeadKnight6->setAttack("LifeDrain", "attack", 60);
+	room[14]->setEnemy(UndeadKnight6);
+	/*
 		/*
 	ROOM 15 corrador of the dammed
 	*/
 	room[15]->setRooms(room[16], room[13], room[17],nullptr);
-	room[15]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[15]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[15]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[15]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[15]->addToDescription("This door can't be broken, you must find a key.");
+	room[15]->addToDescription("You one you come out of crypt you arrive what essentialy looks like a gate to hell on the west wall that is painted in extreame detail  by someone of old as if to liken the crypts to never ending suffering for those who are not invited.");
+	room[15]->addToDescription("You have the option of two more crypts either to the north or to the east.");
+	
 		/*
 	ROOM 16  north wing of the second lvl of the crypt
 	*/
 	room[16]->setRooms(nullptr, room[15], room[19], nullptr);
-	room[16]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[16]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[16]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[16]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[16]->addToDescription("This door can't be broken, you must find a key.");
-		/*
+	room[16]->addToDescription("This crypt was alot shorter then the others and comes to a eastern door which is made out of a material you haven't seen before. . .");
+	room[16]->addToDescription("You have a really bad feeling about it and peek in.");
+	room[16]->addToDescription("When you look in all you see is a great hall filled with 2 chaos knights and 3 undead.");
+	room[16]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
+	room[16]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
+	/*
 	ROOM 17 Eastern wing of the second lvl of the crypt
 	*/
 	room[17]->setRooms(room[18], nullptr, nullptr, room[15]);
@@ -644,23 +659,22 @@ std::vector<Room*> createRooms() {
 	ROOM 19 Undead Dragon  tomb of royal the gardian 1 undead dragon key room
 	*/
 	room[19]->setRooms(nullptr,nullptr,nullptr,room[19]);
-	room[19]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[19]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[19]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[19]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[19]->addToDescription("This door can't be broken, you must find a key.");
+	room[19]->addToDescription("Room is Filled with gold and jews . . .");
+	room[19]->addToDescription("There is a hole in the ceiling above them . . .");
+	room[19]->addToDescription("All of a sudden a LARGE DRAGON COMES CRASHING DOWN INTO THE PILE OF GOLD. . ..");
+	room[19]->addToDescription("Upon looking around you see a key made of gold on the floor next to a corpse of whaat looks like a freshly killed adventurer");
 	Item* key = new Item("key", "item");
-	key->addToDescription("You see a key on the ground next to the sleeping bags.");
+	key->addToDescription("A key in the hand of a dead adventure, it must open something important. . .");
 	room[19]->setItem(key);
 	/*
 	ROOM 20 Boss Room [Chaos Lord] Crypt of the elders 1 lord of destruction and chaos
 	*/
 	room[20]->setRooms(room[12],nullptr,nullptr,nullptr);
-	room[20]->addToDescription("You are in a cold room, surrounded on all four sides by walls, each with a door.");
-	room[20]->addToDescription("There is a hole in the ceiling above you, but it is too high to reach, and there is nothing to climb on.");
-	room[20]->addToDescription("In the corner there is a locked metal door with a small window.");
-	room[20]->addToDescription("Upon looking through the window a staircase can be seen.");
-	room[20]->addToDescription("This door can't be broken, you must find a key.");
+	room[20]->addToDescription("You are in a large Hall with a throne at the end of it. . .");
+	room[20]->addToDescription("On the throne You see a mass of black miasma covering the throne. . .");
+	room[20]->addToDescription("You hear a loud clap, anmd the black miasma dissapates. . .");
+	room[20]->addToDescription("You see on the throne a man the size of a giant . . . ");
+	room[20]->addToDescription("The giant before you is the lord of chaos & Destruction! ! !");
 	room[20]->setLockStatus(true);
 	room[20]->hasDoor(true);
 	return room;
