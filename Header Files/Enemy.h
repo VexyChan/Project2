@@ -4,6 +4,9 @@
 #include <map>
 #include "Item.h"
 #include "Player.h"
+
+	
+
 class Enemy:public Player
 {
 public:
@@ -18,7 +21,7 @@ public:
 	Adds an Attack to the attack vector
 	*/
 	void addToAttacks(std::string name, std::string type, int value);
-	std::vector<struct Attack> getAttacks();
+	std::vector<struct Attack*> getAttacks();
 
 	/*
 	WARNINGS THAT ENEMY SHOWS WHEN IN A ROOM
@@ -37,7 +40,13 @@ public:
 	TAKES IN AN ATTACK AND PERFORMS OPERATIONS ON ENEMY HEALTH/STATUS
 	NOT YET COMPLETED
 	*/
-	void attacked(struct Attack *attack);
+	void attacked(struct Attack* attack);
+
+	struct Attack {
+		std::string name;
+		std::string type;
+		int value;
+	};
 
 protected:
 
@@ -46,7 +55,7 @@ protected:
 	int health;
 	int blockValue;
 
-	std::vector<struct Attack> attacksVector;
+	std::vector<struct Attack*> attacksVector;
 
 	bool alive;
 

@@ -51,7 +51,7 @@ void Item::setValue(int value)
 
 std::vector<struct Attack> Item::getAttacks() 
 {
-	return attacks;
+	return attacksVector;
 }
 
 /*

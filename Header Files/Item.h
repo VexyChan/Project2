@@ -4,6 +4,12 @@
 #include <map>
 #include <iostream>
 
+struct Attack {
+	std::string name;
+	std::string type;
+	int value;
+};
+
 class Item
 {
 public:
@@ -51,11 +57,6 @@ private:
 	std::string type; //KEY, item, weapon...
 	int value; //for health items
 
-	struct Attack {
-		std::string name;
-		std::string type;
-		int value;
-	};
 	std::vector<struct Attack> attacksVector;
 
 	bool usable;
