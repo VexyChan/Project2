@@ -295,27 +295,32 @@ std::vector<Room*> createRooms() {
 	room[0]->setItem(sBow);
 	room[0]->setItem(sHolySword);
 	room[0]->setItem(sMageStaff);
-	item* WaterRation1 = new Item("WaterRation", "health");
+	Item* WaterRation1 = new Item("WaterRation", "health");
+	WaterRation1->setUsable(true);
 	WaterRation1->setValue(30);
 	WaterRation1->addToDescription("Gain some health back for hydrating");
 	room[0]->setItem(WaterRation1);
-	item* FoodRation1 = new Item("FoodRation", "health");
+	Item* FoodRation1 = new Item("FoodRation", "health");
+	FoodRation1->setUsable(true);
 	FoodRation1->setValue(20);
 	FoodRation1->addToDescription("You can't fight on an empty stomach");
 	room[0]->setItem(FoodRation1);
-	item* HealthPotion1 =new Item("HealthPotion", "health";
+	Item* HealthPotion1 =new Item("HealthPotion", "health");
+	HealthPotion1->setUsable(true);
 	HealthPotion1->setValue(50);
 	HealthPotion1->addToDescription("An avarge quality Health Potion")
 	room[0]->setItem(HealthPotion1);
-	item* HealthPotion2 =new Item("HealthPotion", "health";
+	Item* HealthPotion2 =new Item("HealthPotion", "health");
+	HealthPotion2->setUsable(true);
 	HealthPotion2->setValue(50);
 	HealthPotion2->addToDescription("An avarge quality Health Potion")
 	room[0]->setItem(HealthPotion2);
-	item* HealthPotion3 =new Item("HealthPotion", "health";
+	Item* HealthPotion3 =new Item("HealthPotion", "health");
+	HealthPotion3->setUsable(true);
 	HealthPotion3->setValue(50);
 	HealthPotion3->addToDescription("An avarge quality Health Potion")
 	room[0]->setItem(HealthPotion3);
-	item* LeatherArmor =new Item("LeatherArmor", "health");
+	Item* LeatherArmor =new Item("LeatherArmor", "health");
 	LeatherArmor->setValue(250);
 	LeatherArmor->addToDescription("Well crafted armor which helps with taking some hit from enemies"));
 	room[0]->setItem(LeatherArmor);
@@ -324,13 +329,14 @@ std::vector<Room*> createRooms() {
 	shield adds 32 hp // its a wood plank
 	*/
 	room[1]->setRooms(nullptr, room[0], room[2], room[3]);
-	room[1]->addToDescription("You enter the path into the Nabaran Forest..."");
+	room[1]->addToDescription("You enter the path into the Nabaran Forest...");
 	room[1]->addToDescription("The path is over cast by trees and darkness.....");
 	room[1]->addToDescription("This however is the only way to the necropolis of the old kingdom....");
 	room[1]->addToDescription("Infomation from the guild tells you ...");
 	room[1]->addToDescription("In the east is the direct route while in the west in a village you may stop and get supplies... ");
 	/* Items */
-	item* HealthPotion4 =new Item("HealthPotion", "health";
+	Item* HealthPotion4 =new Item("HealthPotion", "health");
+	HealthPotion4->setUsable(true);
 	HealthPotion4->setValue(50);
 	HealthPotion4->addToDescription("An avarge quality Health Potion")
 	room[1]->setItem(HealthPotion4);
@@ -356,13 +362,15 @@ std::vector<Room*> createRooms() {
 	room[2]->addToDescription("As you enter deeper into the forest the pressure of the miasma grows. . .");
 	room[2]->addToDescription("you see several abandoned carts as you journey along the path may of them have been destroyed. . . but by what? . . .");
 	/* Items */
-	item* HealthPotion5 =new Item("HealthPotion", "health";
+	Item* HealthPotion5 =new Item("HealthPotion", "health");
+	HealthPotion5->setUsable(true);
 	HealthPotion5->setValue(50);
-	HealthPotion5->addToDescription("An avarge quality Health Potion")
+	HealthPotion5->addToDescription("An avarge quality Health Potion");
 	room[2]->setItem(HealthPotion3);
-	item* HealthPotion6 =new Item("HealthPotion", "health";
+	Item* HealthPotion6 =new Item("HealthPotion", "health";
+	HealthPotion6->setUsable(true);
 	HealthPotion6->setValue(50);
-	HealthPotion6->addToDescription("An avarge quality Health Potion")
+	HealthPotion6->addToDescription("An avarge quality Health Potion");
 	room[2]->setItem(HealthPotion6);
 	/*Enemies */ 
 	Enemy* Bear= new Enemy("Bear", 100);
@@ -378,17 +386,19 @@ std::vector<Room*> createRooms() {
 	room[3]->addToDescription("you find a path to the east which will take you around to the exit of the forest....");	
 	room[3]->setRooms(room[4], nullptr, room[1], nullptr);
 	/* Items */
-	item* HealthPotion7 =new Item("HealthPotion", "health";
+	Item* HealthPotion7 =new Item("HealthPotion", "health");
+	HealthPotion7->setUsable(true);
 	HealthPotion7->setValue(50);
-	HealthPotion7->addToDescription("An avarge quality Health Potion")
+	HealthPotion7->addToDescription("An avarge quality Health Potion");
 	room[3]->setItem(HealthPotion7);
-	item* WaterRation2 =new Item("WaterRation", "health";
+	Item* WaterRation2 =new Item("WaterRation", "health";
+	WaterRation2->setUsable(true);
 	WaterRation2->setValue(20);
-	WaterRation2->addToDescription("Gain some health back for hydrating")
+	WaterRation2->addToDescription("Gain some health back for hydrating");
 	room[2]->setItem(WaterRation2);
-	item* WoodSheild =new Item("WoodPlank", "health";
+	Item* WoodSheild =new Item("WoodPlank", "health");
 	WoodSheild ->setValue(70);
-	WoodSheild->addToDescription("Gain some more protection from damage")
+	WoodSheild->addToDescription("Gain some more protection from damage");
 	room[2]->setItem(WoodSheild);
 	/*Enemies */ 
 	Enemy* Wolf1= new Enemy("Wolf", 30);
@@ -439,11 +449,13 @@ std::vector<Room*> createRooms() {
 	room[5]->addToDescription("When you are on the blockade you see the village of Toyha  burned to the ground, miasma cover the path between houses . . .");
 	room[5]->addToDescription("It is infested with zombies and what you belive crazzed humans killing each other within the  miasma. . .");
 	room[5]->addToDescription("You have two choices either move north to the old kingdom which you see in the distance  and exit the forest or go back and try to go east to look for more supplies . . .");
-	item* FoodRation2 = new Item("Food Ration", "health");
+	Item* FoodRation2 = new Item("Food Ration", "health");
+	FoodRation2->setUsable(true);
     FoodRation2->setValue(25);
     FoodRation2->addToDescription("Gain some health back for Eating");
     room[5]->setItem(FoodRation2);
-	item* FoodRation3 = new Item("Food Ration", "health");
+	Item* FoodRation3 = new Item("Food Ration", "health");
+	FoodRation3->setUsable(true);
     FoodRation3->setValue(20);
     FoodRation3->addToDescription("Gain some health back for Eating");
     room[5]->setItem(FoodRation3);
