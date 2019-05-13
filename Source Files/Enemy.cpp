@@ -71,9 +71,7 @@ bool Enemy::hasItem()
 
 void Enemy::attacked(struct Attack *attack)
 {
-	/*
-	WILL COMPLETE ONCE THE RANDOM ITEM GENERATOR IS COMPLETE
-	*/
+	subHealth(attack.value);
 }
 
 
