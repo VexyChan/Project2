@@ -21,7 +21,7 @@ Player::~Player()
 
 std::string Player::getName()
 {
-	return this->name;
+	return name;
 }
 
 void Player::setName(std::string name)
@@ -70,14 +70,14 @@ void Player::removeFromInv(Item* item)
 bool Player::searchInv(Item* item)
 {
 	if (item->getType() == "item") {
-		for (Item* it : this->items) {
+		for (Item* it : items) {
 			if (it == item) {
 				return true;
 			}
 		}
 	}
 	else {
-		for (Item* it : this->weapons) {
+		for (Item* it : weapons) {
 			if (it == item) {
 				return true;
 			}
@@ -88,7 +88,7 @@ bool Player::searchInv(Item* item)
 
 std::vector<Item*> Player::getWeapons()
 {
-	return this->weapons;
+	return weapons;
 }
 
 void Player::printWeapons()
@@ -102,7 +102,7 @@ void Player::printWeapons()
 
 std::vector<Item*> Player::getItems()
 {
-	return this->items;
+	return items;
 }
 
 void Player::printItems()
@@ -139,9 +139,19 @@ int Player::numOfKeys()
 	return i;
 }
 
+void Player::useItem(Item * item)
+{
+	if (item->getType() == "health") {
+		addHealth(item->getValue());
+	}
+	else {
+		std::cout << "This item could not be used (This came from Player class)." << std::endl;
+	}
+}
+
 int Player::getHealth()
 {
-	return this->health;
+	return health;
 }
 
 void Player::setHealth(int health)
@@ -176,7 +186,7 @@ void Player::subHealth(int value)
 
 int Player::getBlockValue()
 {
-	return this->blockValue;
+	return blockValue;
 }
 
 void Player::setBlockValue(int blockValue)
@@ -186,7 +196,7 @@ void Player::setBlockValue(int blockValue)
 
 bool Player::isAlive()
 {
-	return this->alive;
+	return alive;
 }
 
 void Player::printStatus()
@@ -206,18 +216,18 @@ void Player::printStatus()
 void Player::setStatus(std::string statusName, int statusValue)
 {
 	int newVal;
-	if ((statusValue - this->blockValue) <= 0) {
+	if ((statusValue - blockValue) <= 0) {
 		newVal = 0;
 	}
 	else {
-		newVal = statusValue - this->blockValue;
+		newVal = statusValue - blockValue;
 	}
 
 	status temp;
 	temp.statusName = statusName;
 	temp.statusValue = newVal;
 	temp.statusTurns = 3;
-	this->statusVector.push_back(temp);
+	statusVector.push_back(temp);
 }
 
 void Player::checkStatus()
@@ -230,7 +240,7 @@ void Player::checkStatus()
 			tempStatus.push_back(stat);
 		}
 	}
-	this->statusVector = tempStatus;
+	statusVector = tempStatus;
 }
 
 void Player::resetStatus()

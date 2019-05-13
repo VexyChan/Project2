@@ -41,6 +41,9 @@ public:
 	void addToDescription(std::string desc);
 	std::vector<std::string> getDescription();
 	void printDescription();
+
+	void setUsable(bool usable);
+	bool isUsable();
 	
 private:
 	std::vector<std::string> description;
@@ -54,5 +57,7 @@ private:
 		int value;
 	};
 	std::vector<struct Attack> attacksVector;
+
+	bool usable;
 };
 
