@@ -249,20 +249,6 @@ std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	}
 	return std::make_pair(player, enemy);
 }
-/* enemy attack add for knight
-	Knight* bronzeKnight = new Knight("Bronze Knight", 150);
-	bronzeKnight->setAttack("Slam", "attack", 15); 
-	bronzeKnight->setAttack("Barricade", "block", 10);
-	bronzeKnight->setWarning("A tall knight clad in bronze-colored armor steps out from behind the fire.");
-	bronzeKnight->setWarning("He carries a gleaming Steel Sword.");
-	Item* steelSword = new Item("Steel Sword", "melee");
-	steelSword->setAttackType("Stab", "attack", 30);
-	steelSword->setAttackType("Block", "block", 25);
-	steelSword->setAttackType("Fury", "status", 15);
-	bronzeKnight->setItem(steelSword);
-	bronzeKnight->setImmunity("melee");
-	room[6]->setEnemy(bronzeKnight);
-	*/
 /*
 Creates and populates the rooms that will be traveled through.
 */
@@ -291,21 +277,21 @@ std::vector<Room*> createRooms() {
 	room[0]->addToDescription("For now you may only go north towards the Forest...");
 	room[0]->addToDescription("In the distance you see an ominous black miasma overcast in the direction you need to go...");
 	/* Items*/
-	Item*  sMageStaff= new Item("MageStaff", "magic");
+	Item*  sMageStaff= new Item("MageStaff", "attack");
 	sMageStaff->addToDescription("Your trusty magic staff you have fought may enemies with while adventuring")
-	sMageStaff->setAttackType("Fireball", "attack", 45);
-	sMageStaff->setAttackType("Lightning", "attack", 20);
-	sMageStaff->setAttackType("Purification", "attack", 55);
-	Item* sHolySword = new Item("HolySword", "melee");
+	sMageStaff->addToAttacks("Fireball", "magic", 45);
+	sMageStaff->addToAttacks("Lightning", "magic", 20);
+	sMageStaff->addToAttacks("Purification", "magic", 55);
+	Item* sHolySword = new Item("HolySword", "attack");
 	sHolySword->addToDescription("Your trusty sword  you have had since you first became an adventure, it has been passed down in your family for generations");
-	sHolySword->setAttackType("Slash", "attack", 40);
-	sHolySword->setAttackType("cleave", "attack", 50);
-	sHolySword->setAttackType("Impale", "attack", 55);
-	Item* sBow = new Item("Bow&Arrow", "ranged");
+	sHolySword->addToAttacks("Slash", "melee", 40);
+	sHolySword->addToAttacks("cleave", "melee", 50);
+	sHolySword->addToAttacks("Impale", "melee", 55);
+	Item* sBow = new Item("Bow&Arrow", "attack");
 	sBow->addToDescription("eww it is just a normal bow you just kinda found");
-	sBow->setAttackType("VortexArrow", "attack", 35);
-	sBow->setAttackType("FireArrow", "attack", 45);
-	sBow->setAttackType("Snipe", "attack", 30);
+	sBow->addToAttacks("VortexArrow", "ranged", 35);
+	sBow->addToAttacks("FireArrow", "ranged", 45);
+	sBow->addToAttacks("Snipe", "ranged", 30);
 	room[0]->setItem(sBow);
 	room[0]->setItem(sHolySword);
 	room[0]->setItem(sMageStaff);
