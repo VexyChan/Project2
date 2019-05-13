@@ -17,13 +17,16 @@ public:
     void printItem();
     bool getisOpenable();
     bool getIsUsable();
-
+    std::string whereIsItem;
     bool getIsEquipable();
     int getHealthAdd();
     int getArmorAdd();
     int getBlockAdd();
     int getAttackAdd();
-
+    std::string examine();
+    std::string getWhereIsObj();
+    void setWhereItIS(std::string location);
+    
     void loadItem(std::ifstream& inFile);
     void saveItem(std::ofstream& oFile);
     void loadStaticItemParts(std::ifstream& inFile);
