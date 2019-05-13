@@ -1,0 +1,68 @@
+ItemName= PotionA
+Type= healing
+isOpenable= 0
+isUsable= 1
+isEquipable= 0
+healthAdd= 100
+armorAdd= 0
+blockAdd= 0
+attackAdd= 0
+RoomWhereItIs= 
+
+ItemName= Bomb
+Type= range
+isOpenable= 0
+isUsable= 1
+isEquipable= 0
+healthAdd= 0
+armorAdd= 0
+blockAdd= 0
+attackAdd= 100
+RoomWhereItIs= 
+
+ItemName= Sword
+Type= melee
+isOpenable= 0
+isUsable= 1
+isEquipable= 1
+healthAdd= 0
+armorAdd= 0
+blockAdd= 35
+attackAdd= 75
+RoomWhereItIs= 
+
+ItemName= Axe
+Type= melee
+isOpenable= 0
+isUsable= 1
+isEquipable= 1
+healthAdd= 0
+armorAdd= 0
+blockAdd= 50
+attackAdd= 100
+RoomWhereItIs= 
+
+ItemName= Bow
+Type= range
+isOpenable= 0
+isUsable= 1
+isEquipable= 1
+healthAdd= 0
+armorAdd= 0
+blockAdd= 0
+attackAdd= 100
+RoomWhereItIs= 
+
+ItemName= Fireball
+Type= magic
+isOpenable= 0
+isUsable= 1
+isEquipable= 0
+healthAdd= 0
+armorAdd= 0
+blockAdd= 0
+attackAdd= 100
+RoomWhereItIs= 
+
+
+

@@ -1,0 +1,46 @@
+ItemName= PotionA
+Type= healing
+healthAdd= 100
+armorAdd= 0
+blockAdd= 0
+attackAdd= 0
+
+
+ItemName= Bomb
+Type= range
+healthAdd= 0
+armorAdd= 0
+blockAdd= 0
+attackAdd= 100
+
+
+ItemName= Sword
+Type= melee
+healthAdd= 0
+armorAdd= 0
+blockAdd= 50
+attackAdd= 75
+
+
+ItemName= Axe
+Type= melee
+healthAdd= 0
+armorAdd= 0
+blockAdd= 25
+attackAdd= 100
+
+
+ItemName= Bow
+Type= healing
+healthAdd= 100
+armorAdd= 0
+blockAdd= 0
+attackAdd= 90
+
+
+ItemName= Fireball
+Type= magic
+healthAdd= 0
+armorAdd= 0
+blockAdd= 0
+attackAdd= 100
