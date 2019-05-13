@@ -57,9 +57,13 @@ std::vector<struct Attack> Item::getAttacks()
 /*
 takes an attack struct and adds it to attacks vector
 */
-void Item::addToAttacks(struct Attack *attack)
+void Item::addToAttacks(std::string name, std::string type, int value)
 {
-	attacksVector.push_back(attack);
+	struct Attack tempAttack;
+	tempAttack.name = name;
+	tempAttack.type = type;
+	tempAttack.value = value;
+	attacksVector.push_back(tempAttack);
 }
 
 void Item::printAttackTypes()
@@ -84,6 +88,13 @@ void Item::addToDescription(std::string desc)
 	this->description.push_back(desc);
 }
 
+void Item::setUsable(bool usable) {
+	this->usable = usable;
+}
+
+bool Item::isUsable() {
+	return usable;
+}
 
 
 
