@@ -16,14 +16,6 @@ ItemGen::ItemGen()
     
 }
 
-ItemGen(std::string name, std::string type, int value)
-{
-    this->name = nName;
-    this->type = tType;
-    this->value = vValue;
-    
-}
-
 ItemGen::ItemGen(std::string nName, std::string type, bool isOpe, bool isU, bool isE, std::string open, int h, int arm, int blc, int atck, std::string whIsItem)
 {
 	name = nName;
@@ -166,7 +158,7 @@ void ItemGen::saveItem(std::ofstream& oFile)
 
 }
 
-void ItemGen::loadStaticOItemParts(std::ifstream& inFile)
+void ItemGen::loadStaticItemParts(std::ifstream& inFile)
 {
 
 	std::string garbage;
