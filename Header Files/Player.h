@@ -24,6 +24,7 @@ public:
 	void printItems();
 	bool hasInventory();
 	int numOfKeys();
+	void useItem(Item* item);
 
 	int getHealth();
 	void setHealth(int health);

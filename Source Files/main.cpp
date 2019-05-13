@@ -422,22 +422,17 @@ std::vector<Room*> createRooms() {
 /*
 Returns a vector of user input tokens
 */
-std::string tokenize(std::string userIn, char seperator) {
+std::vector<std::string> tokenize(std::string userIn) {
+	char seperator = ' ';
 	std::vector<std::string> tokens;
 	std::stringstream ss(userIn);
 	std::string tok;
 	bool stop = false;
 
 	while(getline(ss, tok, seperator)) {
-		if (tok == "quit" || tok == "help" || tok == "north" ||
-			tok == "south" || tok == "east" || tok == "west" ||
-			tok == "inventory" || tok == "gate" || tok == "take" ||
-			tok == "grab" || tok == "look" || tok == "search") 
-		{
-			return tok;
-		}
+		tokens.push_back(tok);
 	}
-	return "blank";
+	return tokens;
 }
 
 /*
@@ -477,6 +472,25 @@ int main() {
 	std::string userIn;
 
 	/*
+	Allowed inputs
+	*/
+	std::vector<std::string> allowedInput;
+	allowedInput.push_back("quit");
+	allowedInput.push_back("help");
+	allowedInput.push_back("north");
+	allowedInput.push_back("south");
+	allowedInput.push_back("east");
+	allowedInput.push_back("west");
+	allowedInput.push_back("inventory");
+	allowedInput.push_back("gate");
+	allowedInput.push_back("take");
+	allowedInput.push_back("grab");
+	allowedInput.push_back("look");
+	allowedInput.push_back("search");
+					
+		)
+
+	/*
 	Get character name here:
 	*/
 	std::cout << "You suddenly wake up, your head is pounding." << std::endl;
@@ -500,42 +514,53 @@ int main() {
 	while (runGame) {
 		Room* previousRoom = currentRoom; //This is used if the user wants to run from a fight, returns them to "previous room"
 
+
+		/*
+		Prevents room information from being printed an unnecessary amount of times
+		*/
 		if (printRoom) {
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
-			if (currentRoom->hasItem()) {
-				currentRoom->getItem()->printDescription();
+			if (currentRoom->hasItems()) {
+				for (Item* it : currentRoom->getItems()) {
+					it->printDescription();
+				}
 			}
 		}
 		printRoom = true;
+
+
 		/*
 		takes user input and tokenizes it
 		*/
 		std::cout << "What do you want to do?" << std::endl;
-		std::getline(std::cin, userIn);
-		std::string tok = tokenize(userIn, ' ');
+		std::getline(std::cin, userIn); //gets input
+		std::transform(userIn.begin(), userIn.end(), userIn.begin(), ::tolower); //lowercases input
+		std::vector<std::string> tokens = tokenize(userIn); //seperates input into tokens
 		system("CLS");
 
-		std::transform(tok.begin(), tok.end(), tok.begin(), ::tolower);
-
-		if (tok == "quit") {
+		/*
+		checks first token against possible commands
+		*/
+		if (tokens[0] == "quit") {
 			runGame = false;
 			break;
 		}//"QUIT" IF STATEMENT
-		else if (tok == "help") {
+		else if (tokens[0] == "help") {
 			printRoom = false;
 			printHelp();
 			std::cout << std::endl;
 		}//"HELP IF STATEMENT
-		else if (tok == "north" || tok == "south" || tok == "east" || tok == "west") {
-			currentRoom = currentRoom->getRoom(tok); //SETS CURRENT ROOM TO NEW ROOM, OR SAME ROOM IF DIRECTION WAS NULLPTR
+		else if (tokens[0] == "north" || tokens[0] == "south" || tokens[0] == "east" || tokens[0] == "west") {
+			currentRoom = currentRoom->getRoom(tokens[0]); //SETS CURRENT ROOM TO NEW ROOM, OR SAME ROOM IF DIRECTION WAS NULLPTR
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
 			printRoom = false;
-			if (currentRoom->hasItem()) {
-				currentRoom->getItem()->printDescription();
+			if (currentRoom->hasItems()) {
+				for (Item* it : currentRoom->getItems()) {
+					it->printDescription();
+				}
 			}
-
 			if (currentRoom->hasEnemy()) { //CHECKS IF THERE IS AN ENEMY IN THE ROOM
 				currentRoom->getEnemy()->printWarning();
 				std::cout << "Do you want to fight the " << currentRoom->getEnemy()->getName() << " or run?" << std::endl;
@@ -591,7 +616,7 @@ int main() {
 				}
 			}//if currentRoom.hasEnemy()
 		}//ROOM TRAVEL DIRECTION IF STATEMENT
-		else if (tok == "inventory") {
+		else if (tokens[0] == "inventory") {
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			if (player->getItems().size() != 0) {
 				std::cout << "Items: " << std::endl;
@@ -600,6 +625,21 @@ int main() {
 			else {
 				std::cout << "You have no items." << std::endl;
 			}
+		}//END OF INVENTORY IF STATMENT
+		else if (tokens[0] == "use") {
+			for (Item* it : player.getItems()) {
+				if (it->getName() == tokens[1]) {
+					if (it->isUsable()) {
+						player.useItem(it);
+					}
+					else {
+						std::cout << "That item is not usable.";
+					}
+					break;
+				}
+			}
+		}//END OF USE IF STATMENT
+		else if (tokens[0] == "weapons") {
 			if (player->getWeapons().size() != 0) {
 				std::cout << "Weapons: " << std::endl;
 				player->printWeapons();
@@ -607,40 +647,8 @@ int main() {
 			else {
 				std::cout << "You have no weapons." << std::endl;
 			}
-			std::cout << std::endl;
-			std::cout << "Select an item!" << std::endl;
-			std::cout << "Enter 0 or any letter to go back!" << std::endl;
-			int userIn;
-			std::cin >> userIn;
-			while (!std::cin) {
-				std::cin.clear();
-				std::cin.ignore();
-				std::cout << "You must enter a number." << std::endl;
-				std::cin >> userIn;
-			}
-			if (userIn <= player->getItems().size() && userIn > 0) {
-				Item* playerItem = player->getItems()[userIn - 1];
-				if (playerItem->getType() == "health") {
-					player->addHealth(playerItem->getValue());
-					player->removeFromInv(playerItem);
-					system("CLS");
-					std::cout << "You used a " << playerItem->getName() << "! It has been removed from your inventory." << std::endl;
-					int pause;
-					std::cout << "Enter any number to continue.";
-					std::cin >> pause;
-					while (!std::cin) {
-						std::cin.clear();
-						std::cin.ignore();
-						std::cout << "You must enter a number.";
-						std::cin >> pause;
-					}
-				}
-				else {
-					std::cout << "THIS ITEM DOES NOT HAVE A USE RIGHT NOW." << std::endl;
-				}
-			}
-		}//END OF INVENTORY IF STATMENT
-		else if (tok == "search") {
+		}//END OF WEAPONS IF STATEMENT
+		else if (tokens[0] == "search") {
 			if (!currentRoom.hasItems()) {
 				std::cout << "This room has no usable items." << std::endl;
 			}
@@ -652,16 +660,13 @@ int main() {
 				}
 			}
 		}//END OF SEARCH IF STATEMENT
-		else if (tok == "door") {
+		else if (tokens[0] == "open") {
 			if (currentRoom->hasDoor()) {
 				if (player->numOfKeys() > 0) {
-					currentRoom->setLockStatus("unlocked");
-				}
-				if (currentRoom->isLocked()) {
-					std::cout << "That is locked, find the key" << std::endl;
-				}
-				else {
-					currentRoom = room[9];
+					currentRoom->setLockStatus(false);
+					currentRoom = room[9]; //CHANGE THIS TO BE THE BOSS ROOM[?]
+				} else {
+					std::cout << "That is locked, find the key." << std::endl;
 				}
 			}
 			else {
@@ -669,22 +674,26 @@ int main() {
 			}
 			
 		}//END OF DOOR IF STATEMENT
-		else if (tok == "take" || tok == "grab") {
-			if (currentRoom->hasItem()) {
-				player->addToInv(currentRoom->getItem());
-				std::cout << "You received: " << currentRoom->getItem()->getName() << "!" << std::endl << std::endl;
-				currentRoom->removeItem();
+		else if (tokens[0] == "take" || tokens[0] == "grab") {
+			if (currentRoom->hasItems()) {
+				for (Item* it : currentRoom->getItems()) {
+					if (it->getName() == tokens[1]) {
+						player->addToInv(it);
+					}
+				}
 			}
 			else {
 				std::cout << "There are no items you can take." << std::endl;
 			}
 		}//CHEST IF STATEMENT
-		else if (tok == "look") {
+		else if (tokens[0] == "look") {
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
 			printRoom = false;
-			if (currentRoom->hasItem()) {
-				currentRoom->getItem()->printDescription();
+			if (currentRoom->hasItems()) {
+				for (Item* it : currentRoom->getItems()) {
+					it->printDescription();
+				}
 			}
 			if (currentRoom->hasEnemy()) { //CHECKS IF THERE IS AN ENEMY IN THE ROOM
 				currentRoom->getEnemy()->printWarning();
@@ -716,5 +725,17 @@ int main() {
 				}
 			}//IF CURRENT ROOM HAS ENEMY
 		}//LOOK ELSE IF STATEMENT
+		else {
+			std::cout << "INCORRECT INPUT." << std::endl;
+			int pause;
+			std::cout << "Enter any number to continue.";
+			std::cin >> pause;
+			while (!std::cin) {
+				std::cin.clear();
+				std::cin.ignore();
+				std::cout << "You must enter a number.";
+				std::cin >> pause;
+			}
+		}//INCORRECT INPUT ELSE STATEMENT
 	} //WHILE (RUN)
 } //BOTTOM OF MAIN
