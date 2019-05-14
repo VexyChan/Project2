@@ -298,13 +298,12 @@ std::vector<Room*> createRooms() {
 	HealthPotion4->addToDescription("An avarge quality Health Potion");
 	room[1]->addToItems(HealthPotion4);
 	Enemy* CHumman1 = new Enemy("Alex", 60);
-	CHumman1->addToAttacks("Inpact", "melee", 10); 
+	CHumman1->addToAttacks("Inpact", "melee", 15); 
 	CHumman1->addToAttacks("AxeSlash", "melee", 40);
 	CHumman1->setWarning("During the first waves when the chaos lord returned he had corrupted the spirts of  humans  make them mindless servents to chaos. . ..");
 	CHumman1->setWarning("As you enter the forest you come upon people  Alex who you have known since childhood, as you get closser you see his eyes are glossed over. . .");
 	CHumman1->setWarning("It is like they can't even see the world around him any more. . .");
 	room[1]->setEnemy(CHumman1);
-	
 	/*
 	ROOM 2  Western path of the Nahouran forest
 	*/
@@ -331,6 +330,11 @@ std::vector<Room*> createRooms() {
 	Bear->addToAttacks("Bite", "melee", 50);
 	Bear->addToAttacks("Claw", "melee", 30);
 	room[2]->setEnemy(Bear);
+	Item* HealthPotion8 =new Item("HealthPotion", "health");
+	HealthPotion8->setUsable(true);
+	HealthPotion8->setValue(50);
+	HealthPotion8->addToDescription("An avarge quality Health Potion");
+	room[2]->addToItems(HealthPotion8);
 	/*
 	ROOM 3 Eastern path of the Nahouran forest
 	*/
@@ -353,6 +357,11 @@ std::vector<Room*> createRooms() {
 	WoodSheild ->setValue(70);
 	WoodSheild->addToDescription("Gain some more protection from damage");
 	room[2]->addToItems(WoodSheild);
+	Item* Edibleplants1 =new Item("Edibleplants", "health");
+	Edibleplants1->setUsable(true);
+	Edibleplants1->setValue(20);
+	Edibleplants1->addToDescription("An avarge quality Health Potion");
+	room[3]->addToItems(Edibleplants1);
 	/*Enemies */ 
 	Enemy* Wolf1= new Enemy("Wolf", 30);
 	Wolf1->addToAttacks("Charge", "melee",15); 
@@ -372,6 +381,12 @@ std::vector<Room*> createRooms() {
 	Wolf5->addToAttacks("Bite", "melee", 35);
 	Wolf5->addToAttacks("Claw", "melee",40);
 	room[4]->setEnemy(Wolf5);
+	
+	Item* Edibleplants2 =new Item("Edibleplants", "health");
+	Edibleplants2->setUsable(true);
+	Edibleplants2->setValue(20);
+	Edibleplants2->addToDescription("An avarge quality Health Potion");
+	room[4]->addToItems(Edibleplants2);
 	/*
 	ROOM 5 the exit of the forest, next to the destroyed town of tohya
 	*/
@@ -431,6 +446,15 @@ std::vector<Room*> createRooms() {
 	Wayvern1->setWarning("you have heard legends that the kingdoms of old use to have the power to train and control wayverns and dragons. . .");
 	Wayvern1->setWarning("You never believed that they existed, but now you know they must have! ! ! . . .");
 	room[7]->setEnemy(Wayvern1);
+	Item* mBlade = new Item("IncorporealExorcismBlade", "attack");
+	mBlade->addToDescription("A Blade With No Form");
+	// the blade stretches out and tracks your target
+	mBlade->addToAttacks("SeekingBlade", "magic", 35)
+	// blade becomes giant and caporeal and uses gracity to strike with lots of power;
+	mBlade->addToAttacks("DropBlade", "melee",100);
+	//blade becomes a mist cloud and does damage to what ever is in the cloud
+	mBlade->addToAttacks("MistCloud", "magic",60);
+	room[7]->addToItems(mBlade);
 
 	/*
 	ROOM 8 Estize Kingdom Necropolis
