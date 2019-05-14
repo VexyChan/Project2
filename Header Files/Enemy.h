@@ -5,8 +5,6 @@
 #include "Item.h"
 #include "Player.h"
 
-	
-
 class Enemy:public Player
 {
 public:
@@ -40,13 +38,7 @@ public:
 	TAKES IN AN ATTACK AND PERFORMS OPERATIONS ON ENEMY HEALTH/STATUS
 	NOT YET COMPLETED
 	*/
-	void attacked(struct Attack* attack);
-
-	struct Attack {
-		std::string name;
-		std::string type;
-		int value;
-	};
+	void attacked(struct Attack attack);
 
 protected:
 

@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-
+// edit to force main ahead
 std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	system("CLS");
 
@@ -298,6 +298,14 @@ std::vector<Room*> createRooms() {
 	HealthPotion4->setValue(50);
 	HealthPotion4->addToDescription("An avarge quality Health Potion");
 	room[1]->addToItems(HealthPotion4);
+	Item* BookofLostWill =new Item("BookofLostWill", "attack");
+	BookofLostWill->addToDescription("Ancient magic text of the Underworld. ");
+	BookofLostWill->setUsable(true);
+	BookofLostWill->setValue(50);
+	BookofLostWill->addToAttacks("MindShock", "magic", 55);
+	BookofLostWill->addToAttacks("Demoralized", "magic", 45);
+	BookofLostWill->addToAttacks("SpiritBreak", "magic", 35);
+	room[1]->addToItems(BookofLostWill);
 	/* Enemeis*/
 	Enemy* CHumman1 = new Enemy("Alex", 60);
 	CHumman1->addToAttacks("Inpact", "melee", 10); 
@@ -369,6 +377,16 @@ std::vector<Room*> createRooms() {
 	room[4]->addToDescription("you are still a good distance away from the old kingdom, but you see it from the forest the skies pitch black due to the evil  miasma coming from the necropolis. . .");
 	room[4]->addToDescription("you need to go East to arrive at the old kingdom to fight the chaos lord. . .");	
 	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
+	/* Items */
+	Item* sFireStorm =new Item("Firestorm", "attack");
+	sFireStorm->addToDescription("A ripped page from a spellbook. ");
+	sFireStorm->setUsable(true);
+	sFireStorm->setValue(50);
+	sFireStorm->addToAttacks("MeteorShower", "magic", 400);
+	sFireStorm->addToAttacks("Firewall", "magic", 125);
+	sFireStorm->addToAttacks("Ignite", "magic", 100);
+	room[4]->addToItems(sFireStorm);
+	/*Enemies */ 
 	Enemy* Wolf5= new Enemy("Wolf", 60);
 	Wolf5->addToAttacks("Charge", "melee",25); 
 	Wolf5->addToAttacks("Bite", "melee", 35);
@@ -427,6 +445,14 @@ std::vector<Room*> createRooms() {
 	room[7]->addToDescription("You notice there are many bodies on the ground they look like the have been dropped from a significant high. . .");
 	room[7]->addToDescription("You also notice some of them look to have been preyed on by vultures and other animals. . .");
 	room[7]->addToDescription("ou see intestines strewn from these bodies as if what ever did this savagely ripped them apart after they fell from a high. . .");
+	Item* DragonFury =new Item("DragonFury", "attack");
+	DragonFury->addToDescription("A dragon talon of impenetrable wrath. ");
+	DragonFury->setUsable(true);
+	DragonFury->setValue(60);
+	DragonFury->addToAttacks("DiveBomb", "melee", 125);
+	DragonFury->addToAttacks("Swift", "melee", 70);
+	DragonFury->addToAttacks("Slash", "melee", 55);
+	room[7]->addToItems(DragonFury);
 	Enemy* Wayvern1 = new Enemy("Wayvern",150);
 	Wayvern1->addToAttacks("Bite", "melee", 50); 
 	Wayvern1->addToAttacks("TailWhip", "melee", 120);
@@ -481,6 +507,7 @@ std::vector<Room*> createRooms() {
 	room[11]->setRooms(nullptr, nullptr, room[9], room[10]);
 	room[11]->addToDescription("You are in the priests quarters, it is bleak and empty just as you would excpect a man of the cloths room to be. . .");
 	room[11]->addToDescription("As when they join the brother hood of the cloth they give up worldly possesions. . .");
+	
 	Enemy* Skeleton4 = new Enemy("Skeleton", 40);
 	Skeleton4->addToAttacks("BowBash", "melee", 5); 
 	Skeleton4->addToAttacks("BoneThrow", "melee", 20);
@@ -508,6 +535,14 @@ std::vector<Room*> createRooms() {
 	room[13]->addToDescription("There is cobwebs and dust filling the air to make it hard to see even with light. . .");
 	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
 	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
+	Item* SkullScepter =new Item("SkullScepter", "attack");
+	SkullScepter->addToDescription("For the forgotten king ready to ravage the land.");
+	SkullScepter->setUsable(true);
+	SkullScepter->setValue(60);
+	SkullScepter->addToAttacks("HallowEve", "ranged", 200);
+	SkullScepter->addToAttacks("Dismember", "ranged", 85);
+	SkullScepter->addToAttacks("SkullInvitation", "ranged", 40);
+	room[13]->addToItems(SkullScepter);
 	Enemy* Skeleton6 = new Enemy("Skeleton", 40);
 	Skeleton6->addToAttacks("BowBash", "melee", 5); 
 	Skeleton6->addToAttacks("BoneThrow", "melee", 20);
@@ -570,6 +605,15 @@ std::vector<Room*> createRooms() {
 	room[18]->addToDescription("You what looks like a royal tomb of a diffrent era long before the times of now. . .");
 	room[18]->addToDescription("It Also Seems to have an aura of war and blood to it. . ..");
 	 room[18]->addToDescription("It must have been a generation of war. . .");
+	Item* Loyality =new Item("Loyality", "attack");
+	Loyality->addToDescription("A dusty legendary sword kept in the kings tomb locked away in hopes of a worthy man.");
+	Loyality->setUsable(true);
+	Loyality->setValue(80);
+	Loyality->addToAttacks("Judgement", "melee", 500);
+	Loyality->addToAttacks("Gulliotine", "melee", 225);
+	Loyality->addToAttacks("ThousandCuts", "melee", 100);
+	room[18]->addToItems(Loyality);
+	
 	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 225);
     ChaosKnight2->addToAttacks("Inpact", "melee", 25); 
     ChaosKnight2->addToAttacks("Punch", "melee", 20);

@@ -29,10 +29,10 @@ void Enemy::addToAttacks(std::string name, std::string type, int value)
 	tempAttack.name = name;
 	tempAttack.type = type;
 	tempAttack.value = value;
-	attacksVector.push_back(tempAttack);
+	attacksVector.push_back(&tempAttack);
 }
 
-std::vector<struct Attack> Enemy::getAttacks()
+std::vector<struct Attack*> Enemy::getAttacks()
 {
 	return attacksVector;
 }
@@ -69,7 +69,7 @@ bool Enemy::hasItem()
 	}
 }
 
-void Enemy::attacked(struct Attack *attack)
+void Enemy::attacked(struct Attack attack)
 {
 	subHealth(attack.value);
 }
