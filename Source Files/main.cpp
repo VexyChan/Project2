@@ -18,7 +18,7 @@ std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 
 	std::vector<struct Attack*> enemyAttacks = enemy->getAttacks();
 	struct Attack* enemyAttack;
-	struct Attack* userAttack;
+	struct Attack userAttack;
 	std::vector<Item*> playerWeapons = player->getWeapons();
 	std::vector<Item*> playerItems = player->getItems();
 	Item* userWeapon = nullptr;
@@ -139,7 +139,7 @@ std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 					} 
 					else if ((unsigned int)userIn <= userWeapon->getAttacks().size() && userIn > 0) {
 						run = true;
-						userAttack = &userWeapon->getAttacks()[userIn - 1];
+						userAttack = userWeapon->getAttacks()[userIn - 1];
 						system("CLS");
 					}
 				}//end of while loop for attack input
