@@ -1,0 +1,31 @@
+﻿  Enemy.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(879): error C2440: 'initializing': cannot convert from 'Enemy::Attack' to '_Objty'
+          with
+          [
+              _Objty=Enemy::Attack *
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(879): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(900): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,Enemy::Attack&>(_Alloc &,_Objty *const ,Enemy::Attack &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<Enemy::Attack *>,
+              _Ty=Enemy::Attack *,
+              _Objty=Enemy::Attack *
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(902): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,Enemy::Attack&>(_Alloc &,_Objty *const ,Enemy::Attack &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<Enemy::Attack *>,
+              _Ty=Enemy::Attack *,
+              _Objty=Enemy::Attack *
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(916): note: see reference to function template instantiation 'void std::vector<Enemy::Attack *,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<Enemy::Attack&>(Enemy::Attack &)' being compiled
+          with
+          [
+              _Ty=Enemy::Attack *
+          ]
+  c:\users\james\source\repos\rpg2\rpg2\enemy.cpp(32): note: see reference to function template instantiation 'void std::vector<Enemy::Attack *,std::allocator<_Ty>>::emplace_back<Enemy::Attack&>(Enemy::Attack &)' being compiled
+          with
+          [
+              _Ty=Enemy::Attack *
+          ]
