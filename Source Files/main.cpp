@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-
+// edit to force main ahead
 std::pair<Player*, Enemy*> doCombat(Player* player, Enemy* enemy) {
 	system("CLS");
 
