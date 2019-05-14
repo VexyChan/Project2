@@ -1,4 +1,4 @@
-range
+ranged
 melee
 magic
-healing
+
