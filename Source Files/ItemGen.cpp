@@ -16,9 +16,9 @@ ItemGen::ItemGen()
 
 ItemGen::ItemGen(std::string name, std::string type, int value)
 	
-	name = nName;
-	type = tType;
-	value = vValue;
+	this->name = name;
+	this->type = type;
+	this->value = value;
 
 }
 
