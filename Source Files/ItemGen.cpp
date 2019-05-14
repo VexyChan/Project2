@@ -25,8 +25,7 @@ ItemGen::ItemGen(std::string name, std::string type, int value)
 
 void ItemGen::printItem()
 {
-	std::cout << "Item name: " << name << std::endl;
-	std::cout << "Item type: " << type << std::endl;
+	std::cout << "Item: " << name << type << value << std::endl;
 }
 
 
