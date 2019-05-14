@@ -1,7 +1,7 @@
 #include "ItemGen.h"
 #include <string>
-#include <cstdlib> 
-#include <ctime>
+#include <stdlib> 
+#include <time>
 #include <iostream>
 #include <vector>
 #include <fstream>
