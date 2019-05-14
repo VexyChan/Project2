@@ -295,15 +295,15 @@ std::vector<Room*> createRooms() {
 	HealthPotion4->setValue(50);
 	HealthPotion4->addToDescription("An avarge quality Health Potion");
 	room[1]->addToItems(HealthPotion4);
-	Item* BookofLostWill =new Item("BookofLostWill", "attack");
-	BookofLostWill->addToDescription("Ancient magic text of the Underworld. ");
-	BookofLostWill->setUsable(true);
-	BookofLostWill->setValue(50);
-	BookofLostWill->addToAttacks("MindShock", "magic", 55);
-	BookofLostWill->addToAttacks("Demoralized", "magic", 45);
-	BookofLostWill->addToAttacks("SpiritBreak", "magic", 35);
-	room[1]->addToItems(BookofLostWill);
-	/* Enemeis*/
+	Item* BookofLostWill =new Item("Scroll", "attack");
+	sBookofLostWill->addToDescription("Ancient magic text of the Underworld. ");
+	sBookofLostWill->setUsable(true);
+	sBookofLostWill->setValue(50);
+	sBookofLostWill->addToAttacks("MindShock", "magic", 55);
+	sBookofLostWill->addToAttacks("Demoralized", "magic", 45);
+	sBookofLostWill->addToAttacks("SpiritBreak", "magic", 35);
+	room[1]->addToItems(sBookofLostWill);
+	/* Enemies*/
 	Enemy* CHumman1 = new Enemy("Alex", 60);
 	CHumman1->addToAttacks("Inpact", "melee", 10); 
 	CHumman1->addToAttacks("AxeSlash", "melee", 40);
@@ -356,10 +356,10 @@ std::vector<Room*> createRooms() {
 	WaterRation2->setValue(20);
 	WaterRation2->addToDescription("Gain some health back for hydrating");
 	room[2]->addToItems(WaterRation2);
-	Item* WoodSheild =new Item("WoodPlank", "health");
-	WoodSheild ->setValue(70);
-	WoodSheild->addToDescription("Gain some more protection from damage");
-	room[2]->addToItems(WoodSheild);
+	Item* WoodShield =new Item("WoodPlank", "health");
+	WoodShield ->setValue(70);
+	WoodShield->addToDescription("Gain some more protection from damage");
+	room[2]->addToItems(WoodShield);
 	/*Enemies */ 
 	Enemy* Wolf1= new Enemy("Wolf", 30);
 	Wolf1->addToAttacks("Charge", "melee",15); 
@@ -375,7 +375,7 @@ std::vector<Room*> createRooms() {
 	room[4]->addToDescription("you need to go East to arrive at the old kingdom to fight the chaos lord. . .");	
 	room[4]->setRooms(nullptr, room[3], room[6],nullptr);
 	/* Items */
-	Item* sFireStorm =new Item("Firestorm", "attack");
+	Item* sFireStorm =new Item("Scroll", "attack");
 	sFireStorm->addToDescription("A ripped page from a spellbook. ");
 	sFireStorm->setUsable(true);
 	sFireStorm->setValue(50);
@@ -402,14 +402,14 @@ std::vector<Room*> createRooms() {
 	room[5]->addToDescription("You have two choices either move north to the old kingdom which you see in the distance  and exit the forest or go back and try to go east to look for more supplies . . .");
 	Item* FoodRation2 = new Item("Food Ration", "health");
 	FoodRation2->setUsable(true);
-    FoodRation2->setValue(25);
-    FoodRation2->addToDescription("Gain some health back for Eating");
-    room[5]->addToItems(FoodRation2);
+    	FoodRation2->setValue(25);
+    	FoodRation2->addToDescription("Gain some health back for Eating");
+    	room[5]->addToItems(FoodRation2);
 	Item* FoodRation3 = new Item("Food Ration", "health");
 	FoodRation3->setUsable(true);
-    FoodRation3->setValue(20);
-    FoodRation3->addToDescription("Gain some health back for Eating");
-    room[5]->addToItems(FoodRation3);
+    	FoodRation3->setValue(20);
+    	FoodRation3->addToDescription("Gain some health back for Eating");
+    	room[5]->addToItems(FoodRation3);
 	Enemy* ZHumman1 = new Enemy("Zombie", 60);
 	ZHumman1->addToAttacks("Grab", "melee", 5); 
 	ZHumman1->addToAttacks("Bite", "melee", 20);
@@ -442,7 +442,7 @@ std::vector<Room*> createRooms() {
 	room[7]->addToDescription("You notice there are many bodies on the ground they look like the have been dropped from a significant high. . .");
 	room[7]->addToDescription("You also notice some of them look to have been preyed on by vultures and other animals. . .");
 	room[7]->addToDescription("ou see intestines strewn from these bodies as if what ever did this savagely ripped them apart after they fell from a high. . .");
-	Item* DragonFury =new Item("DragonFury", "attack");
+	Item* DragonFury =new Item("Sword", "attack");
 	DragonFury->addToDescription("A dragon talon of impenetrable wrath. ");
 	DragonFury->setUsable(true);
 	DragonFury->setValue(60);
@@ -482,9 +482,9 @@ std::vector<Room*> createRooms() {
 	room[9]->addToDescription("It seems like the temple where you see off the dead in the crypt of Estnophor");
 	room[9]->addToDescription("If you remeber correctly the layout of the Estnophor crypt had a priests quarters to the  west and a path to the crypts in the east");
 	Enemy* ChaosKnight1 = new Enemy("ChaosKnight", 255);
-    ChaosKnight1->addToAttacks("Inpact", "melee", 25); 
-    ChaosKnight1->addToAttacks("Punch", "melee", 20);
-    room[9]->setEnemy(ChaosKnight1);
+    	ChaosKnight1->addToAttacks("Inpact", "melee", 25); 
+    	ChaosKnight1->addToAttacks("Punch", "melee", 20);
+    	room[9]->setEnemy(ChaosKnight1);
 
 	/*
 	ROOM 10 corridor to the crypts
@@ -518,10 +518,14 @@ std::vector<Room*> createRooms() {
 	room[12]->addToDescription("You travel a while down the southern wing of the crypt and come to two doors one giant and one normal sized. . .");
 	room[12]->addToDescription("The giant door is locked and the smaller one seems open");
 	room[12]->addToDescription("You can go back north and find a key for the southern door possibly deeper in the crypt from the ritual chamber or go east into what seems like a crypt for royals of the kingdom. . .");
+	Item* SteelShield =new Item("Steel", "health");
+	SteelShield ->setValue(80);
+	SteelShield->addToDescription("A heavy shield carried by many loyal knights.");
+	room[12]->addToItems(SteelShield);
 	Enemy* UndeadKnight3 = new Enemy("UndeadKnight", 115);
-    UndeadKnight3->addToAttacks("MaceBludgeon", "melee", 35); 
-    UndeadKnight3->addToAttacks("cleave", "melee", 40);
-    room[12]->setEnemy(UndeadKnight3);
+    	UndeadKnight3->addToAttacks("MaceBludgeon", "melee", 35); 
+    	UndeadKnight3->addToAttacks("cleave", "melee", 40);
+    	room[12]->setEnemy(UndeadKnight3);
 
 	/*
 		/*
@@ -532,7 +536,7 @@ std::vector<Room*> createRooms() {
 	room[13]->addToDescription("There is cobwebs and dust filling the air to make it hard to see even with light. . .");
 	room[13]->addToDescription("you explore the new area of crypts long forgotten. . .");
 	room[13]->addToDescription("Upon apon climbing down countless amounts of stairs you come to a northern room. . .");
-	Item* SkullScepter =new Item("SkullScepter", "attack");
+	Item* SkullScepter =new Item("MageStaff", "attack");
 	SkullScepter->addToDescription("For the forgotten king ready to ravage the land.");
 	SkullScepter->setUsable(true);
 	SkullScepter->setValue(60);
@@ -553,9 +557,9 @@ std::vector<Room*> createRooms() {
 	room[14]->setRooms(nullptr,nullptr,nullptr, room[12]);
 	room[14]->addToDescription("You are in a Tomb for the first generation of royals of the Estize kingdom. . .");
 	Enemy* UndeadKnight5 = new Enemy("UndeadKnight", 155);
-    UndeadKnight5->addToAttacks("MaceBludgeon", "melee", 35); 
-    UndeadKnight5->addToAttacks("RainOfMaces", "melee", 80);
-    room[14]->setEnemy(UndeadKnight5);
+    	UndeadKnight5->addToAttacks("MaceBludgeon", "melee", 35); 
+    	UndeadKnight5->addToAttacks("RainOfMaces", "melee", 80);
+    	room[14]->setEnemy(UndeadKnight5);
 
 	/*
 	ROOM 15 corrador of the dammed
@@ -577,9 +581,9 @@ std::vector<Room*> createRooms() {
 	room[16]->addToDescription("You have entered another crypt with only one exit to the east. . . .");
 	room[16]->addToDescription("The eastern door is lkarge enoug for several of the wayverns you fought back in the town square to fit through, what does that mean for wha't whating for you ? ? ?.");
 	Enemy* UndeadKnight10= new Enemy("UndeadKnight", 125);
-    UndeadKnight10->addToAttacks("Inpact", "melee", 25); 
-    UndeadKnight10->addToAttacks("Punch", "melee", 20);
-    room[16]->setEnemy(UndeadKnight10);
+    	UndeadKnight10->addToAttacks("Inpact", "melee", 25); 
+    	UndeadKnight10->addToAttacks("Punch", "melee", 20);
+    	room[16]->setEnemy(UndeadKnight10);
 
 	/*
 	ROOM 17 Eastern wing of the second lvl of the crypt
@@ -590,10 +594,15 @@ std::vector<Room*> createRooms() {
 	room[17]->addToDescription("When you look in all you see is a great hall filled with 2 chaos knights and 3 undead.");
 	room[17]->addToDescription("It does look to be where the chaos lord is nor is there any other doors entries to the room.");
 	room[17]->addToDescription("You notice a msg in blood on the wall after you close the door saying you should not enter and turn back. . .");
+	Item* ElixirofMorality =new Item("Elixir", "health");
+	ElixirofMorality->setUsable(true);
+	ElixirofMorality->setValue(100);
+	ElixirofMorality->addToDescription("An elixir that gives full health.");
+	room[17]->addToItems(ElixirofMorality);
 	Enemy* UndeadKnight12 = new Enemy("UndeadKnight", 125);
-    UndeadKnight12->addToAttacks("Inpact", "melee", 25); 
-    UndeadKnight12->addToAttacks("Punch", "melee", 20);
-    room[17]->setEnemy(UndeadKnight12);
+    	UndeadKnight12->addToAttacks("Inpact", "melee", 25); 
+    	UndeadKnight12->addToAttacks("Punch", "melee", 20);
+   	room[17]->setEnemy(UndeadKnight12);
 
 	/*
 	ROOM 18  2nd generation tomb of royalty 3 undead knight  2 chaos knights Dead End room dont enter
@@ -606,15 +615,19 @@ std::vector<Room*> createRooms() {
 	Loyality->addToDescription("A dusty legendary sword kept in the kings tomb locked away in hopes of a worthy man.");
 	Loyality->setUsable(true);
 	Loyality->setValue(80);
-	Loyality->addToAttacks("Judgement", "melee", 500);
-	Loyality->addToAttacks("Gulliotine", "melee", 225);
-	Loyality->addToAttacks("ThousandCuts", "melee", 100);
+	Loyality->addToAttacks("Judgement", "melee", 400);
+	Loyality->addToAttacks("Gulliotine", "melee", 150);
+	Loyality->addToAttacks("ThousandCuts", "melee", 80);
 	room[18]->addToItems(Loyality);
-	
+	Item* Honesty =new Item("Honesty", "health");
+	Honesty->setUsable(true);
+	Honesty->setValue(300);
+	Honesty->addToDescription("A legendary armor forged in blood of its enemies");
+	room[18]->addToItems(Honesty);
 	Enemy* ChaosKnight2 = new Enemy("ChaosKnight", 225);
-    ChaosKnight2->addToAttacks("Inpact", "melee", 25); 
-    ChaosKnight2->addToAttacks("Punch", "melee", 20);
-    room[18]->setEnemy(ChaosKnight1);
+    	ChaosKnight2->addToAttacks("Inpact", "melee", 25); 
+    	ChaosKnight2->addToAttacks("Punch", "melee", 20);
+    	room[18]->setEnemy(ChaosKnight1);
 		/*
 	ROOM 19 Undead Dragon  tomb of royal the gardian 1 undead dragon key room
 	*/
@@ -627,10 +640,10 @@ std::vector<Room*> createRooms() {
 	key->addToDescription("A key in the hand of a dead adventure, it must open something important. . .");
 	room[19]->addToItems(key);
 	Enemy* UndeadDragon = new Enemy("UndeadDragon", 325);
-    UndeadDragon->addToAttacks("FireBreath", "melee", 100); 
-    UndeadDragon->addToAttacks("WingSlam", "melee", 50);
+    	UndeadDragon->addToAttacks("FireBreath", "melee", 100); 
+    	UndeadDragon->addToAttacks("WingSlam", "melee", 50);
 	UndeadDragon->addToAttacks("TailWhip", "melee", 90);
-    room[19]->setEnemy(UndeadDragon);
+    	room[19]->setEnemy(UndeadDragon);
 	/*
 	ROOM 20 Boss Room [Chaos Lord] Crypt of the elders 1 lord of destruction and chaos
 	*/
@@ -643,9 +656,9 @@ std::vector<Room*> createRooms() {
 	room[20]->setLockStatus(true);
 	room[20]->setDoor(true);
 	Enemy* ChaosLord = new Enemy("ChaosLord", 525);
-    ChaosLord->addToAttacks("Inpact", "melee", 25); 
-    ChaosLord->addToAttacks("Punch", "melee", 20);
-    room[20]->setEnemy(ChaosLord);
+    	ChaosLord->addToAttacks("Inpact", "melee", 25); 
+    	ChaosLord->addToAttacks("Punch", "melee", 20);
+    	room[20]->setEnemy(ChaosLord);
 	return room;
 }
 /*
