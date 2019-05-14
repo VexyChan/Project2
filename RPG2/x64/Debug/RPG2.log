@@ -1,0 +1,14 @@
+﻿  Enemy.cpp
+c:\users\james\source\repos\rpg2\rpg2\enemy.cpp(34): error C2440: 'return': cannot convert from 'std::vector<Enemy::Attack *,std::allocator<_Ty>>' to 'std::vector<Attack *,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=Enemy::Attack *
+          ]
+          and
+          [
+              _Ty=Attack *
+          ]
+  c:\users\james\source\repos\rpg2\rpg2\enemy.cpp(34): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  main.cpp
+  Room.cpp
+  Generating Code...
