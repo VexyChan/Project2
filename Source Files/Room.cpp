@@ -5,7 +5,7 @@ Room::Room(std::string name)
 	this->name = name;
 	enemyBool = false;
 	enemy = nullptr;
-	gate = false;
+	door = false;
 }
 
 Room::~Room()
@@ -114,12 +114,12 @@ void Room::removeItem(Item* item)
 			temp.push_back(it);
 		}
 	}
-	items = temp;
+	itemsVector = temp;
 }
 
 bool Room::isLocked()
 {
-	return status
+	return locked;
 }
 
 void Room::setLockStatus(bool status)

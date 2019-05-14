@@ -2,12 +2,6 @@
 
 Enemy::Enemy()
 {
-	name = "";
-	health = 0;
-	alive = true;
-	blockValue = 0;
-	item = nullptr;
-
 }
 
 Enemy::Enemy(std::string name, int health)

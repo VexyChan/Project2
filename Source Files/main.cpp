@@ -211,7 +211,7 @@ Creates and populates the rooms that will be traveled through.
 */
 std::vector<Room*> createRooms() {
 	std::vector<Room*> room;
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 21; i++) {
 		room.push_back(new Room("Room " + std::to_string(i)));
 	}
 
@@ -228,9 +228,6 @@ std::vector<Room*> createRooms() {
 	No enemies in this room	
 	*/
 	room[0]->setRooms(room[1],nullptr,nullptr,nullptr);
-	room[0]->addToDescription("After leaving the adventures guild & gathering your things, you leave the town...");
-	room[0]->addToDescription("You stand outside the town ready to fight the Lord Of Chaos...");
-	room[0]->addToDescription("But first you must find the old kingdom's necropolis...");
 	room[0]->addToDescription("For now you may only go north towards the Forest...");
 	room[0]->addToDescription("In the distance you see an ominous black miasma overcast in the direction you need to go...");
 	/* Items*/
@@ -311,7 +308,7 @@ std::vector<Room*> createRooms() {
 	CHumman1->addToAttacks("Inpact", "melee", 10); 
 	CHumman1->addToAttacks("AxeSlash", "melee", 40);
 	CHumman1->setWarning("During the first waves when the chaos lord returned he had corrupted the spirts of  humans  make them mindless servents to chaos. . ..");
-	CHumman1->setWarning("As you enter the forest you come upon 2 people Jace and Alex who you have known since childhood, as you get closser you see their eyes are glossed over. . .");
+	CHumman1->setWarning("As you enter the forest you come upon Alex who you have known since childhood, as you get closser you see his eyes are glossed over. . .");
 	CHumman1->setWarning("It is like they can't even see the world around them any more. . .");
 	room[1]->setEnemy(CHumman1);
 	
@@ -676,7 +673,8 @@ void printHelp() {
 	std::vector<std::string> help;
     help.push_back("Interaction Commands:");
     help.push_back("[ {north} | {south} | {east} | {west} ] Will move you into the next room");
-    help.push_back("{Inventory} Displays Your Inventory");
+    help.push_back("{Inventory} Displays Your Item Inventory");
+	help.push_back("{Weapons} Displays Your Weapons");
     help.push_back("{look} tells the player infomation about the room  & what items it has");
     help.push_back("[ {take} | {grab} ] Will allow you to take an item");
 	help.push_back("[ {search} ]tells what items a room has");
@@ -710,7 +708,6 @@ int main() {
 	Sleep(10);
 		std::cout << ". . ." << std::endl;
 	Sleep(25);
-	system("CLS");
 	std::cout << std::endl << std::endl;
 	std::string name;
 	std::cout << "What is Your Name Hero. . . " << std::endl;
@@ -721,21 +718,6 @@ int main() {
 		std::getline(std::cin, name);
 	}
 	Player* player = new Player(name);
-	system("CLS");
-	std::cout << ". . . ???" << std::endl;
-	Sleep(10);
-	std::cout << "The Lord Of Chaos Wages War & Destruction upon the land attacking it's people in waves... "<<std::endl;
-	Sleep(10);
-	std::cout << player->getName()<< " you have been tasked with defeating the chaos lord and his corrupted minions and stopping the spread of his  malevolence..."<<std::endl; 
-	Sleep(10);
-	std::cout <<"You must raid the Chaos Lord's  stronghold which was the necropolis of old, which belonged to a  long forgotten kingdom amongst the passing of time..."<<std::endl;
-	Sleep(10);
-	std::cout <<"The adventures guild of the kingdom of Estnophor has tasked you with finding and stop the spread of chaos..."<<std::endl;
-	Sleep(10);
-	std::cout <<"As well as defeating the Chaos Lord ..."<<std::endl;
-	Sleep(10);
-	std::cout <<"Will You Save the Kingdom & The World..."<<std::endl;
-	Sleep(35);
 	system("CLS");
 	bool printRoom = true;
 	
@@ -749,11 +731,6 @@ int main() {
 		if (printRoom) {
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
-			if (currentRoom->hasItems()) {
-				for (Item* it : currentRoom->getItems()) {
-					it->printDescription();
-				}
-			}
 		}
 		printRoom = true;
 
@@ -767,6 +744,9 @@ int main() {
 		std::vector<std::string> tokens = tokenize(userIn); //seperates input into tokens
 		system("CLS");
 
+		if (tokens.size() == 0) {
+			tokens.push_back("look");
+		}
 		/*
 		checks first token against possible commands
 		*/
@@ -780,23 +760,19 @@ int main() {
 			std::cout << std::endl;
 		}//"HELP IF STATEMENT
 		else if (tokens[0] == "north" || tokens[0] == "south" || tokens[0] == "east" || tokens[0] == "west") {
+			system("CLS");
 			currentRoom = currentRoom->getRoom(tokens[0]); //SETS CURRENT ROOM TO NEW ROOM, OR SAME ROOM IF DIRECTION WAS NULLPTR
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
 			printRoom = false;
-			if (currentRoom->hasItems()) {
-				for (Item* it : currentRoom->getItems()) {
-					it->printDescription();
-				}
-			}
 			if (currentRoom->hasEnemy()) { //CHECKS IF THERE IS AN ENEMY IN THE ROOM
 				currentRoom->getEnemy()->printWarning();
-				std::cout << "Do you want to fight the " << currentRoom->getEnemy()->getName() << " or run?" << std::endl;
+				std::cout << std::endl << "Do you want to fight or run?" << std::endl;
 				std::getline(std::cin, userIn);
 				std::transform(userIn.begin(), userIn.end(), userIn.begin(), ::tolower);
 				while (userIn != "fight" && userIn != "run") {
 					system("CLS");
-					std::cout << "Incorrect choice! Do you want to fight the " << currentRoom->getEnemy()->getName() << " or run?" << std::endl;
+					std::cout << "Incorrect choice! Do you want to fight or run?" << std::endl;
 					std::cin >> userIn;
 				}
 				if (userIn == "run") {
@@ -849,7 +825,6 @@ int main() {
 			}//if currentRoom.hasEnemy()
 		}//ROOM TRAVEL DIRECTION IF STATEMENT
 		else if (tokens[0] == "inventory") {
-			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			if (player->getItems().size() != 0) {
 				std::cout << "Items: " << std::endl;
 				player->printItems();
@@ -909,9 +884,20 @@ int main() {
 		}//END OF DOOR IF STATEMENT
 		else if (tokens[0] == "take" || tokens[0] == "grab") {
 			if (currentRoom->hasItems()) {
-				for (Item* it : currentRoom->getItems()) {
-					if (it->getName() == tokens[1]) {
+				if (tokens[1] == "all") {
+					for (Item* it : currentRoom->getItems()) {
 						player->addToInv(it);
+						currentRoom->removeItem(it);
+					}
+				}
+				else {
+					for (Item* it : currentRoom->getItems()) {
+						std::string tempName = it->getName();
+						std::transform(tempName.begin(), tempName.end(), tempName.begin(), ::tolower);
+						if (tempName == tokens[1]) {
+							player->addToInv(it);
+							currentRoom->removeItem(it);
+						}
 					}
 				}
 			}
@@ -920,14 +906,10 @@ int main() {
 			}
 		}//CHEST IF STATEMENT
 		else if (tokens[0] == "look") {
+			system("CLS");
 			std::cout << player->getName() << "'s health is: " << player->getHealth() << std::endl << std::endl;
 			currentRoom->printDescription();
 			printRoom = false;
-			if (currentRoom->hasItems()) {
-				for (Item* it : currentRoom->getItems()) {
-					it->printDescription();
-				}
-			}
 			if (currentRoom->hasEnemy()) { //CHECKS IF THERE IS AN ENEMY IN THE ROOM
 				currentRoom->getEnemy()->printWarning();
 				std::cout << "Do you want to fight or run?";
@@ -960,15 +942,6 @@ int main() {
 		}//LOOK ELSE IF STATEMENT
 		else {
 			std::cout << "INCORRECT INPUT." << std::endl;
-			int pause;
-			std::cout << "Enter any number to continue.";
-			std::cin >> pause;
-			while (!std::cin) {
-				std::cin.clear();
-				std::cin.ignore();
-				std::cout << "You must enter a number.";
-				std::cin >> pause;
-			}
 		}//INCORRECT INPUT ELSE STATEMENT
 	} //WHILE (RUN)
 } //BOTTOM OF MAIN
