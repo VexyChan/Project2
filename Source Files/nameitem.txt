@@ -1,4 +1,6 @@
 DragonFury
 SkullScepter
 Loyality
-BookofLostWill
+sBookofLostWill
+sFireStorm
+Trust
